@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.SwGestionArticleController">
+   <children>
+      <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="436.0" layoutX="5.0" layoutY="20.0" opacity="0.88" stroke="#9a6c56" strokeType="INSIDE" width="363.0" />
+      <Separator layoutX="75.0" layoutY="128.0" prefWidth="200.0" />
+      <Separator layoutX="52.0" layoutY="353.0" prefHeight="3.0" prefWidth="255.0" />
+      <Separator layoutX="52.0" layoutY="424.0" prefHeight="3.0" prefWidth="255.0" />
+      <Hyperlink layoutX="75.0" layoutY="163.0" onAction="#prixArticle" text="Voire prix d'un article" textFill="#f80303">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="75.0" layoutY="222.0" onAction="#historikVente" text="Historique du vente" textFill="#f80303">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

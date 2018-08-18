@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.AccueilController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+              
+              <Menu mnemonicParsing="false" text="Gérer les Utilisateurs">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ajouterUtilsateur" text="Ajouter Utilisateur" />
+                        <MenuItem mnemonicParsing="false" text="Voire Details Utilisateur" />
+                        <MenuItem mnemonicParsing="false" text="Details Utilisateur par date" />
+                     </items>
+                  </Menu>
+                
+                      <Menu mnemonicParsing="false" text="Gérer les Stocks">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ajouterArticle" text="Ajouter Article" />
+                        <MenuItem mnemonicParsing="false" text="Voire Details Articles" />
+                        <MenuItem mnemonicParsing="false" text="Details Articles par date" />
+                        <MenuItem mnemonicParsing="false" text="Mise à jourt Stock" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Seuil Alert Stock" />
+                        	 <Menu mnemonicParsing="false" text="Catégorie">
+                        	 	<items>
+                        			<MenuItem mnemonicParsing="false" onAction="#ouvrirCategorie" text="Ajouter Catégorie" />
+                        			<MenuItem mnemonicParsing="false" text="Liste de Catégorie" />
+                        		</items>
+                        	 </Menu>
+                       		 <Menu mnemonicParsing="false" text="Rayon">
+                        	 	<items>
+                        			<MenuItem mnemonicParsing="false" onAction="#ouvrirRayon" text="Ajouter Rayon" />
+                        			<MenuItem mnemonicParsing="false" text="Liste de Rayon" />
+                        		</items>
+                        	 </Menu>
+                     </items>
+                  </Menu>
+                <Menu mnemonicParsing="false" text="Gérer les Fournisseurs">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#ajouterFournisseur" text="Ajouter Fournisseur" />
+                        <MenuItem mnemonicParsing="false" text="Voire Details Fournisseurs" />
+                        <MenuItem mnemonicParsing="false" text="Details Fournisseurs par date" />
+                     </items>
+                  </Menu>
+                  
+                      
+                  
+                  <Menu mnemonicParsing="false" text="Gérer les Articles ">
+                  	<items>
+                        <MenuItem mnemonicParsing="false" onAction="#NouveauClient" text="Nouveau Client" />
+                        <MenuItem mnemonicParsing="false" text="Mise à jourt Achat" />
+                    </items>
+                  </Menu>
+               <!--    
+               <Menu mnemonicParsing="false" text="Statistique" />
+                  <Menu mnemonicParsing="false" text="Paramètre" />
+                  <Menu mnemonicParsing="false" text="Déconnexion" /> 
+                  -->
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="900.0" arcWidth="50.0" fill="LEMONCHIFFON" height="336.0" layoutX="49.0" layoutY="99.0" opacity="0.78" stroke="#a47753" strokeType="INSIDE" width="855.0" />
+
+                  <Circle fill="#a9afad" layoutX="127.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
+                  <Circle fill="#a9afad" layoutX="490.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
+                  <Circle fill="#a9afad" layoutX="604.0" layoutY="378.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
+                  <Circle fill="#a9afad" layoutX="247.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
+                  <Circle fill="#a9afad" layoutX="366.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="217.0" layoutY="344.0" onMouseClicked="#ajouterFournisseur" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/Fournisseur.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="460.0" layoutY="345.0" onMouseClicked="#ajouterArticle" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/storage.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="97.0" layoutY="341.0" onMouseClicked="#NouveauClient" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cashier-machine.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="574.0" layoutY="347.0" onMouseClicked="#parametre" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/parametre.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="339.0" layoutY="350.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/update.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="CLOSED_HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Hyperlink layoutX="685.0" layoutY="343.0" onAction="#deconnexion" text="Deconnection" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Hyperlink>
+                  <Hyperlink layoutX="692.0" layoutY="201.0" onAction="#parametre" text="Paramètre" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="688.0" layoutY="247.0" onAction="#statistique" text="Statistique" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Separator layoutX="82.0" layoutY="319.0" prefHeight="0.0" prefWidth="436.0" />
+                  <Separator layoutX="672.0" layoutY="167.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <Hyperlink layoutX="686.0" layoutY="294.0" text="Notification" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="694.0" layoutY="161.0" text="Aide" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Label fx:id="affichUser" layoutX="89.0" layoutY="151.0" text="Utilsateur : ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+             </AnchorPane>
+         </center>  
+      </BorderPane>
+   </children>
+</AnchorPane>

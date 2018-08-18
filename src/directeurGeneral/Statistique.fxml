@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane fx:id="rootStatistik" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.StatistiqueController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <AnchorPane>
+               <children>
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="31.0" layoutY="16.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="417.0" layoutX="20.0" layoutY="66.0" stroke="BLACK" strokeType="INSIDE" width="913.0" />
+                  <Button layoutX="649.0" layoutY="19.0" mnemonicParsing="false" text="Achat journalier" />
+                  <Button layoutX="788.0" layoutY="19.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Exporter en Excel" />
+                  <Button layoutX="477.0" layoutY="19.0" mnemonicParsing="false" text="Achat hebdomadaire" />
+                  <Button layoutX="332.0" layoutY="19.0" mnemonicParsing="false" text="Achat journalier" />
+                  <ComboBox layoutX="115.0" layoutY="19.0" prefHeight="25.0" prefWidth="146.0" promptText="liste" />
+                  <Label layoutX="20.0" layoutY="24.0" text="Voire Details" />
+                  <Separator layoutX="466.0" layoutY="154.0" orientation="VERTICAL" prefHeight="200.0" />
+                  <ListView layoutX="492.0" layoutY="90.0" prefHeight="367.0" prefWidth="423.0" />
+                  <PieChart fx:id="sarArtt" layoutX="55.0" layoutY="90.0" onMouseClicked="#analytic" prefHeight="333.0" prefWidth="399.0" />
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

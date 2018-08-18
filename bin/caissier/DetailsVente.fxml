@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.prixArticleController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="31.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
+      <TableView layoutX="20.0" layoutY="67.0" prefHeight="384.0" prefWidth="912.0">
+        <columns>
+            <TableColumn prefWidth="251.0" text="Nom Article" />
+            <TableColumn minWidth="27.0" prefWidth="186.0" text="ID Article" />
+            <TableColumn prefWidth="170.0" text="Code barre" />
+            <TableColumn prefWidth="126.0" text="Quantité" />
+            <TableColumn prefWidth="178.0" text="Prix " />
+        </columns>
+      </TableView>
+      <TextField layoutX="761.0" layoutY="29.0" text="recherche" />
+      <Label layoutX="20.0" layoutY="34.0" text="Date Article Vendu" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="à" />
+   </children>
+</AnchorPane>

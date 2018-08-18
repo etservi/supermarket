@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootAccueil" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.AccueilController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <MenuBar BorderPane.alignment="CENTER">
+              <menus>
+                <Menu mnemonicParsing="false" text="Caissier" />
+              </menus>
+            </MenuBar>
+         </top>
+         <center>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="393.0" layoutX="49.0" layoutY="42.0" opacity="0.74" stroke="#a37553" strokeType="INSIDE" width="855.0" />
+                  <Separator layoutX="193.0" layoutY="118.0" prefHeight="0.0" prefWidth="277.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="141.0" layoutY="161.0" stroke="#a37553" strokeType="INSIDE" width="190.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="367.0" layoutY="161.0" stroke="#a37553" strokeType="INSIDE" width="190.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="590.0" layoutY="161.0" stroke="#a37553" strokeType="INSIDE" width="190.0" />
+                  <Hyperlink layoutX="360.0" layoutY="84.0" onAction="#deconnexion" text="Déconnexion">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="187.0" layoutY="84.0" onAction="#nouveauClient" text="Nouveau client">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="151.0" layoutY="206.0" onAction="#gestionArticleClik" text="Gestion Article" textFill="#e40303">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="365.0" layoutY="208.0" text="Gestion Catégorie" textFill="#e40303">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="623.0" layoutY="206.0" text="Statistique" textFill="#e40303">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Hyperlink>
+               </children>
+             </AnchorPane>
+         </center>          
+      </BorderPane>
+   </children>
+</AnchorPane>

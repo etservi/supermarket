@@ -1,0 +1,21 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.root{
+	-fx-background-image: url('/images/arrierePlan.jpeg') ;
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: center center;	
+}
+
+.button{
+	-fx-background-color: #feb634; 
+	-fx-text-fill: white;
+	-fx-font-weight: normal;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, blue); 
+    -fx-text-fill: #fff3d1;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+}
