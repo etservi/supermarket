@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 public class AccueilController implements Initializable{
 
 	@FXML private AnchorPane rootPane;
+	Stage stage;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -35,7 +36,8 @@ public class AccueilController implements Initializable{
 		
 		// REDIRECTION SUR ACCUEIL - IMAGE
 		@FXML
-		private void ajouterCategorie() throws IOException {
+		private void ajouterCategorie() throws IOException { //OUVERTURE DANS UNE AUTRE FENETRE
+		
 			Stage stage = new Stage();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Categorie.fxml"));
 			Parent root = loader.load();
@@ -49,7 +51,8 @@ public class AccueilController implements Initializable{
 	//-------------------------------------------------------------------------
 		// REDIRECTION SUR ACCUEIL - IMAGE
 		@FXML
-		private void ajouterRayon() throws IOException {
+		private void ajouterRayon() throws IOException {  //OUVERTURE DANS UNE AUTRE FENETRE
+			
 			Stage stage = new Stage();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Rayon.fxml"));
 			Parent root = loader.load();
@@ -63,7 +66,7 @@ public class AccueilController implements Initializable{
 	//-------------------------------------------------------------------------
 		// REDIRECTION SUR ACCUEIL - IMAGE
 		@FXML
-		private void listeRayon() throws IOException {
+		private void listeRayon() throws IOException {  //OUVERTURE DANS MEME FENETRE
 			Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
 			rootPane.getChildren().setAll(pane);
 

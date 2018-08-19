@@ -84,7 +84,7 @@ public class FactureController implements Initializable{
 		   product = nomArticle.getText() ;
 		   price = Double.parseDouble(prixUnitairee.getText());
 		   nombre = Integer.parseInt(qtite.getText());
-		   
+	/*	   
 		   amount = price * nombre;
 		   
 		   listPurchase.add(product);
@@ -107,7 +107,7 @@ public class FactureController implements Initializable{
 			
 			tbViewFacture.setItems(listPurchase);
 			tbViewFacture.setItems(String.valueOf(listOfPrice));
-		   
+		   */
 	   }
 	   
 	   public void annulerArticle() {
