@@ -15,7 +15,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
-import java.util.concurrent.SynchronousQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -81,6 +80,8 @@ public class AjoutFournisseurController implements Initializable{
 	@FXML private Label duJour;
 	
 	 ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
+	 
+	 
 	@FXML private TextField recherch;
 	Fournisseur fourni;
 	
@@ -680,7 +681,7 @@ private boolean validerEmail() {
 	//------------------------------------------------------------
 	
 //	ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
-	
+/*	
 	@FXML
     private void rechercheFournisseur(KeyEvent ke) {
         
@@ -712,7 +713,7 @@ private boolean validerEmail() {
 
         });
        
-    }
+    }*/
 	//----------------------------------------------
 	// DEMARRER CODE BARRE AUTOMATIQUE
 	public static class codeBarreStart{
@@ -747,6 +748,60 @@ private boolean validerEmail() {
 				}
 			}
 		}
+		
+		//--------------------------------------------
+		//-------------------------------------------
+/*		
+		@FXML
+	    private void initializeFiltr() {
+	        // 0. Initialize the columns.
+//			colonneRaisonSociale.setCellValueFactory(cellData -> ((Object) cellData.getValue()).firstNameProperty());
+//	        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+			
+			
+			colonneRaisonSociale.setCellValueFactory(new PropertyValueFactory<>("raisonSociale"));
+			colonneSigle.setCellValueFactory(new PropertyValueFactory<>("sigle"));
+			colonneTelephone.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+			colonneAdesse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
+			colonneCourriel.setCellValueFactory(new PropertyValueFactory<>("email"));
+			tableViewFournisseur.setItems(fournisseurList);
+
+	        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+	        FilteredList<Fournisseur> filteredData = new FilteredList<>(masterData, p -> true);
+
+	        // 2. Set the filter Predicate whenever the filter changes.
+	        recherch.textProperty().addListener((observable, oldValue, newValue) -> {
+	            filteredData.setPredicate(person -> {
+	                // If filter text is empty, display all persons.
+	                if (newValue == null || newValue.isEmpty()) {
+	                    return true;
+	                }
+
+	                // Compare first name and last name of every person with filter text.
+	                String lowerCaseFilter = newValue.toLowerCase();
+
+	                if (person.getRaisonSociale().toLowerCase().contains(lowerCaseFilter)) {
+	                    return true; // Filter matches first name.
+	                } else if (person.getSigle().toLowerCase().contains(lowerCaseFilter)) {
+	                    return true; // Filter matches last name.
+	                }
+	                return false; // Does not match.
+	            });
+	        });
+
+	        // 3. Wrap the FilteredList in a SortedList. 
+	        SortedList<Fournisseur> sortedData = new SortedList<>(filteredData);
+
+	        // 4. Bind the SortedList comparator to the TableView comparator.
+	        sortedData.comparatorProperty().bind(tableViewFournisseur.comparatorProperty());
+
+	        // 5. Add sorted (and filtered) data to the table.
+	        tableViewFournisseur.setItems(sortedData);
+	    }
+		
+		*/
+		
+		
 }
 
 //------------------------------------

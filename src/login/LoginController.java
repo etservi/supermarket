@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -28,7 +29,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;;
 
 public class LoginController implements Initializable{
 	
@@ -39,6 +41,8 @@ public class LoginController implements Initializable{
 	@FXML private PasswordField psswFild;
 	
 	@FXML private Button btValidCon,effacerChp;
+	
+	int count = 0;
 	
 	
 	public TextField getLoginnFild() { return this.loginnfild; };
@@ -53,7 +57,7 @@ public class LoginController implements Initializable{
 		
 //		System.out.println(LoginController.);
 		
-		
+
 		
 		
 	}
@@ -109,10 +113,14 @@ public class LoginController implements Initializable{
 						paneLogin.getChildren().setAll(pane);
 
 					} else {
+						
+						
+						
 						System.out.println("Pas confome");
 						AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
 						paneLogin.getChildren().setAll(pane);
 						effacer();
+						
 					} 
 				} else {
 					signError.setText("Veuillez vérifier vos identifiants.");
@@ -169,6 +177,12 @@ public void effacer() {
 			    		loginnfild.textProperty().isEmpty()
 			    )
 			);}
+//--------------------------------------------------------------------
+		  @FXML  // PERMET DE FERMET LE PROGRAM
+		    private void closeProgram(ActionEvent event) throws IOException {
+		        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        app_stage.close();
+		    }
 	
 }
 

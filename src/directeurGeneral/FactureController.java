@@ -77,14 +77,14 @@ public class FactureController implements Initializable{
 	Double total = 0.0;
 	
 	public void ajouterArticle() {
-		   String product;
+		  /* String product;
 		   Double price,amount;
 		   int nombre, nombreProduit = 0;
 		   
 		   product = nomArticle.getText() ;
 		   price = Double.parseDouble(prixUnitairee.getText());
 		   nombre = Integer.parseInt(qtite.getText());
-	/*	   
+		   
 		   amount = price * nombre;
 		   
 		   listPurchase.add(product);
@@ -98,7 +98,7 @@ public class FactureController implements Initializable{
 		   qtite.setText(String.valueOf(nombreProduit));
 		   total += amount;
 		   refPrixTotal.setText(String.valueOf(total));
-		   
+		   */
 			tcIdArticle.setCellValueFactory(new PropertyValueFactory<>(idArticl.getText()));
 			tcNom.setCellValueFactory(new PropertyValueFactory<>(nomArticle.getText()));
 			tcQuantite.setCellValueFactory(new PropertyValueFactory<>(qtite.getText()));
@@ -106,8 +106,8 @@ public class FactureController implements Initializable{
 			refPrixTotal.setText(String.valueOf(total));
 			
 			tbViewFacture.setItems(listPurchase);
-			tbViewFacture.setItems(String.valueOf(listOfPrice));
-		   */
+//			tbViewFacture.setItems(String.valueOf(listOfPrice));
+		   
 	   }
 	   
 	   public void annulerArticle() {
@@ -135,5 +135,14 @@ public class FactureController implements Initializable{
 	}
 //-------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
+/*// REDIRECTION
+	public void test() {
+		Parent modify_part_parent = FXMLLoader.load(getClass().getResource("modifyPart.fxml"));
+        Scene modify_part_scene = new Scene(modify_part_parent);
+        modify_part_scene.getStylesheets().add("style.css");
+        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        app_stage.setScene(modify_part_scene);
+        app_stage.show();
+	}
 	
-}
+}*/
