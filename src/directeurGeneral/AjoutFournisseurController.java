@@ -99,7 +99,7 @@ public class AjoutFournisseurController implements Initializable{
 	
 	protected ImageView bottom_bar_dt;
 
-	private String p;
+
 	
 //---------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------	
@@ -118,6 +118,8 @@ public class AjoutFournisseurController implements Initializable{
 		//--------------------------------------------------
 		selctionAuto();
 		//-------------------------------------------------------
+		
+
 		try {
 			codeBarreStart.main(null);
 		} catch (SQLException e1) {
@@ -800,8 +802,27 @@ private boolean validerEmail() {
 	    }
 		
 		*/
-		
-		
+		ObservableList<Fournisseur> data = FXCollections.observableArrayList();
+		ObservableList<Fournisseur> filterdList = FXCollections.observableArrayList();
+		//---------------------------------------------------
+		public void filterFournisseur(String oldvalue, String newValue) {
+			
+			
+			if(recherch.getText()  == null || (newValue.length() < oldvalue.length() ) || newValue==null ) {
+				tableViewFournisseur.setItems(data);
+			}
+			else {
+				newValue = newValue.toUpperCase();
+				for(Fournisseur founisr : tableViewFournisseur.getItems()) {
+					String filterRaisonSociale = founisr.getRaisonSociale();
+					String filterSigle= founisr.getSigle();
+					if(filterRaisonSociale.toUpperCase().contains(newValue) || filterSigle.toUpperCase().contains(newValue)) {
+						filterdList.add(founisr);
+					}
+				}
+				tableViewFournisseur.setItems(filterdList);
+			}
+		}
 }
 
 //------------------------------------

@@ -43,7 +43,7 @@
                   <TextField fx:id="TextFieldTelephone" layoutX="128.0" layoutY="199.0" prefHeight="25.0" prefWidth="194.0" promptText="Téléphone" />
                   <TextField fx:id="TextFieldAdresse" layoutX="128.0" layoutY="238.0" prefHeight="25.0" prefWidth="194.0" promptText="Adresse" />
                   <TextField fx:id="TextFieldCourriel" layoutX="128.0" layoutY="278.0" prefHeight="25.0" prefWidth="194.0" promptText="E-mail" />
-                  <TextField fx:id="recherch" layoutX="359.0" layoutY="17.0" onKeyTyped="#initializeFiltr" promptText="recherche" />
+                  <TextField fx:id="recherch" layoutX="359.0" layoutY="17.0" promptText="recherche" />
                   <Button layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#ajouterFournsseur" text="Ajouter" />
                   <Button layoutX="179.0" layoutY="352.0" mnemonicParsing="false" onAction="#AfficheTableViewChampsFournisseur" text="Modifier" />
                   <Button layoutX="21.0" layoutY="352.0" mnemonicParsing="false" onAction="#EffacerLesChamps" text="Effacer" />
