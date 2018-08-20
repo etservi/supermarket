@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -13,10 +14,13 @@
 
 <AnchorPane fx:id="rootStatistik" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.StatistiqueController">
    <children>
-      <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="459.0" layoutX="22.0" layoutY="27.0" stroke="BLACK" strokeType="INSIDE" width="913.0" />
+      <Rectangle arcHeight="1200.0" arcWidth="5.0" fill="LEMONCHIFFON" height="459.0" layoutX="22.0" layoutY="27.0" opacity="0.8" stroke="#996a46" strokeType="INSIDE" width="913.0" />
       <Separator orientation="VERTICAL" prefHeight="200.0" />
-      <PieChart fx:id="piechart" layoutX="29.0" layoutY="42.0" onMouseClicked="#articleVendues" prefHeight="367.0" prefWidth="450.0" title="Articles Vendus" />
-      <Label fx:id="pourrcentage" layoutX="50.0" layoutY="371.0" text="\%" textFill="#e10404">
+      <PieChart fx:id="piechart" layoutX="29.0" layoutY="42.0" onMouseClicked="#articleVendues" prefHeight="367.0" prefWidth="450.0" title="Articles Vendus">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></PieChart>
+      <Label fx:id="pourrcentage" layoutX="57.0" layoutY="54.0" text="\%" textFill="#e10404">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

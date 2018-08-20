@@ -44,6 +44,10 @@ import boiteAlert.Confirmation;
 import codeBarre.CodeBarreImage;
 import javaBeansClass.Fournisseur;
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.BooleanExpression;
+import javafx.beans.property.ListProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -61,6 +65,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -98,6 +103,9 @@ public class AjoutFournisseurController implements Initializable{
 	private ObservableList<Fournisseur> fournisseurList = FXCollections.observableArrayList();
 	
 	protected ImageView bottom_bar_dt;
+	
+	@FXML Button btValidModif, imprim, supprimer, modifier;
+	
 
 
 	
@@ -118,37 +126,40 @@ public class AjoutFournisseurController implements Initializable{
 		//--------------------------------------------------
 		selctionAuto();
 		//-------------------------------------------------------
+//		btValidModif.disableProperty().bind();
 		
+		imprimer();
 
-		try {
-			codeBarreStart.main(null);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-//-------------------------------------------------------
+		//-----------------------------------------------------
 		try {
 			genererMot();
+			codeBarreStart.main(null);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 }
 //---------------------------------------------------------------------------------	
 //---------------------------------------------------------------------------------
+	
+	
 
-	// INSERTION FOURNISSEUR
+	// INSERTION FOURNISSEUR ////////////////////////////////////////////////////// METHODE AJOUTER FOURNISSEUR
 	public void ajouterFournsseur() {
-		
-		Connection connexion = ConnectionDB.maConnection();
-		
 		String RaisonSocial = textFieldRaisonSociale.getText().trim();
 		String Sigl = TextFieldSigle.getText().trim();
 		String Telephon = TextFieldTelephone.getText();
 		String Adess = TextFieldAdresse.getText().trim();
 		String Couriel = TextFieldCourriel.getText();	
 		
-		if( validerTelephone() && validerEmail() && textFieldRaisonSociale.getText()!= null && TextFieldAdresse.getText() != null ) {
+		Connection connexion = ConnectionDB.maConnection();
+		
+		// VERIFICATION SI LES CHAMPS SONT BIEN REMPLIS
+		if(RaisonSocial.isEmpty() && Sigl.isEmpty() && Telephon.isEmpty() && Adess.isEmpty() && Couriel.isEmpty() && Adess.isEmpty()){
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Veuillez remplir les champs SVP!!!");
+			alert.showAndWait();
+			
+		} else if( validerTelephone() && validerEmail() && textFieldRaisonSociale.getText()!= null && TextFieldAdresse.getText() != null ) {
 
 		try {
 			String requetteInsertion = "INSERT INTO `Fournisseur`(`raisonSociale`, `sigle`, `telephone`, `adresse`, `email`) VALUES ('"+RaisonSocial+"','"+Sigl+"','"+Telephon+"','"+Adess+"','"+Couriel+ "')";
@@ -278,6 +289,7 @@ public class AjoutFournisseurController implements Initializable{
 		} catch (Exception exInsertFournisseur) {
 			Logger.getLogger(AjoutFournisseurController.class.getName()).log(Level.SEVERE, null, exInsertFournisseur);
 		}
+
 	} else {
 		System.out.println("Error Rapl");
 	}
@@ -296,13 +308,27 @@ public class AjoutFournisseurController implements Initializable{
 	// APPEERSU D'UNE LIGNE SUR LE TABLEAU UNE FOIS CLIQUER
 	public void AfficheTableViewChampsFournisseur(ActionEvent event) {
 		
+		String RaisonSocial = textFieldRaisonSociale.getText().trim();
+		String Sigl = TextFieldSigle.getText().trim();
+		String Telephon = TextFieldTelephone.getText();
+		String Adess = TextFieldAdresse.getText().trim();
+		String Couriel = TextFieldCourriel.getText();	
+		
 		Fournisseur mat = tableViewFournisseur.getSelectionModel().getSelectedItem();
 		
+		if( RaisonSocial.isEmpty() && Sigl.isEmpty() && Telephon.isEmpty() && Adess.isEmpty() && Couriel.isEmpty() && Adess.isEmpty() ){
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Veuillez selectionner une ligne SVP!!!");
+			alert.showAndWait();
+			
+		} else {
+			
 		textFieldRaisonSociale.setText(mat.getRaisonSociale());		
 		TextFieldSigle.setText(mat.getSigle());						
 		TextFieldTelephone.setText(mat.getTelephone());				
 		TextFieldAdresse.setText(mat.getAdresse());					
-		TextFieldCourriel.setText(mat.getEmail());					
+		TextFieldCourriel.setText(mat.getEmail());	
+	}
 	}
 //---------------------------------------------------------------------------------
 	
@@ -808,7 +834,7 @@ private boolean validerEmail() {
 		public void filterFournisseur(String oldvalue, String newValue) {
 			
 			
-			if(recherch.getText()  == null || (newValue.length() < oldvalue.length() ) || newValue==null ) {
+			if(recherch  == null || (newValue.length() < oldvalue.length() ) || newValue==null ) {
 				tableViewFournisseur.setItems(data);
 			}
 			else {
@@ -816,17 +842,35 @@ private boolean validerEmail() {
 				for(Fournisseur founisr : tableViewFournisseur.getItems()) {
 					String filterRaisonSociale = founisr.getRaisonSociale();
 					String filterSigle= founisr.getSigle();
-					if(filterRaisonSociale.toUpperCase().contains(newValue) || filterSigle.toUpperCase().contains(newValue)) {
+					if( (filterRaisonSociale.toUpperCase().contains(newValue) ) || ( filterSigle.toUpperCase().contains(newValue)  ) ) {
 						filterdList.add(founisr);
 					}
 				}
 				tableViewFournisseur.setItems(filterdList);
-			}
+			} 
 		}
-}
+		
+		// IMPRIMER
+		public void imprimer() {
+			
+			String id = modifier.getId();
+			
+//				btValidModif.setVisible(true);
+//				modifier.setVisible(false);
+			
+		
+			
+//			if(modifier) {
+			this.modifier.disableProperty().bind(BooleanExpression.booleanExpression(this.tableViewFournisseur.getSelectionModel().selectedItemProperty().isNull()));
+//			} else {
+//			btValidModif.setVisible(false);
+//			}
+		}
+
 
 //------------------------------------
 
+}
 
 
 

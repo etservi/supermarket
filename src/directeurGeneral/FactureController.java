@@ -46,6 +46,9 @@ public class FactureController implements Initializable{
 	@FXML ImageView imgrtr;  // RETOUR SUR LE MENU
 	@FXML ComboBox<Integer> comboBoxQuatite;
 
+	
+	public TextField getLoginnFild() { return this.refNamCashier; };
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comboBoxQuantite(); // CHOIX DU NOMBRE DE PRODUIT QUE LE VEUX
@@ -146,3 +149,8 @@ public class FactureController implements Initializable{
 	}
 	
 }*/
+	//------------------------------// RECUPERER USER CONNECTER
+	public void myFunction(String userConnect) {
+		refNamCashier.setText(userConnect);
+	}
+}

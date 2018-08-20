@@ -1,8 +1,14 @@
 package directeurGeneral;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.mysql.jdbc.PreparedStatement;
+
+import baseDeDonnées.ConnectionDB;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -26,22 +32,30 @@ public class StatistiqueController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		articleVendues();
+		try {
+			articleVendues();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		stocksArticle();
 
 	}
 
-	public void articleVendues() {
+	public void articleVendues() throws SQLException {
+		
 		ObservableList<PieChart.Data> details = FXCollections.observableArrayList();
-		details.addAll(
-				new PieChart.Data("Article 1", 20), 
-				new PieChart.Data("Article 2", 30), 
-				new PieChart.Data("Article 3", 50),
-				new PieChart.Data("Article 4", 10), 
-				new PieChart.Data("Article 5", 7), 
-				new PieChart.Data("Article 5", 60)
-				);
-
+		
+		Connection connexion = ConnectionDB.maConnection();
+		String sql = "SELECT nomProduit,  qteStock FROM Article ";
+		
+		PreparedStatement pst =  (PreparedStatement) connexion.prepareStatement(sql);
+		ResultSet rs = pst.executeQuery();
+		
+		while(rs.next()) {
+			details.add(new PieChart.Data(rs.getString(1), rs.getDouble(2)));
+		}
+		
 		piechart.setData(details);
 
 		for (final PieChart.Data data : piechart.getData()) {

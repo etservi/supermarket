@@ -1,10 +1,16 @@
 package login;
 
 import java.sql.Connection;
+
 import baseDeDonnées.ConnectionDB;
+import directeurGeneral.FactureController;
+import javaBeansClass.Utilisateur;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
@@ -19,6 +25,7 @@ public class LoginMain extends Application {
 		VericationConnexionBaseDeDonnees();
 
 		try {
+
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 950, 500);
 			scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
@@ -45,5 +52,6 @@ public class LoginMain extends Application {
 			System.out.println("Connexion de la base de données réussie");
 		}
 	}
+	// ----------
 
 }

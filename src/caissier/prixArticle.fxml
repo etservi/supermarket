@@ -10,10 +10,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.DetailsVenteController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.prixArticleController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="31.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
-      <TextField layoutX="602.0" layoutY="29.0" text="code barre" />
+      <TextField fx:id="tfReserch" layoutX="602.0" layoutY="28.0" text="code barre" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="à" />
       <Button layoutX="786.0" layoutY="28.0" mnemonicParsing="false" text="OK" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="416.0" layoutX="20.0" layoutY="78.0" stroke="BLACK" strokeType="INSIDE" width="913.0" />
@@ -59,32 +59,32 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="505.0" layoutY="259.0" text="Qt r" textFill="#fcfafa">
+      <Label fx:id="labQtRestante" layoutX="505.0" layoutY="259.0" text="Qt r" textFill="#fcfafa">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="505.0" layoutY="105.0" text="Id Rayon Nom" textFill="#fcfafa">
+      <Label fx:id="labIdRayon" layoutX="505.0" layoutY="105.0" text="Id Rayon Nom" textFill="#fcfafa">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="505.0" layoutY="153.0" text="Id Cqtégorie Nom" textFill="#fcfafa">
+      <Label fx:id="LabIdCat" layoutX="505.0" layoutY="153.0" text="Id Cqtégorie Nom" textFill="#fcfafa">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="505.0" layoutY="205.0" text="Art Nom" textFill="#fcfafa">
+      <Label fx:id="labNomAr" layoutX="505.0" layoutY="205.0" text="Art Nom" textFill="#fcfafa">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="505.0" layoutY="319.0" text="Prix " textFill="#fcfafa">
+      <Label fx:id="labPrxUnitaire" layoutX="505.0" layoutY="319.0" text="Prix " textFill="#fcfafa">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <BorderPane layoutX="468.0" layoutY="362.0" prefHeight="40.0" prefWidth="200.0" />
-      <BorderPane layoutX="468.0" layoutY="421.0" prefHeight="40.0" prefWidth="200.0" />
+      <BorderPane fx:id="labCodBarr" layoutX="468.0" layoutY="362.0" prefHeight="40.0" prefWidth="200.0" />
+      <BorderPane fx:id="labQrCod" layoutX="468.0" layoutY="421.0" prefHeight="40.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

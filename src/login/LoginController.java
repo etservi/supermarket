@@ -15,6 +15,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import directeurGeneral.AccueilController;
+import directeurGeneral.FactureController;
 import javaBeansClass.Utilisateur;
 import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -30,9 +32,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
 
 public class LoginController implements Initializable{
+	
+	public static String tfName = ""; 
 	
 	@FXML private AnchorPane paneLogin;
 //	private static long temps = 0;
@@ -46,23 +52,11 @@ public class LoginController implements Initializable{
 	
 	
 	public TextField getLoginnFild() { return this.loginnfild; };
-
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		Utilisateur nr = new Utilisateur();
-//		nr.setLogin(loginnfild.getText());
-		
-		setText(loginnfild.getText());
 
-		
-//		System.out.println(LoginController.);
-		
-
-		
-		
-	}
-	public void setText(String loginnfild) {
-		this.loginnfild.setText(loginnfild);
 	}
 // -----------------------------------
 	
@@ -98,8 +92,24 @@ public class LoginController implements Initializable{
 					//-------------------------------------
 					if (logRole.equalsIgnoreCase("Administrateur")) {
 						
-						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
-						paneLogin.getChildren().setAll(pane);
+//						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
+//						paneLogin.getChildren().setAll(pane);
+//						
+//						new FactureController().myFunction(loginnfild.getText());
+						
+						FXMLLoader loggedWindow = null;
+						loggedWindow = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml")); // here crashes!
+						Pane root = loggedWindow.load();
+
+						FactureController controller = loggedWindow.getController();
+						controller.myFunction(String.valueOf(loginnfild));
+
+						Stage switchScene = (Stage)((Node)event.getSource()).getScene().getWindow();
+						switchScene.setResizable(false);
+//						switchScene.setTitle("Welcome " + customer.FirstName + " " + customer.LastName);
+						switchScene.setScene(new Scene(root, 800, 500));
+
+						switchScene.show();
 						
 					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
@@ -167,16 +177,7 @@ public void effacer() {
 		}
 	//-----------------------------------------------------------------------
 	//----------------------------------------------------------------------
-	//-----------------------------------------------------------------------
-	//------------------------- DESACTIVER LES BUTTONS SI LES CHAMPS SONT VIDES
-		
-		public void frv() {
-		btValidCon.disableProperty().bind(
-				loginnfild.textProperty().isEqualTo(psswFild.textProperty()).not()
-			    .or(
-			    		loginnfild.textProperty().isEmpty()
-			    )
-			);}
+
 //--------------------------------------------------------------------
 		  @FXML  // PERMET DE FERMET LE PROGRAM
 		    private void closeProgram(ActionEvent event) throws IOException {
