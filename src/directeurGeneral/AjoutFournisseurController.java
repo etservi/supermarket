@@ -605,7 +605,7 @@ private boolean validerEmail() {
 		}
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
-/*		
+		
 	final ObservableList<Fournisseur> data = FXCollections.observableArrayList();
 	
 	public void rechercheFiltrs(KeyEvent ke) {
@@ -635,7 +635,7 @@ private boolean validerEmail() {
 				tableViewFournisseur.setItems(sortData);
 //			});		
 	}
-	*/
+	
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
 	public void selctionAuto() {

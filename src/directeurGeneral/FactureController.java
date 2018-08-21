@@ -112,7 +112,7 @@ public class FactureController implements Initializable{
 		   listOfPrice.add(amount); 
 		   
 		   //TEST S/O
-//		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
+		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
 		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
 		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idProduit") );
@@ -156,7 +156,7 @@ public class FactureController implements Initializable{
 		   
 		   refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
 		   
-		   
+		   System.out.println("Reamining price"+total);
 		   
 
 		   
