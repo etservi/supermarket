@@ -57,11 +57,14 @@
                   <Button layoutX="547.0" layoutY="457.0" mnemonicParsing="false" onAction="#annulerArticle" text="Annuler" />
                   <Button layoutX="822.0" layoutY="456.0" mnemonicParsing="false" text="Valider Achat" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="27.0" layoutX="381.0" layoutY="12.0" opacity="0.70" stroke="#4895d5" strokeType="INSIDE" width="557.0" />
-                  <Label layoutX="394.0" layoutY="18.0" text="DATE : " />
-                  <Label layoutX="691.0" layoutY="18.0" text="TOTAL : " />
-                  <TextField fx:id="refPrixTotal" editable="false" alignment="CENTER_RIGHT" layoutX="746.0" layoutY="12.0" promptText="total">
+                  <Label fx:id="dateduJour" layoutX="394.0" layoutY="18.0" text="DATE : " />
+                  <Label layoutX="716.0" layoutY="18.0" text="TOTAL : ">
                      <font>
                         <Font size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="refPrixTotal" alignment="CENTER_RIGHT" editable="false" layoutX="776.0" layoutY="12.0" prefHeight="13.0" prefWidth="146.0" promptText="Total">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
                      </font></TextField>
                   <Button layoutX="646.0" layoutY="457.0" mnemonicParsing="false" text="Valider Modification" />
                   <TextField alignment="CENTER" editable="true" layoutX="475.0" layoutY="457.0" prefHeight="25.0" prefWidth="45.0" promptText="nbr" />

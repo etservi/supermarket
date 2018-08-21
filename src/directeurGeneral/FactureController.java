@@ -2,6 +2,10 @@ package directeurGeneral;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javax.swing.plaf.synth.SynthScrollBarUI;
@@ -13,7 +17,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -29,10 +35,10 @@ public class FactureController implements Initializable{
 	
 	@FXML private TableView<Article> tbViewFacture;
 	
-	@FXML private TableColumn<Article, String> tcIdArticle;
+	@FXML private TableColumn<Article, Integer> tcIdArticle;
 	@FXML private TableColumn<Article, String> tcNom;
-	@FXML private TableColumn<Article, String> tcQuantite;
-	@FXML private TableColumn<Article, String> tcPrixUnitaire;
+	@FXML private TableColumn<Article, Integer> tcQuantite;
+	@FXML private TableColumn<Article, Double> tcPrixUnitaire;
 	
 	@FXML private TextField idArticl;
 	@FXML private TextField nomArticle;
@@ -48,6 +54,7 @@ public class FactureController implements Initializable{
 	@FXML ImageView imgrtr;  // RETOUR SUR LE MENU
 	@FXML ComboBox<String> comboBoxQuatite;
 
+	@FXML private Label dateduJour;
 	
 	public TextField getLoginnFild() { return this.refNamCashier; };
 	
@@ -63,6 +70,8 @@ public class FactureController implements Initializable{
 	public void adf() throws IOException {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 		rootPane.getChildren().setAll(pane);
+
+		dateDuJourMethode(); // DATE AUTOMATIQUE
 	}
 	//---------------------------------------------
 	// -------------------------------------------- VIDER LES CHAMPS AVANT D'AJOUT ARTICLE
@@ -164,7 +173,14 @@ public class FactureController implements Initializable{
 		}
 	}
 	
-	//----------- AJOUTER ARTICLE DANS LE TABLEAU
+	//-----------------------------------------------
+	
+	public void dateDuJourMethode() {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		dateduJour.setText("Date : " + reportDate);
+}		
 	
 	
 	
@@ -185,5 +201,31 @@ public class FactureController implements Initializable{
 	public void myFunction(String userConnect) {
 		refNamCashier.setText(userConnect);
 	}
+	//--------------------------------- VERIFICATION CHAMPS VIDE
 	
+	public void verifivationChampVide() {
+		
+		String idArt = idArticl.getText();
+		String namArt = nomArticle.getText();
+		String codBar = codeBarr.getText();
+		String prixU = refPrixTotal.getText();
+		
+		if(idArt.isEmpty() && namArt.isEmpty() && codBar.isEmpty() && prixU.isEmpty() ){
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setHeaderText("Veuillez saisir l'id d'Article !!!");
+			alert.showAndWait();
+	}
+		
+		
+		//-------------------------
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
 }
