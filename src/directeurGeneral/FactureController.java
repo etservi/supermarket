@@ -33,7 +33,7 @@ public class FactureController implements Initializable{
 	
 	@FXML private AnchorPane rootPane;
 	
-	@FXML private static TableView<Article> tbViewFacture;
+	@FXML private TableView<Article> tbViewFacture;
 	
 	@FXML private TableColumn<Article, Integer> tcIdArticle;
 	@FXML private TableColumn<Article, String> tcNom;
@@ -112,7 +112,7 @@ public class FactureController implements Initializable{
 		   listOfPrice.add(amount); 
 		   
 		   //TEST S/O
-		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
+//		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
 		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
 		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idProduit") );
@@ -134,32 +134,64 @@ public class FactureController implements Initializable{
 		     
 	}
 	   
-	   @SuppressWarnings("unlikely-arg-type")
-	public void annulerArticle() {
-		   int index, nombre;
-		   Double amount, price;
+	   public void annulerArticle() {
+		   
+		   String articlCancel;
+		   Double priceArticlCancel, amountarticlCancel;
+		   
+		   Article indexSelctedTab = tbViewFacture.getSelectionModel().getSelectedItem();  // index
+		   String qte = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
+		   
+		   Article priceSelectedtab = tbViewFacture.getSelectionModel().getSelectedItem();  // index
+		   Article qtSelecTab = tbViewFacture.getSelectionModel().getSelectedItem();  // index
+		   
+		   priceArticlCancel = Double.parseDouble(prixUnitairee.getText()); // RECUPERATION PRIX D'ARTICLE
+		   
+		   amountarticlCancel = priceSelectedtab.getPrixUnitaire() * qtSelecTab.getQteStock() ;   //  CALCUL MONTANT TOTAL
+		   
+		   total -= amountarticlCancel;
+		   
+		   listPurchase.remove(String.valueOf( indexSelctedTab) );
+		   listOfPrice.remove(amountarticlCancel); 
+		   
+		   refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
+		   
+		   
+		   
+
+		   
+//		   int quantitee = Integer.parseInt(qte) - 1;
+
+//		   listPurchase.remove(String.valueOf( indexSelctedTab) );
+		   
+		   
+//		   int index, nombre;
+//		   Double amount, price;
 		 /*  
 		   nombre = Integer.parseInt(qtite.getText());
 		   index = listPurchase.getSelectedInde();
 		   amount = Double.parseDouble(listOfPrice.getItem(index));
 		   */
 		   //
-		   String quantite = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
-		   Article indexSelctedTab = tbViewFacture.getSelectionModel().getSelectedItem();
+//		   String quantite = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
+		   
+		   
+//		   System.out.println(quantite);
+//		   System.out.println(indexSelctedTab.getIdProduit());
 //		   amount = price * Integer.parseInt(quantite);  // CALCUL MONTANT TOTAL
 		   //
 //		  int quantitee = Integer.parseInt(quantite) - 1;
 //		   nombre = nombre - 1;
 //		   total = total - amount;
 		   
-		   listPurchase.remove(indexSelctedTab);
-		   listOfPrice.remove(quantite);
+//		   listPurchase.remove(indexSelctedTab);
+//		   listOfPrice.remove(quantite);
 		//--------------------------------------   
-		   System.out.println("Article seletionner " + indexSelctedTab);  
+//		   System.out.println("Article seletionner " + indexSelctedTab);  
 //		   System.out.println("Total"+amount); System.out.println("Montant Ttal restant"+ total);
 		   
 //		   qtite.setText(String.valueOf(nombre));
-		   refPrixTotal.setText(String.valueOf(total));   
+//		   refPrixTotal.setText(String.valueOf(total));   
 		//----------------------------------------------------------------------------   
 		   
 	   }
