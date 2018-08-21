@@ -118,11 +118,11 @@ public class FactureController implements Initializable{
 		   
 //		   numberOfArticlee = listOfPrice.getItemCount();
 //		   numberOfArticlee = listPurchase.get(String.valueOf(nombreProduit));
-			 qtite.setText(String.valueOf(numberOfArticlee));
+//			 qtite.setText(String.valueOf(numberOfArticlee));
 /*		*/    		   
 //		  
 		   total += amount;
-		   refPrixTotal.setText( String.valueOf(total) ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
+		   refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
 		   
 			
 		  
@@ -149,8 +149,9 @@ public class FactureController implements Initializable{
 	//------------------------------------------
 	// --------------------CHOIX DU NOMBRE DE PRODUIT QUE L'ON VEUT
 	public void comboBoxQuantite() {
-//		comboBoxQuatite.getItems().addAll(1,2,3,4,5,6,7);
-	
+		for (int i = 1; i < 100; i++) {
+			comboBoxQuatite.getItems().addAll(String.valueOf(i));
+		}
 	}
 //-------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
