@@ -463,19 +463,34 @@ public class AjoutFournisseurController implements Initializable{
 				tableViewFournisseur.getItems().remove(selectedIndex);
 				
 			try{
-					String sql = "DELETE FROM `Fournisseur` WHERE raisonSociale = '"+ mat.getRaisonSociale() +"' " ;
+//					String sql = "DELETE FROM `Fournisseur` WHERE raisonSociale = '"+ mat.getRaisonSociale() +"' " ;
 				
-					PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
-					pst.executeUpdate();
-					pst.close();
-					connexion.close();
+//					PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
+//					pst.executeUpdate();
+//					pst.close();
+//					connexion.close();
+					
+					  String rsql="DELETE from Fournisseur WHERE raisonSociale=? AND sigle=? AND telephone=? AND adresse=? AND email=?";
+			            PreparedStatement ps = (PreparedStatement) connexion.prepareStatement(rsql);
+			            Fournisseur fcs = new Fournisseur();
+			            
+			            ps.setString(1,fcs.getRaisonSociale());
+			            ps.setString(2,fcs.getSigle());
+			            ps.setString(3,fcs.getTelephone());
+			            ps.setString(4, fcs.getEmail());
+			            ps.setString(5, fcs.getAdresse());
+			            
+			            ps.executeUpdate();
+			            ps.close();
+						connexion.close();
 					// --------------------------------------------------------
 					Confirmation.alerter();
 					// --------------------------------------------------------
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText("Fournisseur a été bien supprimé");
 					alert.showAndWait();
-					
+					//--------------------------------------
+	tableViewFournisseur.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
 					// --------------------------------------------------------				
 					new notificationThred().start();
 					//----------------------------
