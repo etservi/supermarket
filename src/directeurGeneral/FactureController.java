@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
 import javaBeansClass.Article;
 import javaBeansClass.Fournisseur;
 import javafx.collections.FXCollections;
@@ -44,7 +46,7 @@ public class FactureController implements Initializable{
 	@FXML private TextField refNamCashier;
 	
 	@FXML ImageView imgrtr;  // RETOUR SUR LE MENU
-	@FXML ComboBox<Integer> comboBoxQuatite;
+	@FXML ComboBox<String> comboBoxQuatite;
 
 	
 	public TextField getLoginnFild() { return this.refNamCashier; };
@@ -52,79 +54,93 @@ public class FactureController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comboBoxQuantite(); // CHOIX DU NOMBRE DE PRODUIT QUE LE VEUX
-		//		viderLesCambre();  //VIDE LES CHAMPS AVANT D'AJOUT
+		viderLesCambre();  //VIDE LES CHAMPS AVANT D'AJOUT
 		
 	}
 // ---------------------------------------------------
-//---------------------------------------
-	
+//----------------------------------------------------
 	
 	public void adf() throws IOException {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 		rootPane.getChildren().setAll(pane);
 	}
-	//------------------------------------------
-	// --------------------------------------------
+	//---------------------------------------------
+	// -------------------------------------------- VIDER LES CHAMPS AVANT D'AJOUT ARTICLE
 	public void viderLesCambre(){
-//		nomArticle.setText("");
-//		qtite.setText("");
-//		prixUnitairee.setText("");
-//		codeBarr.setText("");
-//		refPrixTotal.setText("");
-//		montantverser.setText("");
-//		montantReduu.setText("");
+		
+		idArticl.setText("");
+		nomArticle.setText("");
+		prixUnitairee.setText("");
+		codeBarr.setText("");
+		refPrixTotal.setText("");
+		montantverser.setText("");
+		montantReduu.setText("");
+		
+		// VIDER LE COMBOBOX
+		comboBoxQuatite.getSelectionModel().clearSelection();
+		comboBoxQuatite.setValue(null);
+		
 	}
 
 	final ObservableList<String> listPurchase = FXCollections.observableArrayList();
-	final ObservableList<Double> listOfPrice = FXCollections.observableArrayList();
+	final ObservableList<Object> listOfPrice = FXCollections.observableArrayList();
+	
 	Double total = 0.0;
 	
 	public void ajouterArticle() {
-		  /* String product;
-		   Double price,amount;
-		   int nombre, nombreProduit = 0;
+		   String articleName;
+		   Double price, amount;
+		   int numberOfArticlee = 0;
 		   
-		   product = nomArticle.getText() ;
-		   price = Double.parseDouble(prixUnitairee.getText());
-		   nombre = Integer.parseInt(qtite.getText());
+		     String quantite = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
+		   			articleName  = nomArticle.getText() ; // RECUPERATION NOM ARTICLE
+		   			price = Double.parseDouble(prixUnitairee.getText()); // RECUPERATION PRIX D'ARTICLE
 		   
-		   amount = price * nombre;
+		   amount = price * Integer.parseInt(quantite);  // CALCUL MONTANT TOTAL
 		   
-		   listPurchase.add(product);
+		   listPurchase.add(articleName);
 		   listOfPrice.add(amount); 
-		   nombreProduit = (listPurchase.get(listPurchase.indexOf(nombreProduit))).length();
-		  
-		   nombreProduit = listOfPrice.getItemCount();
-		   nombreProduit = listPurchase.get(String.valueOf(nombreProduit));
 		   
+		   //TEST S/O
+		   System.out.println(quantite); System.out.println(articleName);  System.out.println(price); System.out.println("Montant"+ amount);
+		   //------------------------------------------------------------------------------------------------------------------------
 		   
-		   qtite.setText(String.valueOf(nombreProduit));
-		   total += amount;
-		   refPrixTotal.setText(String.valueOf(total));
-		   */
-			tcIdArticle.setCellValueFactory(new PropertyValueFactory<>(idArticl.getText()));
-			tcNom.setCellValueFactory(new PropertyValueFactory<>(nomArticle.getText()));
-			tcQuantite.setCellValueFactory(new PropertyValueFactory<>(qtite.getText()));
-			tcPrixUnitaire.setCellValueFactory(new PropertyValueFactory<>(prixUnitairee.getText()));
-			refPrixTotal.setText(String.valueOf(total));
+		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>(idArticl.getText()));
+			tcNom.setCellValueFactory( new PropertyValueFactory<>(articleName) );
+			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( quantite ));
+			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( String.valueOf(price) ) );
 			
-			tbViewFacture.setItems(listPurchase);
+			
+			tbViewFacture.setItems( listPurchase );
 //			tbViewFacture.setItems(String.valueOf(listOfPrice));
+
+//		   numberOfArticlee = (listPurchase.get(listPurchase.indexOf(numberOfArticlee))).length();		   
 		   
+//		   numberOfArticlee = listOfPrice.getItemCount();
+//		   numberOfArticlee = listPurchase.get(String.valueOf(nombreProduit));
+			 qtite.setText(String.valueOf(numberOfArticlee));
+/*		*/    		   
+//		  
+		   total += amount;
+		   refPrixTotal.setText( String.valueOf(total) ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
+		   
+			
+		  
 	   }
 	   
 	   public void annulerArticle() {
 		   int index, nombre;
-		   Double montant, prix;
+		   Double amount, price;
+		  /* 
+		   nombre = Integer.parseInt(qtite.getText());
+		   index = listPurchase.getSelectedInde();
+		   amount = Double.parseDouble(listOfPrice.getItem(index));
 		   
-		   /*nombre = Integer.parseInt(qtite.getText());
-		   index = listAchat.getSelectedInde();
-		   montant = Double.parseDouble(listPrix.getItem(index));
 		   nombre = nombre - 1;
-		   total = total - montant;
+		   total = total - amount;
 		   
-		   listAchat.remove(index);
-		   listPrix.remove(index);
+		   listPurchase.remove(index);
+		   listOfPrice.remove(index);
 		   qtite.setText(String.valueOf(nombre));
 		   refPrixTotal.setText(String.valueOf(total));   
 		   */
@@ -133,7 +149,7 @@ public class FactureController implements Initializable{
 	//------------------------------------------
 	// --------------------CHOIX DU NOMBRE DE PRODUIT QUE L'ON VEUT
 	public void comboBoxQuantite() {
-		comboBoxQuatite.getItems().addAll(1,2,3,4,5,6,7);
+//		comboBoxQuatite.getItems().addAll(1,2,3,4,5,6,7);
 	
 	}
 //-------------------------------------------------------------------------------------------

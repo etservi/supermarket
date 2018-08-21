@@ -18,6 +18,7 @@ import directeurGeneral.AccueilController;
 import directeurGeneral.FactureController;
 import javaBeansClass.Utilisateur;
 import javafx.beans.binding.BooleanBinding;
+import javafx.beans.binding.BooleanExpression;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,6 +68,11 @@ public class LoginController implements Initializable{
 		private void validerConnexion(ActionEvent event) throws IOException {
 			String errorMessage = "";
 			
+			if(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) {
+				btValidCon.setVisible(false);
+			
+			} else {
+				btValidCon.setVisible(true);
 			try {
 				
 				Connection connexion = ConnectionDB.maConnection();
@@ -92,9 +98,9 @@ public class LoginController implements Initializable{
 					//-------------------------------------
 					if (logRole.equalsIgnoreCase("Administrateur")) {
 						
-//						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
-//						paneLogin.getChildren().setAll(pane);
-//						
+						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
+						paneLogin.getChildren().setAll(pane);
+/*//						
 //						new FactureController().myFunction(loginnfild.getText());
 						
 						FXMLLoader loggedWindow = null;
@@ -110,7 +116,7 @@ public class LoginController implements Initializable{
 						switchScene.setScene(new Scene(root, 800, 500));
 
 						switchScene.show();
-						
+						*/
 					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
@@ -146,6 +152,10 @@ public class LoginController implements Initializable{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			}	
+//			else {
+//				
+//			}
 			
 }		
 //////////////////////////////////////////

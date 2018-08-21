@@ -15,6 +15,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -48,6 +49,8 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -64,6 +67,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -126,9 +130,6 @@ public class AjoutFournisseurController implements Initializable{
 		//--------------------------------------------------
 		selctionAuto();
 		//-------------------------------------------------------
-//		btValidModif.disableProperty().bind();
-		
-		imprimer();
 
 		//-----------------------------------------------------
 		try {
@@ -828,6 +829,9 @@ private boolean validerEmail() {
 	    }
 		
 		*/
+		
+		//------------------------------------RECHERCHE
+/*		
 		ObservableList<Fournisseur> data = FXCollections.observableArrayList();
 		ObservableList<Fournisseur> filterdList = FXCollections.observableArrayList();
 		//---------------------------------------------------
@@ -849,7 +853,7 @@ private boolean validerEmail() {
 				tableViewFournisseur.setItems(filterdList);
 			} 
 		}
-		
+		*/
 		// IMPRIMER
 		public void imprimer() {
 			
