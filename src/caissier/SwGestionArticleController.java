@@ -47,6 +47,7 @@ public class SwGestionArticleController implements Initializable{
 		// REDIRECTION SUR ACCUEIL - IMAGE
 		@FXML
 		private void prixArticle() throws IOException {
+			
 			Stage stage = new Stage();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/caissier/prixArticle.fxml"));
 			Parent root = loader.load();

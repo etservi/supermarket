@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.itextpdf.text.pdf.TextField;
 
 import javaBeansClass.Article;
 import javafx.fxml.FXML;
@@ -12,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -58,8 +58,8 @@ public class prixArticleController implements Initializable{
             // REMPLIR LES INFORMATIONS DES ARTICLES
         	labIdRayon.setText(Integer.toString(article.getId()));
         	LabIdCat.setText(Integer.toString(article.getIdCategorie()));
-        	labNomAr.setText(article.getNomArticle());
-        	labQtRestante.setText(article.getNomArticle());
+//        	labNomAr.setText(article.getNomArticle());
+//        	labQtRestante.setText(article.getNomArticle());
         	labPrxUnitaire.setText(Double.toString(article.getPrixUnitaire()));
         	
 //        	labCodBarr.setCenter(imageView);  // REMPLIR L'IMAGE

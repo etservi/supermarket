@@ -12,8 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -22,6 +24,12 @@ public class FactureController implements Initializable{
 	@FXML private AnchorPane rootP;
 	
 	@FXML private TableView<Article> tbViewFacture;
+	
+	@FXML private TableColumn<Article, Integer> tcIdArticle;
+	@FXML private TableColumn<Article, String> tcNom;
+	@FXML private TableColumn<Article, Integer> tcQuantite;
+	@FXML private TableColumn<Article, Double> tcPrixUnitaire;
+	
 	@FXML private TextField idArticl;
 	@FXML private TextField nomArticle;
 	@FXML private TextField qtite;
@@ -35,10 +43,13 @@ public class FactureController implements Initializable{
 	
 	@FXML ImageView imgrtr;  // RETOUR SUR LE MENU
 	@FXML ComboBox<Integer> comboBoxQuatite;
+	
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		comboBoxQuantite(); // CHOIX DU NOMBRE DE PRODUIT QUE LE VEUX
+
+		
 		
 	}
 // ---------------------------------------------------
@@ -49,37 +60,35 @@ public class FactureController implements Initializable{
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
 		rootP.getChildren().setAll(pane);
 	}
-	//------------------------------------------
-	// --------------------------------------------
+	
+	//---------------------------------------------
+	// -------------------------------------------- VIDER LES CHAMPS AVANT D'AJOUT ARTICLE
 	public void viderLesCambre(){
-//		nomArticle.setText("");
-//		qtite.setText("");
-//		prixUnitairee.setText("");
-//		codeBarr.setText("");
-//		refPrixTotal.setText("");
-//		montantverser.setText("");
-//		montantReduu.setText("");
+		
+		idArticl.setText("");
+		nomArticle.setText("");
+		prixUnitairee.setText("");
+		codeBarr.setText("");
+		refPrixTotal.setText("");
+		montantverser.setText("");
+		montantReduu.setText("");
+		
+		// VIDER LE COMBOBOX
+		comboBoxQuatite.getSelectionModel().clearSelection();
+		comboBoxQuatite.setValue(null);
+		
 	}
 
-	final ObservableList<String> listPurchase = FXCollections.observableArrayList();
-	final ObservableList<Double> listOfPrice = FXCollections.observableArrayList();
-	Double total = 0.0;
-	
-	public void ajouterArticle() {
-		 
-	   }
+
+
 	   
 	   public void annulerArticle() {
 		 
 	   }
 
-	//------------------------------------------
-	// --------------------CHOIX DU NOMBRE DE PRODUIT QUE L'ON VEUT
-	public void comboBoxQuantite() {
-		comboBoxQuatite.getItems().addAll(1,2,3,4,5,6,7);
+		//------------------------------------------
 	
-	}
-//-------------------------------------------------------------------------------------------
+//-----------------------------------------------
 //-------------------------------------------------------------------------------------------
 				// REDIRECTION SUR ACCUEIL - 
 				@FXML
