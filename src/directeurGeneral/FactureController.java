@@ -2,6 +2,7 @@ package directeurGeneral;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,6 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -134,13 +136,13 @@ public class FactureController implements Initializable{
 		     
 	}
 	   
-	   public void annulerArticle() {
+	   public void annulerArticle() throws SQLException {
 		   
 		   String articlCancel;
-		   Double priceArticlCancel, amountarticlCancel;
-		   
+		   Double priceArticlCancel;
+		   Double amountarticlCancel;
+//		   
 		   Article indexSelctedTab = tbViewFacture.getSelectionModel().getSelectedItem();  // index
-		   String qte = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
 		   
 		   Article priceSelectedtab = tbViewFacture.getSelectionModel().getSelectedItem();  // index
 		   Article qtSelecTab = tbViewFacture.getSelectionModel().getSelectedItem();  // index
@@ -149,50 +151,27 @@ public class FactureController implements Initializable{
 		   
 		   amountarticlCancel = priceSelectedtab.getPrixUnitaire() * qtSelecTab.getQteStock() ;   //  CALCUL MONTANT TOTAL
 		   
-		   total -= amountarticlCancel;
-		   
-		   listPurchase.remove(String.valueOf( indexSelctedTab) );
-		   listOfPrice.remove(amountarticlCancel); 
-		   
-		   refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
-		   
-		   System.out.println("Reamining price"+total);
-		   
-
-		   
-//		   int quantitee = Integer.parseInt(qte) - 1;
-
-//		   listPurchase.remove(String.valueOf( indexSelctedTab) );
-		   
-		   
-//		   int index, nombre;
-//		   Double amount, price;
-		 /*  
-		   nombre = Integer.parseInt(qtite.getText());
-		   index = listPurchase.getSelectedInde();
-		   amount = Double.parseDouble(listOfPrice.getItem(index));
-		   */
-		   //
-//		   String quantite = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
-		   
-		   
-//		   System.out.println(quantite);
-//		   System.out.println(indexSelctedTab.getIdProduit());
-//		   amount = price * Integer.parseInt(quantite);  // CALCUL MONTANT TOTAL
-		   //
-//		  int quantitee = Integer.parseInt(quantite) - 1;
-//		   nombre = nombre - 1;
-//		   total = total - amount;
-		   
-//		   listPurchase.remove(indexSelctedTab);
-//		   listOfPrice.remove(quantite);
-		//--------------------------------------   
-//		   System.out.println("Article seletionner " + indexSelctedTab);  
-//		   System.out.println("Total"+amount); System.out.println("Montant Ttal restant"+ total);
-		   
-//		   qtite.setText(String.valueOf(nombre));
-//		   refPrixTotal.setText(String.valueOf(total));   
-		//----------------------------------------------------------------------------   
+		   total -= amountarticlCancel; //DECREMENTATION PRI LISTE D'ARTICLE
+		   //-------------------------
+		   int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
+	        if (selectedIndex >= 0) {
+	        	
+	        	listPurchase.remove(String.valueOf( indexSelctedTab) );
+				   listOfPrice.remove(amountarticlCancel); 
+				   
+				   refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
+				   
+				   System.out.println("Reamining price" + total);
+				   
+				  tbViewFacture.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
+	        } else {
+	        	Alert alert = new Alert(AlertType.WARNING);
+	            alert.setTitle("No Selection");
+	            alert.setHeaderText("No Person Selected");
+	            alert.setContentText("Please select a person in the table.");
+	            
+	            alert.showAndWait();
+	        }
 		   
 	   }
 
