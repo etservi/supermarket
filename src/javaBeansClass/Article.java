@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class Article {
 
-	private int idArticle;
+	private int idProduit;
 	private int idRayon;
 	private int idCategorie;
 	private String raisonSociale;
 	private int id;
-	private String nomArticle;
+	private String nomProduit;
 	private int qteStock;
 	private int nombreArticle;
 	private double prixUnitaire;
@@ -26,18 +26,20 @@ public class Article {
 		super();
 	}
 
-	public Article(int idArticle, String nomArticle, int qteStock, double prixUnitaire) {
-		this.idArticle = idArticle;
-		this.prixUnitaire = prixUnitaire;
+	public Article(int idProduit, String nomProduit, int qteStock, double prixUnitaire) {
+		this.idProduit = idProduit;
+		this.nomProduit = nomProduit;
 		this.qteStock = qteStock;
+		this.prixUnitaire = prixUnitaire;
+
 	}
 
-	public int getIdArticle() {
-		return idArticle;
+	public int getIdProduit() {
+		return idProduit;
 	}
 
-	public void setIdArticle(int idArticle) {
-		this.idArticle = idArticle;
+	public void setIdProduit(int idProduit) {
+		this.idProduit = idProduit;
 	}
 
 	public int getIdRayon() {
@@ -72,12 +74,12 @@ public class Article {
 		this.id = id;
 	}
 
-	public String getNomArticle() {
-		return nomArticle;
+	public String getNomProduit() {
+		return nomProduit;
 	}
 
-	public void setNomArticle(String nomArticle) {
-		this.nomArticle = nomArticle;
+	public void setNomProduit(String nomProduit) {
+		this.nomProduit = nomProduit;
 	}
 
 	public int getQteStock() {

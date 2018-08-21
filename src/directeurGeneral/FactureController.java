@@ -114,13 +114,13 @@ public class FactureController implements Initializable{
 		   //TEST S/O
 		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
-		   
-		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idArticle") );
-			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomArticle") );
+		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
+		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idProduit") );
+			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomProduit") );
 			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( "qteStock" ));
 			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( "prixUnitaire" ) );
 			//-----------------------------------------------------------------------------------------------------------------------
-
+			// REMPLIR LES DONNEES RECUPERER DANS LE TEXTFIELD SUR MON TABLEVIEW
 			int idA = Integer.parseInt( idArticl.getText() );
 	        String momArtcle =  nomArticle.getText();
 	        int qtte = Integer.parseInt(quantite );
@@ -224,8 +224,8 @@ public class FactureController implements Initializable{
 		
 		
 		
+	}	
 		
 		
 		
-		
-}
+	}
