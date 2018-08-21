@@ -27,7 +27,7 @@ public class FactureController implements Initializable{
 	
 	@FXML private AnchorPane rootPane;
 	
-	@FXML private TableView<String> tbViewFacture;
+	@FXML private TableView<Article> tbViewFacture;
 	
 	@FXML private TableColumn<Article, String> tcIdArticle;
 	@FXML private TableColumn<Article, String> tcNom;
@@ -36,7 +36,7 @@ public class FactureController implements Initializable{
 	
 	@FXML private TextField idArticl;
 	@FXML private TextField nomArticle;
-	@FXML private TextField qtite;
+//	@FXML private TextField qtite;
 	@FXML private TextField prixUnitairee;
 	@FXML private TextField codeBarr;
 	@FXML private TextField refPrixTotal;
@@ -90,7 +90,8 @@ public class FactureController implements Initializable{
 	public void ajouterArticle() {
 		   String articleName;
 		   Double price, amount;
-		   int numberOfArticlee = 0;
+		   @SuppressWarnings("unused")
+		int numberOfArticlee = 0;
 		   
 		     String quantite = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
 		   			articleName  = nomArticle.getText() ; // RECUPERATION NOM ARTICLE
@@ -102,25 +103,34 @@ public class FactureController implements Initializable{
 		   listOfPrice.add(amount); 
 		   
 		   //TEST S/O
-		   System.out.println(quantite); System.out.println(articleName);  System.out.println(price); System.out.println("Montant"+ amount);
+		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
 		   
-		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>(idArticl.getText()));
-			tcNom.setCellValueFactory( new PropertyValueFactory<>(articleName) );
-			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( quantite ));
-			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( String.valueOf(price) ) );
-			
-			
-			tbViewFacture.setItems( listPurchase );
-//			tbViewFacture.setItems(String.valueOf(listOfPrice));
+		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idArticle") );
+			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomArticle") );
+			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( "qteStock" ));
+			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( "prixUnitaire" ) );
+			//-----------------------------------------------------------------------------------------------------------------------
 
-//		   numberOfArticlee = (listPurchase.get(listPurchase.indexOf(numberOfArticlee))).length();		   
+			int idA = Integer.parseInt( idArticl.getText() );
+	        String momArtcle =  nomArticle.getText();
+	        int qtte = Integer.parseInt(quantite );
+	        Double prixUnit = Double.valueOf( prixUnitairee.getText() );
+	        
+	        Article model = new Article(idA, momArtcle, qtte, prixUnit);
+	        tbViewFacture.getItems().addAll(model);
+	        
+/*				
+	tbViewFacture.setItems( listPurchase );
+	tbViewFacture.setItems(String.valueOf(listOfPrice));
+
+	numberOfArticlee = (listPurchase.get(listPurchase.indexOf(numberOfArticlee))).length();		   
 		   
-//		   numberOfArticlee = listOfPrice.getItemCount();
-//		   numberOfArticlee = listPurchase.get(String.valueOf(nombreProduit));
-//			 qtite.setText(String.valueOf(numberOfArticlee));
-/*		*/    		   
-//		  
+	numberOfArticlee = listOfPrice.getItemCount();
+	numberOfArticlee = listPurchase.get(String.valueOf(nombreProduit));
+	qtite.setText(String.valueOf(numberOfArticlee));
+*/    		   
+	  
 		   total += amount;
 		   refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
 		   
@@ -153,6 +163,11 @@ public class FactureController implements Initializable{
 			comboBoxQuatite.getItems().addAll(String.valueOf(i));
 		}
 	}
+	
+	//----------- AJOUTER ARTICLE DANS LE TABLEAU
+	
+	
+	
 //-------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------
 /*// REDIRECTION
@@ -170,4 +185,5 @@ public class FactureController implements Initializable{
 	public void myFunction(String userConnect) {
 		refNamCashier.setText(userConnect);
 	}
+	
 }
