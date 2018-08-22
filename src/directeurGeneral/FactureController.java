@@ -130,11 +130,11 @@ public class FactureController implements Initializable{
 		   
 		   amount = price * Integer.parseInt(quantite);  // CALCUL MONTANT TOTAL
 		   
-		   listPurchase.add(articleName);
-		   listOfPrice.add(amount); 
-		  
-		   //TEST S/O
-		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
+		   listPurchase.add(articleName); listOfPrice.add(amount); 
+		   
+		   //TEST 
+		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  
+		   System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
 		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
 		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idProduit") );
@@ -153,9 +153,8 @@ public class FactureController implements Initializable{
 	  
 	total += amount;
 	refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
-	 } 
-		     
-	}
+	 } 	     
+}
 	   
 	   public void annulerArticle() throws SQLException {
 		   
@@ -191,8 +190,7 @@ public class FactureController implements Initializable{
 	            alert.setContentText("Selectionnez un article dans la tablle SVP.");
 	            
 	            alert.showAndWait();
-	        }
-		   
+	        }   
 	   }
 
 	   //-------------------------------------
