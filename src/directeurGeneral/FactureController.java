@@ -8,11 +8,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import javaBeansClass.Article;
 import javaBeansClass.Fournisseur;
+import javafx.beans.binding.BooleanExpression;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -58,13 +62,26 @@ public class FactureController implements Initializable{
 
 	@FXML private Label dateduJour;
 	
+	@FXML Button btAnnulArticle;
+	
 	public TextField getLoginnFild() { return this.refNamCashier; };
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		comboBoxQuantite(); // CHOIX DU NOMBRE DE PRODUIT QUE LE VEUX
+		comboBoxQuantite(); // BOUCLE CHOIX DU NOMBRE DE PRODUIT QUE LE VEUX
 		viderLesCambre();  //VIDE LES CHAMPS AVANT D'AJOUT
+		dateDuJourMethode(); // AFFICHE DATE AUTOMATIQUE
 		
+		//------------------------------------------------
+		valideCombox(); 			// VERIFICATION CHIFFRE
+		validPrixUnitMtd();			// VERIFICATION CHIFFRE
+		valideMontantVerse();		// VERIFICATION CHIFFRE
+		valideMontantRenduMtd();	// VERIFICATION CHIFFRE
+		validePrixTotalMtd();		// VERIFICATION CHIFFRE
+		//-------------------------------------------------
+		
+		// DESACTIVER LE BOUTTON TANT QU'UN ARTICLE N'EST SELECTIONNE
+		this.btAnnulArticle.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
 	}
 // ---------------------------------------------------
 //----------------------------------------------------
@@ -92,7 +109,8 @@ public class FactureController implements Initializable{
 		comboBoxQuatite.setValue(null);
 		
 	}
-
+	
+	// AJOUT ARTICLE DANS LE TABLEAU
 	final ObservableList<String> listPurchase = FXCollections.observableArrayList();
 	final ObservableList<Object> listOfPrice = FXCollections.observableArrayList();
 	
@@ -101,8 +119,10 @@ public class FactureController implements Initializable{
 	public void ajouterArticle() {
 		   String articleName;
 		   Double price, amount;
-		   @SuppressWarnings("unused")
-		int numberOfArticlee = 0;
+		   		@SuppressWarnings("unused")
+		   int numberOfArticlee = 0;
+		   
+		   if( valideNom()) {
 		   
 		     String quantite = comboBoxQuatite.getSelectionModel().getSelectedItem().toString(); // RECUPERATION VALEUR COMBOBOX
 		   			articleName  = nomArticle.getText() ; // RECUPERATION NOM ARTICLE
@@ -112,7 +132,7 @@ public class FactureController implements Initializable{
 		   
 		   listPurchase.add(articleName);
 		   listOfPrice.add(amount); 
-		   
+		  
 		   //TEST S/O
 		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
@@ -133,12 +153,13 @@ public class FactureController implements Initializable{
 	  
 	total += amount;
 	refPrixTotal.setText( String.valueOf(total) + "  F CFA " ); // DISPALY TOTAL AMOUNT IN TEXTTFIELD
+	 } 
 		     
 	}
 	   
 	   public void annulerArticle() throws SQLException {
 		   
-		   String articlCancel;
+//		   String articlCancel;
 		   Double priceArticlCancel;
 		   Double amountarticlCancel;
 //		   
@@ -166,15 +187,31 @@ public class FactureController implements Initializable{
 				  tbViewFacture.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
 	        } else {
 	        	Alert alert = new Alert(AlertType.WARNING);
-	            alert.setTitle("No Selection");
-	            alert.setHeaderText("No Person Selected");
-	            alert.setContentText("Please select a person in the table.");
+	            alert.setHeaderText("Aucune selection d'Article");
+	            alert.setContentText("Selectionnez un article dans la tablle SVP.");
 	            
 	            alert.showAndWait();
 	        }
 		   
 	   }
 
+	   //-------------------------------------
+	   
+	   public void moneyRendu() {
+		   
+		   int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
+	        
+	        	
+		double  p = Double.parseDouble( refPrixTotal.getText() ) - Double.parseDouble( montantverser.getText() );
+	        if (selectedIndex == 0) {
+	        	System.out.println("nop");
+	        } else
+//		montantReduu.setText( String.valueOf( p ));
+	        if (selectedIndex >= 0) {
+	        	System.out.println(p);
+	        }
+	   }
+	   
 	//------------------------------------------
 	// --------------------CHOIX DU NOMBRE DE PRODUIT QUE L'ON VEUT
 	public void comboBoxQuantite() {
@@ -186,7 +223,7 @@ public class FactureController implements Initializable{
 	//-----------------------------------------------
 	
 	public void dateDuJourMethode() {
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
 		dateduJour.setText("Date : " + reportDate);
@@ -224,18 +261,91 @@ public class FactureController implements Initializable{
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setHeaderText("Veuillez saisir l'id d'Article !!!");
 			alert.showAndWait();
-	}
-		
-		
-		//-------------------------
-		
-		
-
-		
-		
-		
+		}
+				
 	}	
 		
-		
-		
-	}
+	//----------------------------------------------------------------------------------
+	//----------------------------------------------------------------------------------
+		public void validePrixTotalMtd() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+			refPrixTotal.setOnKeyTyped(e -> {
+				String ch = e.getCharacter();
+				if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
+						|| ch.equals("5") || ch.equals("6") || ch.equals("7") || ch.equals("8") || ch.equals("9")
+						|| ch.equals("BACK_SPACE")) || (!(refPrixTotal.getText().length() < 9))) {
+					e.consume();
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			});
+		}
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
+		public void validPrixUnitMtd() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+			prixUnitairee.setOnKeyTyped(e -> {
+				String ch = e.getCharacter();
+				if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
+						|| ch.equals("5") || ch.equals("6") || ch.equals("7") || ch.equals("8") || ch.equals("9")
+						|| ch.equals("BACK_SPACE")) || (!(prixUnitairee.getText().length() < 9))) {
+					e.consume();
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			});
+		}
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
+		public void valideMontantRenduMtd() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+			montantReduu.setOnKeyTyped(e -> {
+				String ch = e.getCharacter();
+				if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
+						|| ch.equals("5") || ch.equals("6") || ch.equals("7") || ch.equals("8") || ch.equals("9")
+						|| ch.equals("BACK_SPACE")) || (!(montantReduu.getText().length() < 9))) {
+					e.consume();
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			});
+		}
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------	
+		public void valideMontantVerse() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+			montantverser.setOnKeyTyped(e -> {
+				String ch = e.getCharacter();
+				if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
+						|| ch.equals("5") || ch.equals("6") || ch.equals("7") || ch.equals("8") || ch.equals("9")
+						|| ch.equals("BACK_SPACE")) || (!(montantverser.getText().length() < 9))) {
+					e.consume();
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			});
+		}
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+		public void valideCombox() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+			comboBoxQuatite.setOnKeyTyped(e -> {
+				String ch = e.getCharacter();
+				if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
+						|| ch.equals("5") || ch.equals("6") || ch.equals("7") || ch.equals("8") || ch.equals("9")
+						|| ch.equals("BACK_SPACE")) || (!(comboBoxQuatite.getValue().length() < 9))) {
+					e.consume();
+					java.awt.Toolkit.getDefaultToolkit().beep();
+				}
+			});
+		}
+	//-----------------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------------
+		// METHODE VALIDER NOM
+		private boolean valideNom() {
+
+			Pattern p = Pattern.compile("[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
+			Matcher m = p.matcher(nomArticle.getText());
+
+			if (m.find() && m.group().equals(nomArticle.getText())) {
+				return true;
+
+			} else {
+				Alert alerte = new Alert(AlertType.WARNING);
+				alerte.setHeaderText("Entrer un Nom de l'Article SVT!!");
+				alerte.showAndWait();
+			}
+			return false;
+		}
+}

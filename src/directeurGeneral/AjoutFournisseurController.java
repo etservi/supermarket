@@ -878,7 +878,7 @@ private boolean validerEmail() {
 //				modifier.setVisible(false);
 			
 		
-			
+									// DESACTIVER LE BUTTON	
 //			if(modifier) {
 			this.modifier.disableProperty().bind(BooleanExpression.booleanExpression(this.tableViewFournisseur.getSelectionModel().selectedItemProperty().isNull()));
 //			} else {
