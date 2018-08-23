@@ -27,7 +27,7 @@ public class CodeBarreImage {
 			canvas.finish();
 		
 			// ECIRE FICHIER EN PNG
-			FileOutputStream fos = new FileOutputStream("codeBarreImage/"+imageName);
+			FileOutputStream fos = new FileOutputStream("codeBarreImage/"+imageName +".png");
 			fos.write(baos.toByteArray());
 			fos.flush();
 			fos.close();
