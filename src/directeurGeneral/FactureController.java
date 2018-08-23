@@ -2,6 +2,8 @@ package directeurGeneral;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -13,6 +15,11 @@ import java.util.regex.Pattern;
 
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
+import org.controlsfx.control.textfield.TextFields;
+
+import com.mysql.jdbc.PreparedStatement;
+
+import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
 import javaBeansClass.Fournisseur;
 import javafx.beans.binding.BooleanExpression;
@@ -86,6 +93,15 @@ public class FactureController implements Initializable{
 		
 		// DESACTIVER LE BOUTTON TANT QU'UN ARTICLE N'EST SELECTIONNE
 		this.btAnnulArticle.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
+		//-------------------------------------------------
+		
+		// COMPLETER LES MOTS AUTOMATIQUES
+		try {
+			autoCopleteWords();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 // ---------------------------------------------------
 //----------------------------------------------------
@@ -350,4 +366,22 @@ public class FactureController implements Initializable{
 			}
 			return false;
 		}
+		//-------------------------------
+		
+		// COMPLETER LES MOTS QUAND ON COMEMECE A ECRIRE UN MOT QUI EXISTE DANS LA BASE DE DONNEE
+		public void autoCopleteWords() throws SQLException {
+			Connection connexion = ConnectionDB.maConnection();
+			String rekett = "SELECT nomProduit, dateVendu FROM Article "; 
+			
+			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
+			ResultSet rs = pst.executeQuery();
+			
+			String artclMam = null;
+			while (rs.next()) {
+				artclMam = rs.getString("nomProduit");
+				TextFields.bindAutoCompletion(nomArticle, artclMam);  // AUTOCOMPLETE WORDS
+			}
+		}
+		
+		//----------------------------------
 }
