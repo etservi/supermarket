@@ -207,7 +207,7 @@ public class FactureController implements Initializable{
 	        } else {
 	        	Alert alert = new Alert(AlertType.WARNING);
 	            alert.setHeaderText("Aucune selection d'Article");
-	            alert.setContentText("Selectionnez un article dans la tablle SVP.");
+	            alert.setContentText("Selectionnez un Utilisateur dans la tableau SVP.");
 	            
 	            alert.showAndWait();
 	        }   
@@ -371,7 +371,7 @@ public class FactureController implements Initializable{
 		// COMPLETER LES MOTS QUAND ON COMEMECE A ECRIRE UN MOT QUI EXISTE DANS LA BASE DE DONNEE
 		public void autoCopleteWords() throws SQLException {
 			Connection connexion = ConnectionDB.maConnection();
-			String rekett = "SELECT nomProduit, dateVendu FROM Article "; 
+			String rekett = "SELECT nomProduit FROM Article "; 
 			
 			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
 			ResultSet rs = pst.executeQuery();

@@ -15,7 +15,7 @@
       <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="432.0" layoutX="15.0" layoutY="31.0" opacity="0.76" stroke="#976845" strokeType="INSIDE" width="920.0" />
       <BarChart fx:id="barChart" layoutX="28.0" layoutY="47.0" title="Stock Articles">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+          <CategoryAxis side="BOTTOM" fx:id="xAxis" />
         </xAxis>
         <yAxis>
           <NumberAxis side="LEFT" />

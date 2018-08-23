@@ -4,18 +4,25 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormatSymbols;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
+import javaBeansClass.Article;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -29,15 +36,19 @@ public class StatistiqueController implements Initializable {
 	
 	
 	@FXML private BarChart<String, Integer> barChart;
+	@FXML private CategoryAxis xAxis;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		// PIECHART ---------------------
 		try {
 			articleVendu();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 	}
 	//-------------------------------------------------------------------------------------
@@ -78,6 +89,13 @@ public class StatistiqueController implements Initializable {
 		}
 	}
 
+	
+	//---------------------------------------------------------
+
+	
+	
+	
+	
 	//--------------------------------------------------------------------------------------
 	// BARCHAR - STATISTIQUE
 /*

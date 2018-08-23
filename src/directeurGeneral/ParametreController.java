@@ -5,17 +5,25 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import baseDeDonnées.ConnectionDB;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
@@ -26,7 +34,8 @@ public class ParametreController implements Initializable{
 	@FXML private TextField refUtilisateur;
 	@FXML private PasswordField refOldPssd,refNewPssd, refConfPssd;
 
-	
+	@FXML private PieChart pieChart;
+	@FXML Label pourcentz;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -34,6 +43,14 @@ public class ParametreController implements Initializable{
 //		rootPane.getChildren().add(textFd);
 //		AnchorPane.setBottomAnchor(textFd, 20d);
 //		AnchorPane.setLeftAnchor(textFd, 500d);	
+		//---------------------------------------
+		
+		// STATISTIQUE
+		try {
+			articleVendu();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -122,4 +139,44 @@ public class ParametreController implements Initializable{
 		}	
 // ----------------------------------------------------------------
 // ----------------------------------------------------------------
+	//-------------------------------------------------------------------------------------
+	//PIECHART
+	
+	
+	public void articleVendu() throws SQLException {
+		
+		Connection connexion = ConnectionDB.maConnection();
+		String rekett = "SELECT nomProduit, dateVendu FROM Article "; 
+		
+		PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
+		ResultSet rs = pst.executeQuery();
+		
+		String artclMam = null;
+		while (rs.next()) {
+			artclMam = rs.getString("nomProduit");
+		}
+		
+		ObservableList<Data> list = FXCollections.observableArrayList(
+//				new PieChart.Data("JavaFX", 70),
+//				new PieChart.Data("ReactJs", 50),
+//				new PieChart.Data("PHP", 10)
+				new PieChart.Data(artclMam, 10)
+				
+				);
+		pieChart.setData(list);
+		
+		for (final PieChart.Data data : pieChart.getData()) {
+			data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					pourcentz.setText(String.valueOf(data.getPieValue() / ( (70+50+10) / 100) ) + "%");
+					
+				}
+			});
+		}
+	}
+
+	
+	//---------------------------------------------------------
 }
