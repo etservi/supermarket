@@ -1,3 +1,6 @@
+/*
+//CE CODE MEST FONCTIONNEL
+
 package codeBarre;
 
 import java.sql.Connection;
@@ -34,3 +37,5 @@ public class GenereDynamicCodeBarre {
 
 	}
 }
+
+*/

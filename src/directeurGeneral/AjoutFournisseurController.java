@@ -40,17 +40,13 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
 
+import Qr_Code.LireCodeBArre;
 import baseDeDonnées.ConnectionDB;
 import boiteAlert.Confirmation;
 import codeBarre.CodeBarreImage;
 import javaBeansClass.Fournisseur;
 import javafx.application.Platform;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.BooleanExpression;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -64,10 +60,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -128,9 +124,9 @@ public class AjoutFournisseurController implements Initializable{
 		ControlChiffPhone();  //  GERE LE CONTROLE CHIFFRES NUM PHONE
 //		rechercheFiltr();
 		//--------------------------------------------------
-		selctionAuto();
+		selctionAuto(); // SELECTION MULTIPLE
 		//-------------------------------------------------------
-
+		
 		//-----------------------------------------------------
 		try {
 			genererMot();
@@ -653,19 +649,16 @@ private boolean validerEmail() {
 	
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
-	public void selctionAuto() {
-		ObservableList<Fournisseur> select = tableViewFournisseur.getSelectionModel().getSelectedItems();
-//		System.out.println(select);
-	}
+
 //----------------------------------------------------------------
-	public void genererMot() throws SQLException {
+	public void genererMot() throws SQLException {  // AUTOCOMPLETE TEXTFIELD - MOTS DANS LA BASES DE DONNEES
 		
 		Connection connexion = ConnectionDB.maConnection();
 		
 		String sql = "SELECT raisonSociale from Fournisseur";
 
 		PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
-//		pst.setString(1, loginnfild.getText().trim());
+
 		ResultSet rs = pst.executeQuery();
 		
 		String logRole = null;
@@ -673,93 +666,49 @@ private boolean validerEmail() {
 		if (rs.next()) {
 			logRole = rs.getString("raisonSociale");
 		}
-		
-//		String[] mot = {"Hello", "Hello How are u","ok"};
+	
 		TextFields.bindAutoCompletion(textFieldRaisonSociale, logRole );
 	}
 	//--------------------------------------------------------------------
 	//------------------------------------------------------------------------
-	
-	//------------------------------------
-//	public void alertBoite() {
-//		Alert alerte = new Alert(AlertType.WARNING);
-//		alerte.setTitle("Attention");
-//
-//		alerte.setContentText(alertMesaz);
-//		alerte.showAndWait();
-//	}
-	//-----------------------------------------------------------------------
-	//-----------------------------------------------------------------------
-/*	
-    ObservableList<Fournisseur> data = FXCollections.observableArrayList();
-	public void iniFilter() {
+
+
+	///////////////////////////////////////////////////
+	// IMPRIMER
+	public void imprimer() {
 		
-		recherch.textProperty().addListener(new InvalidationListener() {
-			
-			@Override
-			public void invalidated(Observable o) {
-				if(recherch.textProperty().get().isEmpty()) {
-					tableViewFournisseur.setItems(data);
-					return;
-				}
-				ObservableList<Fournisseur> tableItems = FXCollections.observableArrayList();
-				ObservableList<TableColumn<Fournisseur, ?>> cols = tableViewFournisseur.getColumns();
-				for(int i=0; i<data.size(); i++) {
-					for(int j=0; j<cols.size(); j++) {
-						TableColumn<Fournisseur, ?> col = cols.get(j);
-						String cellValue = col.getCellData( data.get(i) ).toString();
-						cellValue = cellValue.toLowerCase();
-						if(cellValue.contains(recherch.textProperty().get().toLowerCase())) {
-							tableItems.add(data.get(i));
-							break;
-						}
-					}
-				}
-				tableViewFournisseur.setItems(tableItems);
-			}
-		});
+		String id = modifier.getId();
+		
+//			btValidModif.setVisible(true);
+//			modifier.setVisible(false);
+		
+	
+								// DESACTIVER LE BUTTON	
+//		if(modifier) {
+		this.modifier.disableProperty().bind(BooleanExpression.booleanExpression(this.tableViewFournisseur.getSelectionModel().selectedItemProperty().isNull()));
+//		} else {
+//		btValidModif.setVisible(false);
+//		}
 	}
-	
-	*/
-	//------------------------------------------------------------
-	//------------------------------------------------------------
-	
-//	ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
-/*	
-	@FXML
-    private void rechercheFournisseur(KeyEvent ke) {
-        
-        FilteredList<Fournisseur> filterData = new FilteredList<>(masterData, p -> true);
-        recherch.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
-            filterData.setPredicate(pers -> {
 
-                if (newvalue == null || newvalue.isEmpty()) {
-                    return true;
-                }
-                String typedText = newvalue.toLowerCase();
-                if (pers.getRaisonSociale().toLowerCase().indexOf(typedText) != -1) {
-                    return true;
-                }
-                if (pers.getSigle().toLowerCase().indexOf(typedText) != -1) {
+	//-----------------------------------------------------------------
 
-                    return true;
-                }
-                if (pers.getAdresse().toLowerCase().indexOf(typedText) != -1) {
-                    return true;
-                }
-
-                return false;
-            });
-            SortedList<Fournisseur> sortedList = new SortedList<>(filterData);
-            sortedList.comparatorProperty().bind(tableViewFournisseur.comparatorProperty());
-            tableViewFournisseur.setItems(sortedList);
-            
-
-        });
-       
-    }*/
-	//----------------------------------------------
-	// DEMARRER CODE BARRE AUTOMATIQUE
+	public void selctionAuto() {
+		final ObservableList<Fournisseur> select = tableViewFournisseur.getSelectionModel().getSelectedItems();
+		 
+		for(int i = 0 ; i < tableViewFournisseur.getItems().size() ; i++){
+//		for(int i = 0 ; i < select.size() ; i++){
+			tableViewFournisseur.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+			
+//			
+//			String p = tableViewFournisseur.getItems().get(i).getRaisonSociale();
+//			System.out.println(p);
+        }
+	}
+	//---------------------------------------------- CODE BARRE - Qr_CODE
+	//////////////////////////////////////////////////////////////////
+	// DEMARRER CODE BARRE AUTOMATIQUE - J'AI CREE UNE METHODE MAIN //
+	//////////////////////////////////////////////////////////////////
 	public static class codeBarreStart{
 		public static void main(String[] args) throws SQLException {
 
@@ -770,31 +719,14 @@ private boolean validerEmail() {
 			ResultSet rs = stmt.executeQuery(query);
 			
 			while (rs.next()) {
-				CodeBarreImage.createImage(rs.getString(1), rs.getString(1));
+				CodeBarreImage.createImage(rs.getString(1), rs.getString(1)); // CREE LE CODE IMAGE
+				LireCodeBArre.generete_qr( rs.getString(2), rs.getString(1) ); // CREE LE Qr_Code
 			}
-			System.out.println("Finished");
+			System.out.println("Réussie");
 		}
 	}
-	//----------------------------------------------
-		// DEMARRER CODE BARRE AUTOMATIQUE
-		public static class Qr_CodeStart{
-			public static void main(String[] args) throws SQLException {
-
-				Connection connexion = ConnectionDB.maConnection();
-				String query = "SELECT raisonSociale, sigle from Fournisseur";
-				Statement stmt = null;
-				stmt = (Statement) connexion.createStatement();
-				ResultSet rs = stmt.executeQuery(query);
-				
-				while (rs.next()) {
-					CodeBarreImage.createImage(rs.getString(1), rs.getString(2));
-					System.out.println("Finished");
-				}
-			}
-		}
-		
-		//--------------------------------------------
-		//-------------------------------------------
+		//--------------------------------------------------------/////////////////////////////////
+		//--------------------------------------------------------/////////////////////////////////
 /*		
 		@FXML
 	    private void initializeFiltr() {
@@ -869,25 +801,80 @@ private boolean validerEmail() {
 			} 
 		}
 		*/
-		// IMPRIMER
-		public void imprimer() {
-			
-			String id = modifier.getId();
-			
-//				btValidModif.setVisible(true);
-//				modifier.setVisible(false);
-			
+	//-----------------------------------------------------------------------/////////////////////////////
+	//-----------------------------------------------------------------------/////////////////////////////
+/*	
+    ObservableList<Fournisseur> data = FXCollections.observableArrayList();
+	public void iniFilter() {
 		
-									// DESACTIVER LE BUTTON	
-//			if(modifier) {
-			this.modifier.disableProperty().bind(BooleanExpression.booleanExpression(this.tableViewFournisseur.getSelectionModel().selectedItemProperty().isNull()));
-//			} else {
-//			btValidModif.setVisible(false);
-//			}
-		}
+		recherch.textProperty().addListener(new InvalidationListener() {
+			
+			@Override
+			public void invalidated(Observable o) {
+				if(recherch.textProperty().get().isEmpty()) {
+					tableViewFournisseur.setItems(data);
+					return;
+				}
+				ObservableList<Fournisseur> tableItems = FXCollections.observableArrayList();
+				ObservableList<TableColumn<Fournisseur, ?>> cols = tableViewFournisseur.getColumns();
+				for(int i=0; i<data.size(); i++) {
+					for(int j=0; j<cols.size(); j++) {
+						TableColumn<Fournisseur, ?> col = cols.get(j);
+						String cellValue = col.getCellData( data.get(i) ).toString();
+						cellValue = cellValue.toLowerCase();
+						if(cellValue.contains(recherch.textProperty().get().toLowerCase())) {
+							tableItems.add(data.get(i));
+							break;
+						}
+					}
+				}
+				tableViewFournisseur.setItems(tableItems);
+			}
+		});
+	}
+	
+	*/
+	//------------------------------------------------------------///////////////////////////////////
+	//------------------------------------------------------------///////////////////////////////////
+	
+//	ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
+/*	
+	@FXML
+    private void rechercheFournisseur(KeyEvent ke) {
+        
+        FilteredList<Fournisseur> filterData = new FilteredList<>(masterData, p -> true);
+        recherch.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
+            filterData.setPredicate(pers -> {
 
+                if (newvalue == null || newvalue.isEmpty()) {
+                    return true;
+                }
+                String typedText = newvalue.toLowerCase();
+                if (pers.getRaisonSociale().toLowerCase().indexOf(typedText) != -1) {
+                    return true;
+                }
+                if (pers.getSigle().toLowerCase().indexOf(typedText) != -1) {
 
-//------------------------------------
+                    return true;
+                }
+                if (pers.getAdresse().toLowerCase().indexOf(typedText) != -1) {
+                    return true;
+                }
+
+                return false;
+            });
+            SortedList<Fournisseur> sortedList = new SortedList<>(filterData);
+            sortedList.comparatorProperty().bind(tableViewFournisseur.comparatorProperty());
+            tableViewFournisseur.setItems(sortedList);
+            
+
+        });
+       
+    }*/
+	
+	//----------------------------------
+	
+	
 
 }
 

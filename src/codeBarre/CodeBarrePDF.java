@@ -1,3 +1,6 @@
+/*
+//CE CODE MEST FONCTIONNEL
+
 package codeBarre;
 
 import java.io.FileOutputStream;
@@ -39,14 +42,14 @@ public class CodeBarrePDF {
 			code128Image.scalePercent(125);
 			doc.add(code128Image);
 			
-			/*BarcodeEAN codeEAN = new BarcodeEAN();
+			BarcodeEAN codeEAN = new BarcodeEAN();
 			codeEAN.setCode(myString.trim());
 			code128.setCodeType(BarcodeEAN.EAN13);
 			Image codeEANImage = code128.createImageWithBarcode(cb, null, null);
 			code128Image.setAbsolutePosition(10, 600);
 			code128Image.scalePercent(125);
 			doc.add(codeEANImage);
-*/
+
 			doc.close();
 			docWritter.close();
 
@@ -56,3 +59,6 @@ public class CodeBarrePDF {
 
 	}
 }
+
+
+*/

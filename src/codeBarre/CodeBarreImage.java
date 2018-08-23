@@ -1,5 +1,8 @@
 package codeBarre;
 
+
+//MARCHE AVEC LE LIBRAIRIE ---->>>>> itextpdf-5.5.0.jar
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;

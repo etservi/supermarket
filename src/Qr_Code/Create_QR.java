@@ -1,3 +1,5 @@
+/*
+//CE CODE MEST FONCTIONNEL
 package Qr_Code;
 
 import java.io.File;
@@ -37,3 +39,4 @@ public class Create_QR {
 		}
 	}
 }
+*/

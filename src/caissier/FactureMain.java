@@ -1,12 +1,8 @@
-package caissier;
-
+package directeurGeneral;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import login.LoginController;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
@@ -23,7 +19,16 @@ public class FactureMain extends Application {
 		// /home/gaye/eclipse-workspace/Gestion commerciale supermarché/src/DirecteurGeneral
 
 		try {
-			FXMLLoader fxml = new FXMLLoader();
+			
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Facture.fxml"));
+			Scene scene = new Scene(root, 950, 500);
+			scene.getStylesheets().add(getClass().getResource("Facture.css").toExternalForm());
+			StgFacture.setScene(scene);
+			StgFacture.show();
+			
+			
+			
+		/*	FXMLLoader fxml = new FXMLLoader();
 			fxml.setLocation(new java.io.File("src/login/Login.fxml").toURI().toURL());
 			AnchorPane root = (AnchorPane) fxml.load(); 
 			LoginController controller = fxml.getController();
@@ -37,6 +42,7 @@ public class FactureMain extends Application {
 			StgFacture.setScene(scene);
 			StgFacture.show();
 			StgFacture.getIcons().add(new Image("/images/YES.png"));
+			*/
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

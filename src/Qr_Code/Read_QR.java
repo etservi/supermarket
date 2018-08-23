@@ -1,3 +1,5 @@
+/*
+//CE CODE MEST FONCTIONNEL
 package Qr_Code;
 
 import java.io.FileInputStream;
@@ -25,7 +27,7 @@ public class Read_QR {
 	public static void main(String[] args) {
 		try {
 				
-			String filePath = "Qr_Code/QRCode.png";  // dans ce dossier on copie une image QR_Code pour a lire
+			String filePath = "Qr_Code/qrcode.jpg";  // dans ce dossier on copie une image QR_Code pour lire l'image
 			String charset = "UTF-8";
 			
 			Map <EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<>();
@@ -54,3 +56,4 @@ public class Read_QR {
 
 
 
+*/

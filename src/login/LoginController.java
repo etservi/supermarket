@@ -59,7 +59,7 @@ public class LoginController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
 	}
 // -----------------------------------
 	
@@ -180,6 +180,17 @@ public void effacer() {
 		        Stage app_stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		        app_stage.close();
 		    }
+			//-----------------------------------------------------------------------------------
+			//-----------------------------------------------------------------------------------	
+				public void valideLogin() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+					loginnfild.setOnKeyTyped(e -> {
+						String ch = e.getCharacter();
+						if (( ch.equals("BACK_SPACE")) || (!(loginnfild.getText().length() < 9))) {
+							e.consume();
+							java.awt.Toolkit.getDefaultToolkit().beep();
+						}
+					});
+				}
 	
 }
 
