@@ -102,7 +102,7 @@ public class AjoutFournisseurController implements Initializable{
 	@FXML private TableColumn<Fournisseur, String> colonneAdesse;
 	@FXML private TableColumn<Fournisseur, String> colonneCourriel;
 	
-	String alertMesaz = "";
+//	String alertMesaz = "";
 	
 	private ObservableList<Fournisseur> fournisseurList = FXCollections.observableArrayList();
 	
@@ -655,7 +655,7 @@ private boolean validerEmail() {
 //----------------------------------------------------------------------------------
 	public void selctionAuto() {
 		ObservableList<Fournisseur> select = tableViewFournisseur.getSelectionModel().getSelectedItems();
-		System.out.println(select);
+//		System.out.println(select);
 	}
 //----------------------------------------------------------------
 	public void genererMot() throws SQLException {
@@ -681,13 +681,13 @@ private boolean validerEmail() {
 	//------------------------------------------------------------------------
 	
 	//------------------------------------
-	public void alertBoite() {
-		Alert alerte = new Alert(AlertType.WARNING);
-		alerte.setTitle("Attention");
-
-		alerte.setContentText(alertMesaz);
-		alerte.showAndWait();
-	}
+//	public void alertBoite() {
+//		Alert alerte = new Alert(AlertType.WARNING);
+//		alerte.setTitle("Attention");
+//
+//		alerte.setContentText(alertMesaz);
+//		alerte.showAndWait();
+//	}
 	//-----------------------------------------------------------------------
 	//-----------------------------------------------------------------------
 /*	
