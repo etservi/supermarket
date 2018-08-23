@@ -64,7 +64,11 @@ public class FactureController implements Initializable{
 	
 	@FXML Button btAnnulArticle;
 	
-	public TextField getLoginnFild() { return this.refNamCashier; };
+//	public TextField getLoginnFild() { return this.refNamCashier; };
+	
+	public void getUser(String user) { 
+		refNamCashier.setText(user);
+	};
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

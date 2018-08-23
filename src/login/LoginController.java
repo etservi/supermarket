@@ -52,8 +52,10 @@ public class LoginController implements Initializable{
 	int count = 0;
 	
 	
-	public TextField getLoginnFild() { return this.loginnfild; };
-	
+//	public TextField getLoginnFild() { return this.loginnfild; };
+	public void getUser(String user) { 
+		loginnfild.setText(user);
+	};
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -100,23 +102,7 @@ public class LoginController implements Initializable{
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().setAll(pane);
-/*//						
-//						new FactureController().myFunction(loginnfild.getText());
 						
-						FXMLLoader loggedWindow = null;
-						loggedWindow = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml")); // here crashes!
-						Pane root = loggedWindow.load();
-
-						FactureController controller = loggedWindow.getController();
-						controller.myFunction(String.valueOf(loginnfild));
-
-						Stage switchScene = (Stage)((Node)event.getSource()).getScene().getWindow();
-						switchScene.setResizable(false);
-//						switchScene.setTitle("Welcome " + customer.FirstName + " " + customer.LastName);
-						switchScene.setScene(new Scene(root, 800, 500));
-
-						switchScene.show();
-						*/
 					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
