@@ -75,6 +75,8 @@ import javafx.util.Duration;
 
 public class AjoutFournisseurController implements Initializable{
 	
+	UtilisateurModificationMain userUpdate;
+	
 	@FXML private AnchorPane paneFournisseur;
 	
 	@FXML private TextField textFieldRaisonSociale;
@@ -127,7 +129,12 @@ public class AjoutFournisseurController implements Initializable{
 		selctionAuto(); // SELECTION MULTIPLE
 		//-------------------------------------------------------
 		
+		// AFFICHER LES INFO DANS LES TEXTFIELD UNE FOIS CLICK SUR UNE LIGNE DU TABAEAU
+		afficheDetailsFouenisseurSiClikTableau(null);
+		tableViewFournisseur.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> afficheDetailsFouenisseurSiClikTableau(newValue));
 		//-----------------------------------------------------
+		//-------------- AUTOCOMPLETE TEXTFIELD
 		try {
 			genererMot();
 			codeBarreStart.main(null);
@@ -588,18 +595,32 @@ private boolean validerEmail() {
 	return false;
 }
 //----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
-	public void ControlChiffPhone() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
-		TextFieldTelephone.setOnKeyTyped(e -> {
-			String ch = e.getCharacter();
-			if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
-					|| ch.equals("5") || ch.equals("6") || ch.equals("7") || ch.equals("8") || ch.equals("9")
-					|| ch.equals("BACK_SPACE")) || (!(TextFieldTelephone.getText().length() < 9))) {
-				e.consume();
-				java.awt.Toolkit.getDefaultToolkit().beep();
-			}
-		});
+
+//	CONTROLE CHIFFRE ENTREE DANS LE TEXFIELD - NUMERO TELEPHONE
+	public void ControlChiffPhone() {
+	TextFieldTelephone.setOnMouseExited(e -> {
+		
+		try {
+			
+		String ch = TextFieldTelephone.getText().substring(0, 2);
+		
+		if(!(ch.equals("77")||ch.equals("78")||ch.equals("76")||ch.equals("70")||ch.equals("33")||ch.equals("30")) || (!(TextFieldTelephone.getText().length() == 9))  ) {	
+			Alert err = new Alert(AlertType.ERROR);
+			err.setHeaderText("Error : Le numero saisi est  invalide !"); 
+			err.setContentText("Le numéro doit commencer par : \n 77 ou 78 ou 76 ou 70 ou 33 ou 30 \n et s'arrête à 9 chiffres"); 
+			err.showAndWait();
+		} 
+		} catch (Exception e2) {
+			Alert err = new Alert(AlertType.ERROR);
+			err.setHeaderText("Vous n'avez pas saisi le numéro"); 
+			err.showAndWait();
+		}
+		
+	});
+	
+
 	}
+
 //-----------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------
 		// REDIRECTION SUR ACCUEIL - IMAGE
@@ -727,7 +748,34 @@ private boolean validerEmail() {
 	}
 		//--------------------------------------------------------/////////////////////////////////
 		//--------------------------------------------------------/////////////////////////////////
-/*		
+
+	//AFFICHER DANS LES TEXFIELDS, UNE FOIS ON CLIQUE SUR LE TABLEAU - RECUEILLI LES INFO SUR LE TABLEAU
+	private void afficheDetailsFouenisseurSiClikTableau(Fournisseur fournisseurr) {
+        if (fournisseurr != null) {
+            // ON REMPLACE LES INFOR SUR UNE LIGNE DU TABLEAU DANS LES TEXFIELDS
+        	textFieldRaisonSociale.setText(fournisseurr.getRaisonSociale());
+        	TextFieldSigle.setText(fournisseurr.getSigle());
+        	TextFieldTelephone.setText(fournisseurr.getTelephone());
+        	TextFieldAdresse.setText(fournisseurr.getAdresse());
+        	TextFieldCourriel.setText(fournisseurr.getEmail());
+
+        } else {
+            // ON LES MET VIDE SI ON N'A PAS CLIQUER SUR UNE LIGNE DU TABLEAU
+        	textFieldRaisonSociale.setText("");
+        	TextFieldSigle.setText("");
+        	TextFieldTelephone.setText("");
+        	TextFieldAdresse.setText("");
+        	TextFieldCourriel.setText("");
+          
+        }
+    }
+	
+
+	
+	//------------------------------------------------------------
+	///////////////////////////////////////////////////////////////
+	
+	/*		
 		@FXML
 	    private void initializeFiltr() {
 	        // 0. Initialize the columns.

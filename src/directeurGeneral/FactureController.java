@@ -69,7 +69,7 @@ public class FactureController implements Initializable{
 
 	@FXML private Label dateduJour;
 	
-	@FXML Button btAnnulArticle;
+	@FXML Button btAnnulArticle, btModif, btvalidAcht, btvalidModif;
 	
 //	public TextField getLoginnFild() { return this.refNamCashier; };
 	
@@ -93,7 +93,11 @@ public class FactureController implements Initializable{
 		
 		// DESACTIVER LE BOUTTON TANT QU'UN ARTICLE N'EST SELECTIONNE
 		this.btAnnulArticle.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
+		this.btModif.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
+		this.btvalidAcht.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()  ));
+		this.btvalidModif.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
 		//-------------------------------------------------
+	
 		
 		// COMPLETER LES MOTS AUTOMATIQUES
 		try {
@@ -215,19 +219,18 @@ public class FactureController implements Initializable{
 
 	   //-------------------------------------
 	   
-	   public void moneyRendu() {
+	   public double parseDouble(String s) {
 		   
 		   int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
 	        
 	        	
 		double  p = Double.parseDouble( refPrixTotal.getText() ) - Double.parseDouble( montantverser.getText() );
-	        if (selectedIndex == 0) {
-	        	System.out.println("nop");
-	        } else
-//		montantReduu.setText( String.valueOf( p ));
 	        if (selectedIndex >= 0) {
 	        	System.out.println(p);
-	        }
+	        } 
+//		montantReduu.setText( String.valueOf( p ));
+			return p;
+	      
 	   }
 	   
 	//------------------------------------------

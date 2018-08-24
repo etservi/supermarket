@@ -57,6 +57,9 @@ import javafx.stage.Stage;
 
 public class AjoutUtilisateurController implements Initializable{
 	
+	AjoutUtilisateurMain userUpdate;
+	private AjoutUtilisateurMain mainApp;
+	
 	@FXML private AnchorPane utilisateurPane;
 	@FXML private TableView<Utilisateur> tableViewUtilisateur;
 	
@@ -471,7 +474,61 @@ public class AjoutUtilisateurController implements Initializable{
 
 			}
 		// ----------------------------------------------------------------------------------	
-/*		//-----------------------------------------------------------------------------------
+//===============================================================================================
+			   
+			//AFFICHER DANS LES TEXFIELDS, UNE FOIS ON CLIQUE SUR LE TABLEAU - RECUEILLI LES INFO SUR LE TABLEAU
+			private void afficheDetailsFouenisseurSiClikTableau(Utilisateur userUser) {
+		        if (userUser != null) {
+		            // ON REMPLACE LES INFOR SUR UNE LIGNE DU TABLEAU DANS LES TEXFIELDS
+		        	refNom.setText(userUser.getNom());
+		        	refPrenom.setText(userUser.getPrenom());
+		        	refAdress.setText(userUser.getAdresse());
+		        	refTelephone.setText(userUser.getTelephone());
+		        	refEmail.setText(userUser.getEmail());
+		        	refeLoginUSer.setText(userUser.getLogin());
+		        	refpassword.setText(userUser.getPassword());
+
+		        } else {
+		            // ON LES MET VIDE SI ON N'A PAS CLIQUER SUR UNE LIGNE DU TABLEAU
+		        	refNom.setText("");
+		        	refPrenom.setText("");
+		        	refAdress.setText("");
+		        	refTelephone.setText("");
+		        	refEmail.setText("");
+		        	refeLoginUSer.setText("");
+		        	refpassword.setText("");
+		        }
+		    }
+			
+			@FXML
+		    private void editerUtilisateur() {
+		        Utilisateur selectedPerson = tableViewUtilisateur.getSelectionModel().getSelectedItem();
+		        if (selectedPerson != null) {
+		            boolean okClicked = mainApp.editerFournisseurDialogue(selectedPerson);
+		            if (okClicked) {
+		            	afficheDetailsFouenisseurSiClikTableau(selectedPerson);
+		            }
+
+		        } else {
+		            // Nothing selected.
+		            Alert alert = new Alert(AlertType.WARNING);
+		            alert.initOwner(mainApp.getPrimaryStage());
+		            alert.setTitle("No Selection");
+		            alert.setHeaderText("No Person Selected");
+		            alert.setContentText("Please select a person in the table.");
+		            
+		            alert.showAndWait();
+		        }
+		    }
+			
+			/////////////////////////////////////////////////////////////
+
+//===============================================================================================
+			
+			
+			/*		//-----------------------------------------------------------------------------------
+ * 
+ * 
 	public int modifierUtilsateur() throws FileNotFoundException, SQLException {
 		Connection connexion = ConnectionDB.maConnection();
 		

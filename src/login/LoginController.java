@@ -15,7 +15,9 @@ import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import directeurGeneral.AccueilController;
+import directeurGeneral.AjoutFournisseurMain;
 import directeurGeneral.FactureController;
+import directeurGeneral.UtilisateurModificationController;
 import javaBeansClass.Utilisateur;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.binding.BooleanExpression;
@@ -31,9 +33,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -51,6 +55,7 @@ public class LoginController implements Initializable{
 	
 	int count = 0;
 	
+	private Stage dialogStage;
 	
 //	public TextField getLoginnFild() { return this.loginnfild; };
 	public void getUser(String user) { 
@@ -102,7 +107,31 @@ public class LoginController implements Initializable{
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().setAll(pane);
-						
+					/*	
+						 // Load the fxml file and create a new stage for the popup dialog.
+			            FXMLLoader loader = new FXMLLoader();
+			            loader.setLocation(AjoutFournisseurMain.class.getResource("directeurGeneral/Accueil.fxml"));
+			            Pane page = (Pane) loader.load();
+
+			            // Create the dialog Stage.
+			            Stage dialogStage = new Stage();
+			            dialogStage.setTitle("Edit Person");
+			            dialogStage.initModality(Modality.WINDOW_MODAL);
+			            dialogStage.initOwner(dialogStage);
+			            Scene scene = new Scene(page);
+			            dialogStage.setScene(scene);
+
+			            // Set the person into the controller.
+			            UtilisateurModificationController controller = loader.getController();
+			            controller.setDialogStage(dialogStage);
+//			            controller.setUtilisateur(editFrsrr);
+
+			            // Set the dialog icon.
+			            dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
+			            
+			            // Show the dialog and wait until the user closes it
+			            dialogStage.showAndWait();
+						*/
 					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));

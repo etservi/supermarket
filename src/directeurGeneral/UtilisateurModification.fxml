@@ -21,8 +21,8 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <TextField layoutX="167.0" layoutY="102.0" prefHeight="26.0" prefWidth="194.0" promptText="name" />
-      <TextField layoutX="167.0" layoutY="137.0" prefHeight="26.0" prefWidth="194.0" promptText="prénom" />
+      <TextField fx:id="tfName" layoutX="167.0" layoutY="102.0" prefHeight="26.0" prefWidth="194.0" promptText="name" />
+      <TextField fx:id="tfPrenom" layoutX="167.0" layoutY="137.0" prefHeight="26.0" prefWidth="194.0" promptText="prénom" />
       <Label layoutX="68.0" layoutY="178.0" prefHeight="18.0" prefWidth="87.0" text="Adresse" textFill="#fcfafa">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -33,8 +33,8 @@
             <Font name="System Bold Italic" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="167.0" layoutY="174.0" prefHeight="26.0" prefWidth="194.0" promptText="adresse" />
-      <TextField layoutX="167.0" layoutY="211.0" prefHeight="26.0" prefWidth="194.0" promptText="téléphone" />
+      <TextField fx:id="tfAdress" layoutX="167.0" layoutY="174.0" prefHeight="26.0" prefWidth="194.0" promptText="adresse" />
+      <TextField fx:id="tfTelephone" layoutX="167.0" layoutY="211.0" prefHeight="26.0" prefWidth="194.0" promptText="téléphone" />
       <Label layoutX="68.0" layoutY="215.0" prefHeight="18.0" prefWidth="87.0" text="Téléphone" textFill="#fcfafa">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -50,8 +50,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="546.0" layoutY="96.0" prefHeight="26.0" prefWidth="194.0" promptText="mot de passe" />
-      <TextField layoutX="546.0" layoutY="131.0" prefHeight="26.0" prefWidth="194.0" promptText="e-mail" />
+      <TextField fx:id="tdMotDePass" layoutX="546.0" layoutY="96.0" prefHeight="26.0" prefWidth="194.0" promptText="mot de passe" />
+      <TextField fx:id="tfEmail" layoutX="546.0" layoutY="131.0" prefHeight="26.0" prefWidth="194.0" promptText="e-mail" />
       <Label layoutX="413.0" layoutY="172.0" prefHeight="21.0" prefWidth="266.0" text="Droit utilisteur" textFill="#fcfafa" underline="true">
          <font>
             <Font name="System Italic" size="18.0" />

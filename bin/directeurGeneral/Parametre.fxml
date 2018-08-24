@@ -112,7 +112,7 @@
                                           <Separator layoutX="161.0" layoutY="127.0" prefWidth="200.0" />
                                           <Separator layoutX="161.0" layoutY="304.0" prefWidth="200.0" />
                                           <Button layoutX="184.0" layoutY="326.0" mnemonicParsing="false" onAction="#effacerChamps" text="Effacer" />
-                                          <Button layoutX="296.0" layoutY="326.0" mnemonicParsing="false" onAction="#changerPassd" text="Valider" />
+                                          <Button layoutX="296.0" layoutY="326.0" mnemonicParsing="false" onAction="#changerPassd" text="ider" />
                                           <Label layoutX="161.0" layoutY="100.0" text="Changement Mot de passe" />
                                        </children>
                                     </AnchorPane>

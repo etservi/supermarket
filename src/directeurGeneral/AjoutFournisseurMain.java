@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 
 
 public class AjoutFournisseurMain extends Application {
+	
 	@Override
 	public void start(Stage StgAjoutFournisseur) {
 		
@@ -29,4 +30,5 @@ public class AjoutFournisseurMain extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+
 }

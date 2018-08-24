@@ -8,6 +8,9 @@ import javafx.fxml.FXMLLoader;
 
 
 public class UtilisateurModificationMain extends Application {
+	
+	private Stage primaryStage;
+	
 	@Override
 	public void start(Stage StgUserUpdate) {
 		
@@ -28,4 +31,8 @@ public class UtilisateurModificationMain extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	 public Stage getPrimaryStage() {
+	        return primaryStage;
+	    }
 }
