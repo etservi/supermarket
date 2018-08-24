@@ -18,7 +18,7 @@ public class SendEmail {
 		props.put("mail.smtp.port", "587");
 //		props.put("mail.smtp.port", "25");
 //		props.put("mail.smtp.port", "465");
-//	    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+	    props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
 	    Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 	                protected PasswordAuthentication getPasswordAuthentication() {
@@ -31,8 +31,8 @@ public class SendEmail {
 	        Message message = new MimeMessage(session);
 	        message.setFrom(new InternetAddress("bayenisss@gmail.com"));
 	        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("farba.gaye@uadb.edu.sn"));
-	        message.setSubject("Testing Subject");
-	        message.setText("Mail GAYE," + "\n\n pas de spam avec mon mail SVP");
+	        message.setSubject("Testing Subject");  // OBJET DU MESSAGE
+	        message.setText("Mail GAYE Farba," + "\n\n pas de spam avec mon mail SVP"); // TEXTE MESSAGE
 
 	        Transport.send(message);
 
