@@ -1,4 +1,4 @@
-package directeurGeneral;
+package caissier;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

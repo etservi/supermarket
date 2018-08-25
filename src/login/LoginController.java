@@ -71,11 +71,8 @@ public class LoginController implements Initializable{
 		private void validerConnexion(ActionEvent event) throws IOException {
 			String errorMessage = "";
 			
-			if(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) {
-				btValidCon.setVisible(false);
-			
-			} else {
-				btValidCon.setVisible(true);
+			if( !(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) ){
+				
 			try {
 				
 				Connection connexion = ConnectionDB.maConnection();
@@ -99,18 +96,18 @@ public class LoginController implements Initializable{
 //					// ------------------------------------
 					logRole = rs.getString("role");
 					//-------------------------------------
-					if (logRole.equalsIgnoreCase("Administrateur")) {
+					if (logRole.equalsIgnoreCase("[Administrateur]")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().setAll(pane);
 					
-					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
+					} else if (logRole.equalsIgnoreCase("[Responsable de stock]")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
 						paneLogin.getChildren().setAll(pane);
 					
 						
-					} else if (logRole.equalsIgnoreCase("Responsable commercial")) {
+					} else if (logRole.equalsIgnoreCase("[Responsable commercial]")) {
 //						
 						Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
 						paneLogin.getChildren().setAll(pane);

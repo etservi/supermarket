@@ -6,14 +6,10 @@
 	-fx-background-position: center center;	
 }
 
-.button{
-	-fx-background-color: #feb634; 
-	-fx-text-fill: white;
-	-fx-font-weight: normal;
-}
+
 
 .button:hover {
-    -fx-background-color: linear-gradient(#2A5058, blue); 
+    -fx-background-color: #feb634; 
     -fx-text-fill: #fff3d1;
     -fx-scale-x: 1.1;
     -fx-scale-y: 1.1;
