@@ -31,7 +31,7 @@ public class SendEmail {
 
 	        Message message = new MimeMessage(session);
 	        message.setFrom(new InternetAddress("bayenisss@gmail.com"));
-	        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("farba.gaye@uadb.edu.sn"));
+	        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("farba.gaye@uadb.edu.sn, etservi@yahoo.com"));
 	        message.setSubject("Testing Subject");  // OBJET DU MESSAGE
 	        message.setText("Mail GAYE Farba," + "\n\n pas de spam avec mon mail SVP"); // TEXTE MESSAGE
 
