@@ -14,6 +14,7 @@ public class Utilisateur {
 	private String email;
 	private byte[] image;
 	private Date date;
+	private String role;
 	
 	public Utilisateur() {
 		
@@ -116,6 +117,14 @@ public class Utilisateur {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

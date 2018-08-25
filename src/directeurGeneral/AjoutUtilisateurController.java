@@ -96,9 +96,7 @@ public class AjoutUtilisateurController implements Initializable{
 		genereRandom(); // METHODE RANDON GENERE ID IRTICLE
 		ControlChiffPhone(); // CONTROLE DE SAISIT NUMERO TELEPHONE
 		
-		listUserChechbox.add(CaissierChechbox.getText());
-		listUserChechbox.add(AdminChechbox.getText());
-		listUserChechbox.add(RespoStokChechbox.getText());
+		
 		
 		
 		
@@ -350,6 +348,7 @@ public class AjoutUtilisateurController implements Initializable{
 				if(CaissierChechbox.isSelected()) {
 					AdminChechbox.setSelected(false);
 					RespoStokChechbox.setSelected(false);
+					listUserChechbox.add(CaissierChechbox.getText());
 				}
 			}
 			
@@ -359,6 +358,8 @@ public class AjoutUtilisateurController implements Initializable{
 				if(AdminChechbox.isSelected()) {
 					CaissierChechbox.setSelected(false);
 					RespoStokChechbox.setSelected(false);
+					listUserChechbox.add(AdminChechbox.getText());
+					
 				}
 			}
 			
@@ -368,8 +369,40 @@ public class AjoutUtilisateurController implements Initializable{
 				if(RespoStokChechbox.isSelected()) {
 					CaissierChechbox.setSelected(false);
 					AdminChechbox.setSelected(false);
+					listUserChechbox.add(RespoStokChechbox.getText());
 				}
 			}		
+			
+//======================================================================
+			
+			public void checkBoxVerificationSiSectected() {
+				if(! (CaissierChechbox.isSelected() | AdminChechbox.isSelected() | RespoStokChechbox.isSelected()) ) {
+					Alert alert = new Alert(AlertType.WARNING);
+		            alert.setHeaderText("SVP Selectionnez le droit d'utilisateur");
+//		            alert.setContentText("Selectionnez un article dans la tablle SVP.");
+		            
+		            alert.showAndWait();
+				}
+			}
+			
+//=====================================================================
+			
+			public void resetTextFieldAndCombox() {
+				
+				refNom.setText("");
+				refPrenom.setText("");
+				refAdress.setText("");
+				refTelephone.setText("");
+				refEmail.setText("");
+				refeLoginUSer.setText("");
+				refpassword.setText("");
+				
+				CaissierChechbox.setSelected(false);
+				RespoStokChechbox.setSelected(false);
+				AdminChechbox.setSelected(false);
+				listUserChechbox.clear();
+			}
+			
 //-----------------------------------------------------------------------------------	
 //-----------------------------------------------------------------------------------
 		public void retourMnu() throws IOException {  // UTILISATEUR RETOUR MENU - CLIIQUE SUR LA PHOTO
@@ -474,21 +507,23 @@ public class AjoutUtilisateurController implements Initializable{
  
 	public void ajouterUtilisateur() throws FileNotFoundException {
 		
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); // DATE AUTOMATIQUE - DATE, HEURE
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // DATE AUTOMATIQUE - DATE, HEURE
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
-	//-----------------------------------------------s
+	/*//-----------------------------------------------s
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(primaryStage);
 		fis = new FileInputStream(file);
-		
-	
+		*/
+		checkBoxVerificationSiSectected(); // METHODE VERIFICATION SI UN DES CHECKBOX EST SELECTIONNE
 	//-----------------------------------------------s
 														// SA RESTE L'INSERTION D'IMAGE
 		Connection connexion = ConnectionDB.maConnection();
 		
-		String requette = " INSERT INTO `Utilisateur`(`id`, `nom`, `prenom`, `adresse`, `telephone`, `login`, `password`, `email`, `image`, `date`, `role`) VALUES ('', '"+ refNom.getText() +"', '" +refPrenom.getText() +"', "
-				+ "'"+ refAdress.getText() +"', '"+ refTelephone.getText() +"', '"+ refeLoginUSer.getText() +"', '"+ refpassword.getText() +"', '"+ refEmail.getText() +"',"+ reportDate +", '"+ listUserChechbox.toString() +"'   ) " ;
+		String requette = " INSERT INTO `Utilisateur`(`id`, `nom`, `prenom`, `adresse`, `telephone`, `login`, `password`, `email`, `image`, `date`, `role`) VALUES ('12', '"+ refNom.getText() +"', '" +refPrenom.getText() +"', "
+				+ "'"+ refAdress.getText() +"', '"+ refTelephone.getText() +"', '"+ refeLoginUSer.getText() +"', '"+ refpassword.getText() +"', '"+ refEmail.getText() +"', '"+imageSet+"',"+ reportDate +", '"+ listUserChechbox.toString() +"'   ) " ;
+		
+		System.out.println(requette);
 		
 		int status;
 		try {
