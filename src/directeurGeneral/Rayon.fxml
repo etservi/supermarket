@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -29,33 +28,23 @@
             <Font name="System Bold" size="14.0" />
          </font></Label>
       <Separator layoutX="37.0" layoutY="128.0" prefWidth="200.0" />
-      <Separator layoutX="52.0" layoutY="353.0" prefHeight="3.0" prefWidth="255.0" />
+      <Separator layoutX="52.0" layoutY="397.0" prefHeight="3.0" prefWidth="255.0" />
       <Label layoutX="37.0" layoutY="101.0" prefHeight="21.0" prefWidth="219.0" text="Ajouter Rayon">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="129.0" layoutY="365.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/enregistrer.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="200.0" layoutY="365.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/modifier.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="52.0" layoutY="365.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/supprimer.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="273.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/validModification.png" />
-         </image>
-      </ImageView>
       <Separator layoutX="52.0" layoutY="424.0" prefHeight="3.0" prefWidth="255.0" />
       <TextField layoutX="140.0" layoutY="48.0" prefHeight="26.0" prefWidth="194.0" text="recherche" />
+      <Hyperlink layoutX="35.0" layoutY="395.0" onAction="#insertrayon" text="Enregistrer">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="222.0" layoutY="395.0" text="Modifier">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>

@@ -43,10 +43,7 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
 	
-	public static String tfName = ""; 
-	
 	@FXML private AnchorPane paneLogin;
-//	private static long temps = 0;
 	@FXML private Label signError;
 	@FXML public TextField loginnfild;
 	@FXML private PasswordField psswFild;
@@ -55,7 +52,6 @@ public class LoginController implements Initializable{
 	
 	int count = 0;
 	
-	private Stage dialogStage;
 	
 //	public TextField getLoginnFild() { return this.loginnfild; };
 	public void getUser(String user) { 
@@ -107,31 +103,7 @@ public class LoginController implements Initializable{
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().setAll(pane);
-					/*	
-						 // Load the fxml file and create a new stage for the popup dialog.
-			            FXMLLoader loader = new FXMLLoader();
-			            loader.setLocation(AjoutFournisseurMain.class.getResource("directeurGeneral/Accueil.fxml"));
-			            Pane page = (Pane) loader.load();
-
-			            // Create the dialog Stage.
-			            Stage dialogStage = new Stage();
-			            dialogStage.setTitle("Edit Person");
-			            dialogStage.initModality(Modality.WINDOW_MODAL);
-			            dialogStage.initOwner(dialogStage);
-			            Scene scene = new Scene(page);
-			            dialogStage.setScene(scene);
-
-			            // Set the person into the controller.
-			            UtilisateurModificationController controller = loader.getController();
-			            controller.setDialogStage(dialogStage);
-//			            controller.setUtilisateur(editFrsrr);
-
-			            // Set the dialog icon.
-			            dialogStage.getIcons().add(new Image("file:resources/images/edit.png"));
-			            
-			            // Show the dialog and wait until the user closes it
-			            dialogStage.showAndWait();
-						*/
+					
 					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
@@ -167,11 +139,8 @@ public class LoginController implements Initializable{
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			}	
-//			else {
-//				
-//			}
-			
+	}	
+
 }		
 //////////////////////////////////////////
 		//////////////////////////
@@ -181,11 +150,6 @@ public void effacer() {
 	psswFild.clear();
 	
 }		
-//---------------------------------------------------
-//---------------------------------------------------
-
-
-
 
 	//-----------------------------------------------------------------------
 	//-----------------------------------------------------------------------

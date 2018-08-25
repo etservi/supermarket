@@ -7,6 +7,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 public class SendEmail {
+	
 	public static void main(String [] args) throws MessagingException{  
 	 final String username = "bayenisss@gmail.com";
 		final String password = "*********";

@@ -63,4 +63,27 @@ public class RayonController implements Initializable{
 	}
 	//--------------------------------------------------------------------------
 	
+	public void insertrayon() {
+		Connection connexion = ConnectionDB.maConnection();
+		
+		String requette = "INSERT INTO `Rayon`(`idRayon`, `idAdmin`, `domaine`) VALUES ( "+ textFielidRayon.getText() +" , "+ comboxUser.getValue() +", '"+ TextFieldDomaine.getText() +"') ";
+		
+		try {
+			int status = connexion.createStatement().executeUpdate(requette);
+			
+			if(status != 0) {
+				System.out.println("Reussi");
+			}
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("NOPE");
+		}
+	}
+	
+	
+	
+//	comboxUser, TextFieldDomaine, textFielidRayon
+	
+	
 }

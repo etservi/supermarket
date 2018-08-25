@@ -58,12 +58,10 @@ import javafx.stage.Stage;
 public class AjoutUtilisateurController implements Initializable{
 	
 	AjoutUtilisateurMain userUpdate;
-	private AjoutUtilisateurMain mainApp;
 	
 	@FXML private AnchorPane utilisateurPane;
 	@FXML private TableView<Utilisateur> tableViewUtilisateur;
 	
-//	@FXML private TextField randomIdUz;
 	@FXML private TextField refNom;
 	@FXML private TextField refPrenom;
 	@FXML private TextField refAdress;
@@ -125,6 +123,7 @@ public class AjoutUtilisateurController implements Initializable{
 	      refeLoginUSer.setText(""+ pw);
 		return pw;
 }
+	 
 	
 	//-----------------------------------------------------------------------------------
 	public void dateDuJourMethode() throws IOException {
@@ -393,14 +392,12 @@ public class AjoutUtilisateurController implements Initializable{
 				imageView.setFitHeight(190);
 				imageView.setPreserveRatio(true);
 				borderPanee.setCenter(imageView);
-				
-				
-			}
-			
-			
+		
+			}	
 		}			
-			// ----------------------------------------------------------------------------------	
-			//-----------------------------------------------------------------------------------
+// ==================================================================================================================================
+// ==================================================================================================================================
+/*			
 //		FileChooser fileChooser = new FileChooser();
 //		File file = fileChooser.showOpenDialog(primaryStage);
 		//-----------
@@ -443,12 +440,10 @@ public class AjoutUtilisateurController implements Initializable{
 			}
 
 		}
+		*/
 		
-		
-// ---------------------------------------------------
-//---------------------------------------
-		//-------------------------------------------------------------------------
-		//-------------------------------------------------------------------------
+// ==================================================================================================================================
+// ==================================================================================================================================
 			
 			// REDIRECTION SUR ACCUEIL - IMAGE
 			@FXML
@@ -473,94 +468,55 @@ public class AjoutUtilisateurController implements Initializable{
 		        }
 
 			}
-		// ----------------------------------------------------------------------------------	
-//===============================================================================================
-			   
-			//AFFICHER DANS LES TEXFIELDS, UNE FOIS ON CLIQUE SUR LE TABLEAU - RECUEILLI LES INFO SUR LE TABLEAU
-			private void afficheDetailsFouenisseurSiClikTableau(Utilisateur userUser) {
-		        if (userUser != null) {
-		            // ON REMPLACE LES INFOR SUR UNE LIGNE DU TABLEAU DANS LES TEXFIELDS
-		        	refNom.setText(userUser.getNom());
-		        	refPrenom.setText(userUser.getPrenom());
-		        	refAdress.setText(userUser.getAdresse());
-		        	refTelephone.setText(userUser.getTelephone());
-		        	refEmail.setText(userUser.getEmail());
-		        	refeLoginUSer.setText(userUser.getLogin());
-		        	refpassword.setText(userUser.getPassword());
-
-		        } else {
-		            // ON LES MET VIDE SI ON N'A PAS CLIQUER SUR UNE LIGNE DU TABLEAU
-		        	refNom.setText("");
-		        	refPrenom.setText("");
-		        	refAdress.setText("");
-		        	refTelephone.setText("");
-		        	refEmail.setText("");
-		        	refeLoginUSer.setText("");
-		        	refpassword.setText("");
-		        }
-		    }
-			
-			@FXML
-		    private void editerUtilisateur() {
-		        Utilisateur selectedPerson = tableViewUtilisateur.getSelectionModel().getSelectedItem();
-		        if (selectedPerson != null) {
-		            boolean okClicked = mainApp.editerFournisseurDialogue(selectedPerson);
-		            if (okClicked) {
-		            	afficheDetailsFouenisseurSiClikTableau(selectedPerson);
-		            }
-
-		        } else {
-		            // Nothing selected.
-		            Alert alert = new Alert(AlertType.WARNING);
-		            alert.initOwner(mainApp.getPrimaryStage());
-		            alert.setTitle("No Selection");
-		            alert.setHeaderText("No Person Selected");
-		            alert.setContentText("Please select a person in the table.");
-		            
-		            alert.showAndWait();
-		        }
-		    }
-			
-			/////////////////////////////////////////////////////////////
-
-//===============================================================================================
-			
-			
-			/*		//-----------------------------------------------------------------------------------
- * 
- * 
-	public int modifierUtilsateur() throws FileNotFoundException, SQLException {
-		Connection connexion = ConnectionDB.maConnection();
+// ---------------------------------------------------------------------------------------------------------------------------------------	
+//========================================================================================================================================
+//----------------------------------------------------------------------------------------------------------------------------------------
+ 
+	public void ajouterUtilisateur() throws FileNotFoundException {
 		
-		try {
-		String rekett = "UPDATE Utilsateur set nom=?, prenom=?,adresse=?,telephone=?,login=?,password=?,email=?,image=? WHERE id=?";
-		PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
-		
-		
-		
-		pst.setString(1, refNom.getText());
-		pst.setString(2, refPrenom.getText());
-		pst.setString(3, refAdress.getText());
-		pst.setString(4, refTelephone.getText());
-		pst.setString(5, refeLoginUSer.getText());
-		pst.setString(6, refpassword.getText());
-		pst.setString(7, listUserChechbox.toString());  //CHECKBOX - FICHIER METHODE HANDL, HEADER, CELLE LA
-		
-		
-		// IMAGE USING
-				FileChooser fileChooser = new FileChooser();
-				File file = fileChooser.showOpenDialog(primaryStage);
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss"); // DATE AUTOMATIQUE - DATE, HEURE
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+	//-----------------------------------------------s
+		FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showOpenDialog(primaryStage);
 		fis = new FileInputStream(file);
 		
-		pst.setBinaryStream(8, (InputStream)fis, (int)file.length());  // PONITER SUR LA CELLULE IMAGE
+	
+	//-----------------------------------------------s
+														// SA RESTE L'INSERTION D'IMAGE
+		Connection connexion = ConnectionDB.maConnection();
+		
+		String requette = " INSERT INTO `Utilisateur`(`id`, `nom`, `prenom`, `adresse`, `telephone`, `login`, `password`, `email`, `image`, `date`, `role`) VALUES ('', '"+ refNom.getText() +"', '" +refPrenom.getText() +"', "
+				+ "'"+ refAdress.getText() +"', '"+ refTelephone.getText() +"', '"+ refeLoginUSer.getText() +"', '"+ refpassword.getText() +"', '"+ refEmail.getText() +"',"+ reportDate +", '"+ listUserChechbox.toString() +"'   ) " ;
+		
+		int status;
+		try {
+			status = connexion.createStatement().executeUpdate(requette);
 			
-		} catch(SQLException ex) {
-			ex.printStackTrace();
-		}
+			if (status != 0) {
+				System.out.println("Reussi");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+			System.out.println("Pas Reussi");
+		}	
+/*
+		// IMAGE USING
+		FileChooser fileChooser = new FileChooser();
+		File file = fileChooser.showOpenDialog(primaryStage);
+		fis = new FileInputStream(file);
+		pst.setBinaryStream(8, (InputStream)fis, (int)file.length());  // PONITER SUR LA CELLULE IMAGE
+*/
+		
+
 		
 	}
-		*/
-		//---------------------------
+		
+// ---------------------------------------------------------------------------------------------------------------------------------------	
+//========================================================================================================================================
+//----------------------------------------------------------------------------------------------------------------------------------------
 		
 	
 		

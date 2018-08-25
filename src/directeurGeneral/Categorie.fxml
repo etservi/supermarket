@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -21,41 +20,31 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <TextField fx:id="textFielidRayon" layoutX="145.0" layoutY="165.0" prefHeight="26.0" prefWidth="194.0" promptText="id Catégorie" />
+      <TextField fx:id="tfIdCategorie" layoutX="145.0" layoutY="165.0" prefHeight="26.0" prefWidth="194.0" promptText="id Catégorie" />
       <TextField fx:id="TextFieldDomaine" layoutX="145.0" layoutY="297.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
-      <ComboBox fx:id="comboxRayn" layoutX="145.0" layoutY="232.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="id Rayon" />
+      <ComboBox fx:id="comboxRayncat" layoutX="145.0" layoutY="232.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="id Rayon" />
       <Label layoutX="31.0" layoutY="302.0" prefHeight="18.0" prefWidth="94.0" text="Libellé">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
       <Separator layoutX="38.0" layoutY="137.0" prefWidth="200.0" />
-      <Separator layoutX="53.0" layoutY="362.0" prefHeight="3.0" prefWidth="255.0" />
+      <Separator layoutX="53.0" layoutY="405.0" prefHeight="3.0" prefWidth="255.0" />
       <Label layoutX="38.0" layoutY="110.0" prefHeight="21.0" prefWidth="209.0" text="Ajouter Rayon">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Separator layoutX="53.0" layoutY="433.0" prefHeight="3.0" prefWidth="255.0" />
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="125.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/enregistrer.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="196.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/modifier.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="48.0" layoutY="377.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/supprimer.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="44.0" fitWidth="58.0" layoutX="269.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/validModification.png" />
-         </image>
-      </ImageView>
       <TextField layoutX="152.0" layoutY="52.0" prefHeight="26.0" prefWidth="172.0" text="recherche" />
+      <Hyperlink layoutX="47.0" layoutY="404.0" onAction="#ajouterCategorie" text="Enregistrer">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="214.0" layoutY="405.0" text="Modifier">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
    </children>
 </AnchorPane>

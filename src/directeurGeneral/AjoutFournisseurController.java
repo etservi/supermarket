@@ -456,24 +456,51 @@ public class AjoutFournisseurController implements Initializable{
 //--------------------------------------------------------------------------------
 
 	// BOUTON SUPPRESSION AU NIVEAU DU TABLEAU
-		public void suppressionSurLeTableau() throws SQLException {
+		public void suppressionSurLeTableau() {
 			
 			Fournisseur mat = tableViewFournisseur.getSelectionModel().getSelectedItem();
+			System.out.println(mat.getRaisonSociale());
 			int selectedIndex = tableViewFournisseur.getSelectionModel().getSelectedIndex();
 			Connection connexion = ConnectionDB.maConnection();
 			
 			if (selectedIndex >= 0) {
-				tableViewFournisseur.getItems().remove(selectedIndex);
+//				tableViewFournisseur.getItems().remove(selectedIndex);
 				
-			try{
-//					String sql = "DELETE FROM `Fournisseur` WHERE raisonSociale = '"+ mat.getRaisonSociale() +"' " ;
+//			try{
+//					String sql = "DELETE FROM `Fournisseur` WHERE telephone = "+ mat.getTelephone() + "  " ;
 				
-//					PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
-//					pst.executeUpdate();
-//					pst.close();
-//					connexion.close();
+					try {
+						
+						String sql = "DELETE FROM `Fournisseur` WHERE raisonSociale = '"+mat.getRaisonSociale()+"'   " ;
+						PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
+						
+						int rs = pst.executeUpdate();
+						
+						if (rs != 0) {
+							System.out.println("Reussi");
+						}
+						
+//						pst.setString(1, mat.getRaisonSociale());
+//						
+//						pst.executeUpdate();
+						connexion.close();
+						
+						System.out.println("Reussi");
+						//--------------------------------------
+						tableViewFournisseur.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
+						// --------------------------------------------------------				
+						new notificationThred().start();
+						//----------------------------
+						System.out.println("Reussi");
+					} catch (SQLException e) {
+						
+						e.printStackTrace();
+						System.out.println("Non Reussi");
+					}
+			}
 					
-					  String rsql="DELETE from Fournisseur WHERE raisonSociale=? AND sigle=? AND telephone=? AND adresse=? AND email=?";
+					
+					/*  String rsql="DELETE from Fournisseur WHERE raisonSociale=? AND sigle=? AND telephone=? AND adresse=? AND email=?";
 			            PreparedStatement ps = (PreparedStatement) connexion.prepareStatement(rsql);
 			            Fournisseur fcs = new Fournisseur();
 			            
@@ -483,30 +510,26 @@ public class AjoutFournisseurController implements Initializable{
 			            ps.setString(4, fcs.getEmail());
 			            ps.setString(5, fcs.getAdresse());
 			            
-			            ps.executeUpdate();
-			            ps.close();
-						connexion.close();
-					// --------------------------------------------------------
+			            ps.executeUpdate();*/
+//			            ps.close();
+						
+	/*				// --------------------------------------------------------
 					Confirmation.alerter();
 					// --------------------------------------------------------
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setHeaderText("Fournisseur a été bien supprimé");
-					alert.showAndWait();
-					//--------------------------------------
-	tableViewFournisseur.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
-					// --------------------------------------------------------				
-					new notificationThred().start();
-					//----------------------------
+					alert.showAndWait();*/
 					
-			}  catch (SQLException ex) {
-				Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
-				ex.printStackTrace();
-			}
+					
+//			}  catch (SQLException ex) {
+//				Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+//				ex.printStackTrace();
+/*//			}
 			} else {
 				Alert alertt = new Alert(Alert.AlertType.INFORMATION);
 				  alertt.setHeaderText("Veuillez choisir un fournisseur SVP");
 				  alertt.showAndWait();
-			}
+			}*/
 			 
 		}
 // -------------------------------------------------------------------------------

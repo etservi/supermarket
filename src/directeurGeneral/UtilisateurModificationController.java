@@ -21,11 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class UtilisateurModificationController implements Initializable {
-	
-	private Stage dialogStage;
-	private boolean okClicked = false;
-	private Utilisateur utilisateursss;
-	
+
 	
 	@FXML private AnchorPane rootPane; // REDIRECTION DE PAGE ON A BESOIN DE SE POINTER DANS LE FICHIER CONTROLLEUR
 
@@ -48,26 +44,7 @@ public class UtilisateurModificationController implements Initializable {
 	// --------------------------------------------------------------------------
 		
 		//===============================================================================
-		//===============================================================================
-		
-		public void setDialogStage(Stage dialogStage) {
-	        this.dialogStage = dialogStage;
-	    }	
-		public boolean isOkClicked() {
-	        return okClicked;
-	    }
-		
-		public void setUtilisateur(Utilisateur utilisateursss) {
-	        this.utilisateursss = utilisateursss;
-//	        tfName, tfPrenom, tfAdress, tfTelephone, tdMotDePass, tfEmail
-	        tfName.setText(utilisateursss.getNom());
-	        tfPrenom.setText(utilisateursss.getPrenom());
-	        tfAdress.setText(utilisateursss.getAdresse());
-	        tfTelephone.setText(utilisateursss.getTelephone());
-	        tdMotDePass.setText(utilisateursss.getPassword());
-	        tfEmail.setText(utilisateursss.getEmail());
-	    }
-		
+
 		
 		
 		

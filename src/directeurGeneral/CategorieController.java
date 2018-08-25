@@ -20,7 +20,7 @@ import javafx.scene.control.TextField;
 
 public class CategorieController implements Initializable{
 	
-	@FXML private TextField textFielidRayon;
+	@FXML private TextField tfIdCategorie;
 	@FXML private TextField TextFieldDomaine;
 	
 	@FXML private TableView<Rayon> tableViewRayon;
@@ -37,7 +37,7 @@ public class CategorieController implements Initializable{
 	}
 	
 	//--------------------------------------------------------------------------
-	@FXML ComboBox<Integer> comboxRayn;
+	@FXML ComboBox<Integer> comboxRayncat;
 	final ObservableList<Integer> optionsComboboxRayon = FXCollections.observableArrayList();
 
 	public void comboBoxrayon() {   // NOM DE LA METHODE
@@ -52,7 +52,7 @@ public class CategorieController implements Initializable{
 			while (rs.next()) {
 				optionsComboboxRayon.add(new Rayon  (   rs.getInt(1)).getIdRayon()  );
 			}
-			comboxRayn.getItems().addAll(optionsComboboxRayon);
+			comboxRayncat.getItems().addAll(optionsComboboxRayon);
 			rs.close();
 			connexion.close();
 		} catch (SQLException er_rs) {
@@ -61,13 +61,23 @@ public class CategorieController implements Initializable{
 	}
 	//--------------------------------------------------------------------------
 	
-	public void ajouterFournsseur() {
-		
-//		String RaisonSocial = textFielidRayon.getText().trim();
-//		String Sigl = TextFieldSigle.getText().trim();
-//		String Telephon = TextFieldDomaine.getText();
+	public void ajouterCategorie() {
 		
 		Connection connexion = ConnectionDB.maConnection();
 		
+		String requette = "INSERT INTO `DomaineCategorie`(`idCategoriee`, `idRayon`, `libCategorie`) VALUES  (  "+ tfIdCategorie.getText() +" , "+ comboxRayncat.getValue() +", '"+ TextFieldDomaine.getText() +"' ) ";
+		
+		try {
+			int status = connexion.createStatement().executeUpdate(requette);
+			
+			if( status != 0 ) {
+				System.out.println("Reussi");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+			System.out.println("Pas Reussi");
+		}
 	}
 }
