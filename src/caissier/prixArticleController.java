@@ -2,9 +2,14 @@ package caissier;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.mysql.jdbc.PreparedStatement;
 
+import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,24 +25,22 @@ public class prixArticleController implements Initializable{
 	@FXML private AnchorPane rootPane;
 	
 	// LABEL SET
-	@FXML Label labIdRayon;
-	@FXML Label LabIdCat;
-	@FXML Label labNomAr;
-	@FXML Label labQtRestante;
-	@FXML Label labPrxUnitaire;
-	@FXML BorderPane labCodBarr;
-	@FXML BorderPane labQrCod;
+	@FXML private Label labIdRayon;
+	@FXML private Label LabIdCat;
+	@FXML private Label labNomAr;
+	@FXML private Label labQtRestante;
+	@FXML private Label labPrxUnitaire;
+	@FXML private BorderPane labCodBarr;
+	@FXML private BorderPane labQrCod;
 	
 	// LABEL AFFICHE ARTICLE
 	
-	@FXML TextField tfReserch;
-	
-	
-
+	@FXML private TextField tfReserch;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+//		voirPrixArticle();
 		
 	}
 	
@@ -51,8 +54,61 @@ public class prixArticleController implements Initializable{
 	}
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
-	@SuppressWarnings("unused")
-	private void voirPrixArticle(Article article) {
+	@FXML
+	private void voirPrixArticle() {
+		
+		Connection connexion = ConnectionDB.maConnection();
+		
+		String sql = "SELECT * FROM Article ";
+		
+		System.out.println(sql);
+		
+		try {
+			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
+			ResultSet rs = pst.executeQuery();
+			
+			String idRyn = null;
+			String nomProd = null;
+			String qtReste = null;
+			String prxUt = null;
+			String verifieCodeBarre = null;
+			
+			
+			if(rs.next()) {
+				System.out.println("existe");
+				
+				nomProd = rs.getString("nomProduit");
+				idRyn = rs.getString("idRayon");
+				qtReste = rs.getString("qteStock");
+				prxUt = rs.getString("prixUnitaire");
+				verifieCodeBarre = rs.getString("codeBarre");  // NOM ARTICLE OU L'ON FAIT LE TEST
+				
+				if(nomProd.equalsIgnoreCase(tfReserch.getText())) {
+			
+					labIdRayon.setText(rs.getString("idProduit"));		 
+					LabIdCat.setText(rs.getString("idCategoriee"));		
+					labNomAr.setText(rs.getString("nomProduit"));		
+					labQtRestante.setText(rs.getString("qteStock"));	
+					labPrxUnitaire.setText(rs.getString("prixUnitaire"));
+					
+				} else {
+					labIdRayon.setText("");
+		        	LabIdCat.setText("");
+		        	labNomAr.setText("");
+		        	labQtRestante.setText("");
+		        	labPrxUnitaire.setText("");
+				}
+				
+			} else {
+				System.out.println("CONNEXION BASE DE DONNEE NON REUSSI");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+/*		
         if (article != null) {
         	
             // REMPLIR LES INFORMATIONS DES ARTICLES
@@ -73,5 +129,7 @@ public class prixArticleController implements Initializable{
         	labPrxUnitaire.setText("");
         
         }
+        
+        */
     }
 }

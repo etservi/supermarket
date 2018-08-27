@@ -538,7 +538,7 @@ public class AjoutFournisseurController implements Initializable{
 					DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 					Date today = Calendar.getInstance().getTime();
 					String reportDate = df.format(today);
-					duJour.setText("Date : " + reportDate);
+					duJour.setText(reportDate);
 		}		
 
 //---------------------------------------------------------------------------------
