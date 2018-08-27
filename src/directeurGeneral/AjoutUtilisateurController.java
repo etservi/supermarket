@@ -520,6 +520,8 @@ public class AjoutUtilisateurController implements Initializable{
 														// SA RESTE L'INSERTION D'IMAGE
 		Connection connexion = ConnectionDB.maConnection();
 		
+		
+		
 		String requette = " INSERT INTO `Utilisateur`(`id`, `nom`, `prenom`, `adresse`, `telephone`, `login`, `password`, `email`, `image`, `date`, `role`) VALUES ('12', '"+ refNom.getText() +"', '" +refPrenom.getText() +"', "
 				+ "'"+ refAdress.getText() +"', '"+ refTelephone.getText() +"', '"+ refeLoginUSer.getText() +"', '"+ refpassword.getText() +"', '"+ refEmail.getText() +"', '"+imageSet+"',"+ reportDate +", '"+ listUserChechbox.toString() +"'   ) " ;
 		

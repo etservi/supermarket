@@ -909,26 +909,26 @@ private boolean validerEmail() {
 	//------------------------------------------------------------///////////////////////////////////
 	
 //	ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
-/*	
+	
 	@FXML
     private void rechercheFournisseur(KeyEvent ke) {
         
         FilteredList<Fournisseur> filterData = new FilteredList<>(masterData, p -> true);
         recherch.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
-            filterData.setPredicate(pers -> {
+            filterData.setPredicate(e -> {
 
                 if (newvalue == null || newvalue.isEmpty()) {
                     return true;
                 }
                 String typedText = newvalue.toLowerCase();
-                if (pers.getRaisonSociale().toLowerCase().indexOf(typedText) != -1) {
+                if (e.getRaisonSociale().toLowerCase().indexOf(typedText) != -1) {
                     return true;
                 }
-                if (pers.getSigle().toLowerCase().indexOf(typedText) != -1) {
+                if (e.getSigle().toLowerCase().indexOf(typedText) != -1) {
 
                     return true;
                 }
-                if (pers.getAdresse().toLowerCase().indexOf(typedText) != -1) {
+                if (e.getAdresse().toLowerCase().indexOf(typedText) != -1) {
                     return true;
                 }
 
@@ -941,11 +941,9 @@ private boolean validerEmail() {
 
         });
        
-    }*/
+    }
 	
-	//----------------------------------
-	
-	
+
 
 }
 
