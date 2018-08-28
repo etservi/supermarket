@@ -14,8 +14,10 @@ import javax.mail.internet.MimeMessage;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class MessageController implements Initializable{
@@ -62,9 +64,14 @@ public class MessageController implements Initializable{
 		        Transport.send(message);
 
 		        System.out.println("Réussi");
+		        
+		        Alert alerte = new Alert(AlertType.INFORMATION);
+				alerte.setHeaderText("Votre Message a été bien envoyé");
+				alerte.showAndWait();
 
 		    } catch (MessagingException e) {
 		    	throw new RuntimeException(e);
+		    	
 	      } 
 	}
 	
