@@ -153,9 +153,9 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Label fx:id="affichUser" layoutX="89.0" layoutY="151.0" text="Utilsateur : ">
+                  <Label fx:id="affichUser" layoutX="82.0" layoutY="212.0" textFill="#a47753">
                      <font>
-                        <Font name="System Bold" size="18.0" />
+                        <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
                </children>

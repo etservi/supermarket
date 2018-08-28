@@ -6,38 +6,23 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.script.Bindings;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
-import directeurGeneral.AccueilController;
-import directeurGeneral.AjoutFournisseurMain;
-import directeurGeneral.FactureController;
-import directeurGeneral.UtilisateurModificationController;
-import javaBeansClass.Utilisateur;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.binding.BooleanExpression;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -52,19 +37,26 @@ public class LoginController implements Initializable{
 	
 	int count = 0;
 	
-	
-//	public TextField getLoginnFild() { return this.loginnfild; };
-	public void getUser(String user) { 
-		loginnfild.setText(user);
-	};
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
+		
 	}
-// -----------------------------------
 	
-//	-------------------------------------------	
+	@FXML
+	private void logRecup (ActionEvent even) {
+		
+		try {
+			
+//			Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Facture.fxml"));
+//			paneLogin.getChildren().removeAll();
+//			paneLogin.getChildren().setAll(fxml);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+// -------------------------------------------- s
+//	-------------------------------------------	s
 	
 		// REDIRECTION SUR ACCUEIL ! CAISSIER / DIRECTEUR / RESPONSABLE DE STOCKS
 		@FXML
@@ -84,8 +76,9 @@ public class LoginController implements Initializable{
 				pst.setString(3, psswFild.getText());
 				ResultSet rs = pst.executeQuery();
 				
+				//-----------RECUPERATION LE NOM UTILISATEUR QUI EST CONNECTER
 				//----------------------------------------------
-
+				StaticInfo.USERNAME = loginnfild.getText();
 				//----------------------------------------------
 				
 
@@ -98,18 +91,21 @@ public class LoginController implements Initializable{
 					//-------------------------------------
 					if (logRole.equalsIgnoreCase("[Administrateur]")) {
 						
-						Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
-						paneLogin.getChildren().setAll(pane);
+						Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
+						paneLogin.getChildren().removeAll();
+						paneLogin.getChildren().setAll(fxml);
 					
 					} else if (logRole.equalsIgnoreCase("[Responsable de stock]")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
+						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 					
 						
 					} else if (logRole.equalsIgnoreCase("[Responsable commercial]")) {
 //						
 						Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
+						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 
 					} else {
@@ -118,6 +114,7 @@ public class LoginController implements Initializable{
 						
 						System.out.println("Pas confome");
 						AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
+						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 						effacer();
 						

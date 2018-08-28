@@ -2,8 +2,14 @@ package directeurGeneral;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.mysql.jdbc.PreparedStatement;
+
+import baseDeDonnées.ConnectionDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import login.StaticInfo;
 
 
 public class AccueilController implements Initializable {
@@ -21,19 +28,38 @@ public class AccueilController implements Initializable {
 	 Stage stage = null;
 	@FXML TextField tfFirstName, tfLastName, tfEmail;
 	@FXML Label affichUser;
+	
+	
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-//		Utilisateur nre = new Utilisateur();
-//		nre.getLogin();
-//		
-//		System.out.println(nre.getLogin());
-//		new LoginController().setText(loginnfild);
-//		affichUser.setText(new LoginController());
+
+			affichLogin(); // AFFICHE UTILISATEUR
 		
 		
 	}
-//------------------------------------------------------------------------------	
+	
+//=============================================================================
+	
+	public void affichLogin() {
+		
+		Connection connexion = ConnectionDB.maConnection();
+		String sqll = "SELECT prenom, nom FROM Utilisateur WHERE telephone =" +StaticInfo.USERNAME +" OR login = "+ StaticInfo.USERNAME + " ";
+		
+			PreparedStatement pst;
+			try {
+				pst = (PreparedStatement) connexion.prepareStatement(sqll);
+				ResultSet rs = pst.executeQuery();
+				if(rs.next()) {
+					affichUser.setText(" Bienvenue " + rs.getString(1) +" "+ rs.getString(2));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				
+	}
+	
+//=============================================================================
 	// REDIRECTION AJOUTER RAYON
 	@FXML
 	private void ouvrirRayon() throws IOException {			
@@ -62,8 +88,9 @@ public class AccueilController implements Initializable {
 	// REDIRECTION SUR ACCUEIL
 	@FXML
 	private void retourAuMenu() throws IOException {
-		Parent pane = FXMLLoader.load(getClass().getResource("Accueil.fxml"));
-		rootPane.getChildren().setAll(pane);
+		Parent fxml = FXMLLoader.load(getClass().getResource("Accueil.fxml"));
+		rootPane.getChildren().removeAll();
+		rootPane.getChildren().setAll(fxml);
 		
 		
 
@@ -72,56 +99,60 @@ public class AccueilController implements Initializable {
 	// REDIRECTION SUR ACCUEIL
 	@FXML
 	private void parametre() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Parametre.fxml"));
-		rootPane.getChildren().setAll(pane);
+		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Parametre.fxml"));
+		rootPane.getChildren().removeAll();
+		rootPane.getChildren().setAll(fxml);
 	}
 //------------------------------------------------------------------------------	
 	// REDIRECTION LOGIN
 	@FXML
 	private void deconnexion() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
-		rootPane.getChildren().setAll(pane);
+		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
+		rootPane.getChildren().removeAll();
+		rootPane.getChildren().setAll(fxml);
 		
 	}
 	//------------------------------------------------------------------------------	
 	// REDIRECTION NOUVEAU CLIENT
 		@FXML
 		private void NouveauClient() throws IOException {
-			FXMLLoader loader = new FXMLLoader();
-			Parent pane = loader.load(new java.io.File("src/directeurGeneral/Facture.fxml").toURI().toURL());
-			rootPane.getChildren().setAll(pane);
 			
-//			javafx.scene.layout.BorderPane bp
-//			System.out.println(  ( ( (  (AnchorPane) (rootPane.getChildren().get(0) ) ).getChildren().get(0)).getClass() )  ); 
-//			.forEach( (e) -> System.out.println(e + " :" + e.getId() ) );
+			AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Facture.fxml"));
+			rootPane.getChildren().removeAll();
+			rootPane.getChildren().setAll(fxml);
+			
 		}
 		//-----------------------------------------------------------------------------------	
 		//-----------------------------------------------------------------------------------
 	@FXML
 	public void ajouterUtilsateur() throws IOException {  
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/AjoutUtilisateur.fxml"));
-		rootPane.getChildren().setAll(pane);
+		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/AjoutUtilisateur.fxml"));
+		rootPane.getChildren().removeAll();
+		rootPane.getChildren().setAll(fxml);
 	}			
 	//-----------------------------------------------------------------------------------	
 	//-----------------------------------------------------------------------------------
 	@FXML
 	public void ajouterArticle() throws IOException {  
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/AjoutArticle.fxml"));
-		rootPane.getChildren().setAll(pane);
+		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/AjoutArticle.fxml"));
+		rootPane.getChildren().removeAll();
+		rootPane.getChildren().setAll(fxml);
 }			
 // ----------------------------------------------------------------------------------	
 //-----------------------------------------------------------------------------------
 	@FXML
 	public void ajouterFournisseur() throws IOException {  
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/AjoutFournisseur.fxml"));
-		rootPane.getChildren().setAll(pane);
+		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/AjoutFournisseur.fxml"));
+		rootPane.getChildren().removeAll();
+		rootPane.getChildren().setAll(fxml);
 }			
 	// ----------------------------------------------------------------------------------	
 	//-----------------------------------------------------------------------------------
 		@FXML
 		public void statistique() throws IOException {  
-			AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Statistique.fxml"));
-			rootPane.getChildren().setAll(pane);
+			AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Statistique.fxml"));
+			rootPane.getChildren().removeAll();
+			rootPane.getChildren().setAll(fxml);
 	}
 		// ----------------------------------------------------------------------------------	
 		//-----------------------------------------------------------------------------------

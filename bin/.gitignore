@@ -1,13 +1,4 @@
-/Qr_Code/
-/baseDeDonnées/
-/boiteAlert/
-/caissier/
-/codeBarre/
-/directeurGeneral/
-/javaBeansClass/
 /login/
-/pdfFacture/
+/directeurGeneral/
+/caissier/
 /responsableDeStocks/
-/serverMailSendMesaz/
-/serveurMultiThread/
-/statistique/

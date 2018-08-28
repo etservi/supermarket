@@ -41,6 +41,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import login.LoginController;
+import login.StaticInfo;
 
 public class FactureController implements Initializable{
 	
@@ -71,18 +72,14 @@ public class FactureController implements Initializable{
 	
 	@FXML Button btAnnulArticle;
 	
-//	public TextField getLoginnFild() { return this.refNamCashier; };
-	
-	public void getUser(String user) { 
-		refNamCashier.setText(user);
-	};
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		comboBoxQuantite(); // BOUCLE CHOIX DU NOMBRE DE PRODUIT QUE LE VEUX
 		viderLesCambre();  //VIDE LES CHAMPS AVANT D'AJOUT
 		dateDuJourMethode(); // AFFICHE DATE AUTOMATIQUE
-		
+		//................................................
+//		refNamCashier.setText("Bienvenue "+StaticInfo.USERNAME);  // RECUPERATION NOM LOGIN
+		affichLogin(); // RECUPERATION NOM LOGIN
 		//------------------------------------------------
 		valideCombox(); 			// VERIFICATION CHIFFRE
 		validPrixUnitMtd();			// VERIFICATION CHIFFRE
@@ -106,8 +103,30 @@ public class FactureController implements Initializable{
 // ---------------------------------------------------
 //----------------------------------------------------
 	
-	public void adf() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
+	//====================================================
+	public void affichLogin() {
+			
+			Connection connexion = ConnectionDB.maConnection();
+			String sqll = "SELECT prenom, nom FROM Utilisateur WHERE telephone =" +StaticInfo.USERNAME +" OR login = "+ StaticInfo.USERNAME + " ";
+			
+				PreparedStatement pst;
+				try {
+					pst = (PreparedStatement) connexion.prepareStatement(sqll);
+					ResultSet rs = pst.executeQuery();
+					if(rs.next()) {
+						refNamCashier.setText( rs.getString(1) +" "+ rs.getString(2));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+					
+		}
+	//====================================================
+		
+	
+	public void retourMenu() throws IOException {
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
+		rootPane.getChildren().removeAll();
 		rootPane.getChildren().setAll(pane);
 
 		dateDuJourMethode(); // DATE AUTOMATIQUE
@@ -262,10 +281,7 @@ public class FactureController implements Initializable{
 	}
 	
 }*/
-	//------------------------------// RECUPERER USER CONNECTER
-	public void myFunction(String userConnect) {
-		refNamCashier.setText(userConnect);
-	}
+	
 	//--------------------------------- VERIFICATION CHAMPS VIDE
 	
 	public void verifivationChampVide() {
