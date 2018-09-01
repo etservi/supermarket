@@ -64,6 +64,7 @@ public class AccueilController implements Initializable{
 	@FXML
 	private void nouveauClient() throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Facture.fxml"));
+		rootAccueil.getChildren().removeAll();
 		rootAccueil.getChildren().setAll(pane);
 
 	}
@@ -87,6 +88,7 @@ public class AccueilController implements Initializable{
 	@FXML
 	private void gestionArticle() throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
+		rootAccueil.getChildren().removeAll();
 		rootAccueil.getChildren().setAll(pane);
 
 	}
@@ -96,6 +98,7 @@ public class AccueilController implements Initializable{
 	@FXML
 	private void statistique() throws IOException {
 		Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
+		rootAccueil.getChildren().removeAll();
 		rootAccueil.getChildren().setAll(pane);
 
 	}

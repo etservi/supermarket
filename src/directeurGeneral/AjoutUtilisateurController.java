@@ -27,7 +27,6 @@ import java.util.regex.Pattern;
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
-import javaBeansClass.Fournisseur;
 import javaBeansClass.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -78,8 +77,7 @@ public class AjoutUtilisateurController implements Initializable{
 	@FXML private TableColumn<Utilisateur, String> colonneId;
 	ObservableList<Utilisateur> UtilisateurList = FXCollections.observableArrayList();
 	
-	@FXML private CheckBox CaissierChechbox,AdminChechbox,RespoStokChechbox  ;
-	ObservableList<String> listUserChechbox = FXCollections.observableArrayList();
+	
 
 	
 	@FXML Label LabTof;
@@ -90,12 +88,17 @@ public class AjoutUtilisateurController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ActualiserDonneesFournisseurTableau();	
+		
+		ActualiserDonneesFournisseurTableau();
 		tableViewUtilisateur.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
-		genereRandom(); // METHODE RANDON GENERE ID IRTICLE
+		//---------------------------------------------------------------------------------
+		try {
+			genereRandom(); // METHODE RANDON GENERE ID IRTICLE S'IL N'EXISTE PAS DANS LA BASE DE DONNEES
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		//------------------------------------------------------------------
 		ControlChiffPhone(); // CONTROLE DE SAISIT NUMERO TELEPHONE
-		
 		
 		
 		
@@ -105,9 +108,24 @@ public class AjoutUtilisateurController implements Initializable{
 	//////////////////////////////////////////////////
 	
 	
-	public String genereRandom() {	
+	public String genereRandom() throws SQLException {	
+		
+		Connection con = ConnectionDB.maConnection();
+		
+		String sqlCheck = "SELECT login from Utilisateur";
+		PreparedStatement pst = (PreparedStatement) con.prepareStatement(sqlCheck);
+		
+		String log = null;
+		
+		ResultSet rs = pst.executeQuery();
+		
+		if(rs.next()) {
+			log = rs.getString("login");
+		}
+		//---------------------------
 		
 		final Random RANDOM = new SecureRandom();
+		
 //		String letters = "abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789+@";
 		String letters = "0123456789";
 		String pw = "";
@@ -117,9 +135,16 @@ public class AjoutUtilisateurController implements Initializable{
 	    	  int index = (int)(RANDOM.nextDouble()*letters.length());
 	          pw += letters.substring(index, index+1);     
 	      }
-	      
-	      refeLoginUSer.setText(""+ pw);
+	      //...........................
+	      if(log != pw) {
+	    	  refeLoginUSer.setText(""+ pw);  
+	      } else {
+	    	  refeLoginUSer.setText("");
+	      }
 		return pw;
+	      
+	       
+		
 }
 	 
 	
@@ -215,17 +240,17 @@ public class AjoutUtilisateurController implements Initializable{
 			UtilisateurList.clear(); // EFFACE REPERTION DONNEES TABLEAU
 			Connection connexion = ConnectionDB.maConnection();
 			
-			String requetteIni = "SELECT login, prenom FROM Utilisateur"; 
+			String requetteIni = "SELECT prenom, nom FROM Utilisateur"; 
 			
 			try {
 				PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(requetteIni);
 				ResultSet rs = pst.executeQuery();
 				while (rs.next()) {
-					UtilisateurList.addAll(new Utilisateur(rs.getInt(1), rs.getString(2) ));
+					UtilisateurList.addAll(new Utilisateur(rs.getString(1), rs.getString(2) ));
 				}
 				tableViewUtilisateur.setItems(UtilisateurList);
-				colonneId.setCellValueFactory(new PropertyValueFactory<>("id"));
-				colonnePrenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+				colonneId.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+				colonnePrenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
 				
 				
 			} catch (Exception exActualiserDonneesFournisseurTableau) {
@@ -309,6 +334,7 @@ public class AjoutUtilisateurController implements Initializable{
 		}
 		//----------------------------------------------------------------------------------
 		//--------------------------------------------------------------------------------	
+/*		
 			// APPEERSU D'UNE LIGNE SUR LE TABLEAU UNE FOIS CLIQUER
 			public void AfficheTableViewChampsAjoutUtilsateur(ActionEvent event) {
 				
@@ -340,39 +366,53 @@ public class AjoutUtilisateurController implements Initializable{
 				
 				
 			}
+			*/
 //---------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------
-			// CONTROLE CHECKBOX CQISSIER
-			@FXML 
-			public void checkBoxCaissier() {
-				if(CaissierChechbox.isSelected()) {
-					AdminChechbox.setSelected(false);
-					RespoStokChechbox.setSelected(false);
-					listUserChechbox.add(CaissierChechbox.getText());
-				}
-			}
 			
-			// CONTROLE CHECKBOX CQISSIER
-			@FXML 
-			public void checkBoxAdmin() {
-				if(AdminChechbox.isSelected()) {
-					CaissierChechbox.setSelected(false);
-					RespoStokChechbox.setSelected(false);
-					listUserChechbox.add(AdminChechbox.getText());
-					
-				}
-			}
+			@FXML private CheckBox CaissierChechbox,AdminChechbox,RespoStokChechbox  ;
+			ObservableList<String> listUserChechbox = FXCollections.observableArrayList();
 			
+			String p ;
 			// CONTROLE CHECKBOX CQISSIER
-			@FXML 
-			public void checkBoxResponsableStock() {
-				if(RespoStokChechbox.isSelected()) {
-					CaissierChechbox.setSelected(false);
-					AdminChechbox.setSelected(false);
-					listUserChechbox.add(RespoStokChechbox.getText());
-				}
-			}		
-			
+						@FXML 
+						public void checkBoxCaissier() {
+							if(CaissierChechbox.isSelected()) {
+								AdminChechbox.setSelected(false);
+								RespoStokChechbox.setSelected(false);
+//								listUserChechbox.add(CaissierChechbox.getText());
+								
+								p = String.valueOf(CaissierChechbox.isSelected());
+								System.out.println(p);
+							}
+						}
+						
+						// CONTROLE CHECKBOX CQISSIER
+						@FXML 
+						public void checkBoxAdmin() {
+							if(AdminChechbox.isSelected()) {
+								CaissierChechbox.setSelected(false);
+								RespoStokChechbox.setSelected(false);
+//								listUserChechbox.add(AdminChechbox.getText());
+								
+								p = String.valueOf(AdminChechbox.isSelected());
+								System.out.println(p);
+							}
+						}
+						
+						// CONTROLE CHECKBOX CQISSIER
+						@FXML 
+						public void checkBoxResponsableStock() {
+							if(RespoStokChechbox.isSelected()) {
+								CaissierChechbox.setSelected(false);
+								AdminChechbox.setSelected(false);
+//								listUserChechbox.add(RespoStokChechbox.getText());
+								
+								p = String.valueOf(RespoStokChechbox.isSelected());
+								
+								System.out.println(p);
+							}
+						}		
 //======================================================================
 			
 			public void checkBoxVerificationSiSectected() {
@@ -408,19 +448,22 @@ public class AjoutUtilisateurController implements Initializable{
 		public void retourMnu() throws IOException {  // UTILISATEUR RETOUR MENU - CLIIQUE SUR LA PHOTO
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 		utilisateurPane.getChildren().setAll(pane);
-		}			
+		}		
+		
+		
 		// ----------------------------------------------------------------------------------	
 		//-----------------------------------------------------------------------------------
 		@FXML
 		public void UploadImage() throws IOException {  
 			
+			
 			FileChooser fileChooser = new FileChooser();
-			File file = fileChooser.showOpenDialog(primaryStage);
+			file = fileChooser.showOpenDialog(primaryStage);
 			if(file != null) {
 				LabTof.setText(file.getAbsolutePath());
 				Image imgae = new Image(file.toURI().toString(), 100, 150, true, true);
 				
-				ImageView imageView = new ImageView(imgae);
+			    ImageView imageView = new ImageView(imgae);
 				imageView.setFitWidth(140);
 				imageView.setFitHeight(190);
 				imageView.setPreserveRatio(true);
@@ -430,51 +473,7 @@ public class AjoutUtilisateurController implements Initializable{
 		}			
 // ==================================================================================================================================
 // ==================================================================================================================================
-/*			
-//		FileChooser fileChooser = new FileChooser();
-//		File file = fileChooser.showOpenDialog(primaryStage);
-		//-----------
-		public void ajouterUtilsateur() throws FileNotFoundException, SQLException {
-			Connection connexion = ConnectionDB.maConnection();
-			
-			
-			try {
-			String rekett = " INSERT into Utilisateur(id, nom, prenom, adresse, telephone, login, password, email, image, date, role ) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
-			
-			Utilisateur ut = new Utilisateur();
-			
-			pst.setInt(1, ut.getId());
-			pst.setString(2, refNom.getText());
-			pst.setString(3, refPrenom.getText());
-			pst.setString(4, refAdress.getText());
-			pst.setString(5, refTelephone.getText());
-			pst.setString(6, refeLoginUSer.getText());
-			pst.setString(7, refpassword.getText());
-			pst.setString(8, refEmail.getText());
-			
-			// IMAGE USING
-			
-			fis = new FileInputStream(file);
-			
-			pst.setBinaryStream(9, (InputStream)fis, (int)file.length());  // PONITER SUR LA CELLULE IMAGE
-//			pst.setString(10, reportDate );
-			pst.setString(11, listUserChechbox.toString());  //CHECKBOX - FICHIER METHODE HANDL, HEADER, CELLE LA
-			
-			 if(pst.executeUpdate()!=1){
-			 System.out.println("Insertion Utilisateur Reussi");
-			 }
-				
-			 pst.close();
-			 connexion.close(); 
-			} catch(SQLException ex) {
-				ex.printStackTrace();
-				System.out.print("impossible de se connecter à la base");
-			}
 
-		}
-		*/
-		
 // ==================================================================================================================================
 // ==================================================================================================================================
 			
@@ -504,17 +503,17 @@ public class AjoutUtilisateurController implements Initializable{
 // ---------------------------------------------------------------------------------------------------------------------------------------	
 //========================================================================================================================================
 //----------------------------------------------------------------------------------------------------------------------------------------
- 
+ /*
 	public void ajouterUtilisateur() throws FileNotFoundException {
 		
 		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // DATE AUTOMATIQUE - DATE, HEURE
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
-	/*//-----------------------------------------------s
+	//-----------------------------------------------s
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(primaryStage);
 		fis = new FileInputStream(file);
-		*/
+		
 		checkBoxVerificationSiSectected(); // METHODE VERIFICATION SI UN DES CHECKBOX EST SELECTIONNE
 	//-----------------------------------------------s
 														// SA RESTE L'INSERTION D'IMAGE
@@ -539,23 +538,71 @@ public class AjoutUtilisateurController implements Initializable{
 			
 			System.out.println("Pas Reussi");
 		}	
-/*
+
 		// IMAGE USING
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(primaryStage);
 		fis = new FileInputStream(file);
 		pst.setBinaryStream(8, (InputStream)fis, (int)file.length());  // PONITER SUR LA CELLULE IMAGE
-*/
+
 		
 
 		
-	}
+	}*/
 		
 // ---------------------------------------------------------------------------------------------------------------------------------------	
 //========================================================================================================================================
 //----------------------------------------------------------------------------------------------------------------------------------------
 		
-	
+	public void addUser() throws SQLException, FileNotFoundException {
+	/*	
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // DATE AUTOMATIQUE - DATE, HEURE
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		
+		
+		*/
+		
+	//// DATE DU JOUR
+		java.util.Date today = new java.util.Date();
+		java.sql.Date dateAutomatique = new java.sql.Date(today.getTime());
+		
+	      Connection con = ConnectionDB.maConnection();
+
+	       PreparedStatement pre = (PreparedStatement) con.prepareStatement("insert into Utilisateur values(?,?,?,?,?,?,?,?,?,?)");
+
+	       pre.setInt(1,32);
+	       pre.setString(2,refNom.getText());
+	       pre.setString(3,refPrenom.getText());
+	       pre.setString(4,refAdress.getText());
+	       pre.setString(5, refTelephone.getText());
+	       pre.setString(6,refeLoginUSer.getText());
+	       pre.setString(7,refpassword.getText());
+	       pre.setString(8,refEmail.getText());
+	       //--------------------------------------------
+	       fis = new FileInputStream(file);
+	       pre.setBinaryStream(9, (InputStream) fis,(int) file.length());
+	       //--------------------------------------------
+//	       pre.setDate(10,dateAutomatique);
+	       pre.setString(10,listUserChechbox.toString());
+	       
+	       
+	       
+	       pre.executeUpdate();
+	       System.out.println("Successfully inserted the file into the database!");
+
+	       pre.close();
+	       con.close(); 
+
+	    //==============================================================================================  
+	       checkBoxVerificationSiSectected(); // METHODE VERIFICATION SI UN DES CHECKBOX EST SELECTIONNE
+		//-----------------------------------------------s
+															// SA RESTE L'INSERTION D'IMAGE
+			
+			
+		
+		
+	}
 		
 		
 		

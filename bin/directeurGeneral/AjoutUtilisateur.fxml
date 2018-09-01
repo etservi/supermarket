@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,26 +49,47 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <TextField fx:id="refNom" layoutX="212.0" layoutY="91.0" prefHeight="25.0" prefWidth="194.0" promptText="Nom" />
-      <TextField fx:id="refPrenom" layoutX="212.0" layoutY="137.0" prefHeight="25.0" prefWidth="194.0" promptText="Prénom" />
-      <TextField fx:id="refAdress" layoutX="212.0" layoutY="182.0" prefHeight="25.0" prefWidth="194.0" promptText="Adresse" />
-      <TextField fx:id="refTelephone" layoutX="212.0" layoutY="232.0" prefHeight="25.0" prefWidth="194.0" promptText="Téléphone" />
-      <TextField fx:id="refeLoginUSer" layoutX="212.0" layoutY="275.0" prefHeight="25.0" prefWidth="194.0" promptText="Login" />
-      <PasswordField fx:id="refpassword" layoutX="212.0" layoutY="321.0" prefHeight="25.0" prefWidth="194.0" promptText="Mot de passe" />
-      <TextField fx:id="refEmail" layoutX="212.0" layoutY="369.0" prefHeight="25.0" prefWidth="194.0" promptText="E-mail" />
+      <JFXTextField fx:id="refNom" layoutX="212.0" layoutY="91.0" prefHeight="25.0" prefWidth="194.0" promptText="Nom">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXTextField>
+      <JFXTextField fx:id="refPrenom" layoutX="212.0" layoutY="137.0" prefHeight="25.0" prefWidth="194.0" promptText="Prénom">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXTextField>
+      <JFXTextField fx:id="refAdress" layoutX="212.0" layoutY="182.0" prefHeight="25.0" prefWidth="194.0" promptText="Adresse">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXTextField>
+      <JFXTextField fx:id="refTelephone" layoutX="212.0" layoutY="232.0" prefHeight="25.0" prefWidth="194.0" promptText="Téléphone">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXTextField>
+      <JFXTextField fx:id="refeLoginUSer" layoutX="212.0" layoutY="275.0" prefHeight="25.0" prefWidth="194.0" promptText="Login">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXTextField>
+      <JFXPasswordField fx:id="refpassword" layoutX="212.0" layoutY="321.0" prefHeight="25.0" prefWidth="194.0" promptText="Mot de passe">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXPasswordField>
+      <JFXTextField fx:id="refEmail" layoutX="212.0" layoutY="369.0" prefHeight="25.0" prefWidth="194.0" promptText="E-mail">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></JFXTextField>
       <CheckBox fx:id="CaissierChechbox" layoutX="472.0" layoutY="145.0" onAction="#checkBoxCaissier" text="Caissier">
          <font>
             <Font size="14.0" />
          </font></CheckBox>
-      <CheckBox fx:id="AdminChechbox" layoutX="472.0" layoutY="175.0" onAction="#checkBoxAdmin" text="Administrateur">
+      <CheckBox fx:id="AdminChechbox" layoutX="472.0" layoutY="175.0" onAction="#checkBoxAdmin" text="Admin général">
          <font>
             <Font size="14.0" />
          </font></CheckBox>
-      <CheckBox fx:id="RespoStokChechbox" layoutX="473.0" layoutY="206.0" onAction="#checkBoxResponsableStock" text="Responsable de stock">
+      <CheckBox fx:id="RespoStokChechbox" layoutX="473.0" layoutY="206.0" onAction="#checkBoxResponsableStock" text="Admin de stocks">
          <font>
             <Font size="14.0" />
          </font></CheckBox>
-      <Button onAction="#resetTextFieldAndCombox" layoutX="309.0" layoutY="440.0" mnemonicParsing="false" text="Effacer" />         
+      <JFXButton layoutX="309.0" layoutY="440.0" mnemonicParsing="false" onAction="#resetTextFieldAndCombox" text="Effacer" />         
 <!--                         editable="false"                      -->
       
                   <Label layoutX="91.0" layoutY="47.0" text="Compte Utilisateur"> 
@@ -84,17 +106,17 @@
             <Image url="@../images/new-user.png" />
          </image>
       </ImageView>
-      <Button layoutX="410.0" layoutY="440.0" mnemonicParsing="false" onAction="#ajouterUtilisateur" text="Enregistrer" />
-      <TableView fx:id="tableViewUtilisateur" layoutX="706.0" layoutY="50.0" prefHeight="422.0" prefWidth="194.0">
+      <JFXButton layoutX="410.0" layoutY="440.0" mnemonicParsing="false" onAction="#addUser" text="Enregistrer" />
+      <TableView fx:id="tableViewUtilisateur" layoutX="667.0" layoutY="50.0" prefHeight="422.0" prefWidth="233.0">
         <columns>
-          <TableColumn fx:id="colonneId" prefWidth="86.0" text="Login" />
-          <TableColumn fx:id="colonnePrenom" prefWidth="101.0" text="Nom" />
+          <TableColumn fx:id="colonneId" prefWidth="130.0" text="Login" />
+          <TableColumn fx:id="colonnePrenom" prefWidth="102.0" text="Nom" />
         </columns>
       </TableView>
       <Separator layoutX="655.0" layoutY="111.0" orientation="VERTICAL" prefHeight="271.0" prefWidth="0.0" />
-      <Button layoutX="538.0" layoutY="440.0" mnemonicParsing="false" onAction="#modiferUytilisateur" text="Modifier" />
+      <JFXButton layoutX="538.0" layoutY="440.0" mnemonicParsing="false" onAction="#modiferUytilisateur" text="Modifier" />
       <Separator layoutX="92.0" layoutY="72.0" prefWidth="200.0" />
-      <Separator layoutX="166.0" layoutY="432.0" prefHeight="3.0" prefWidth="515.0" />
+      <Separator layoutX="166.0" layoutY="432.0" prefHeight="3.0" prefWidth="486.0" />
       <Label fx:id="LabTof" layoutX="89.0" layoutY="407.0" prefHeight="16.0" prefWidth="608.0" />
       <BorderPane fx:id="borderPanee" layoutX="473.0" layoutY="231.0" prefHeight="175.0" prefWidth="166.0" />
       <Hyperlink layoutX="58.0" layoutY="453.0" onAction="#retourMnu" text="retour">
@@ -102,5 +124,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Hyperlink>
+<!--       <JFXButton layoutX="182.0" layoutY="440.0" onAction="" text="TestAffich" /> -->
+<!--       <JFXPasswordField layoutX="354.0" layoutY="402.0" /> -->
+<!--       <JFXTextField layoutX="358.0" layoutY="59.0" /> -->
    </children>
 </AnchorPane>

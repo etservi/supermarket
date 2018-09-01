@@ -42,34 +42,22 @@ public class LoginController implements Initializable{
 		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
 		
 	}
-	
-	@FXML
-	private void logRecup (ActionEvent even) {
-		
-		try {
-			
-//			Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Facture.fxml"));
-//			paneLogin.getChildren().removeAll();
-//			paneLogin.getChildren().setAll(fxml);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 // -------------------------------------------- s
 //	-------------------------------------------	s
 	
 		// REDIRECTION SUR ACCUEIL ! CAISSIER / DIRECTEUR / RESPONSABLE DE STOCKS
 		@FXML
 		private void validerConnexion(ActionEvent event) throws IOException {
-			String errorMessage = "";
+//			String errorMessage = "";
 			
 			if( !(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) ){
 				
 			try {
 				
 				Connection connexion = ConnectionDB.maConnection();
-				String sql = "SELECT * from Utilisateur WHERE (login=? || telephone=?) AND password=?";
-
+				String sql = "SELECT * from Utilisateur WHERE (login =? || telephone =?) AND password =?";
+				
 				PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
 				pst.setString(1, loginnfild.getText().trim());
 				pst.setString(2, loginnfild.getText().trim());
@@ -89,20 +77,20 @@ public class LoginController implements Initializable{
 //					// ------------------------------------
 					logRole = rs.getString("role");
 					//-------------------------------------
-					if (logRole.equalsIgnoreCase("[Administrateur]")) {
+					if (logRole.equalsIgnoreCase("Administrateur")) {
 						
 						Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(fxml);
 					
-					} else if (logRole.equalsIgnoreCase("[Responsable de stock]")) {
+					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 					
 						
-					} else if (logRole.equalsIgnoreCase("[Responsable commercial]")) {
+					} else if (logRole.equalsIgnoreCase("Responsable commercial")) {
 //						
 						Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();
@@ -126,7 +114,7 @@ public class LoginController implements Initializable{
 		            Alert alert = new Alert(AlertType.ERROR);
 		            alert.setTitle("Utilisateur n'existe pas!!");
 		            alert.setHeaderText("Utilisateur incorrect");
-		            alert.setContentText(errorMessage);
+//		            alert.setContentText(errorMessage);
 		            
 		            alert.showAndWait();
 				} 

@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -21,7 +20,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
-import javaBeansClass.Fournisseur;
 import javafx.beans.binding.BooleanExpression;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,8 +37,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import login.LoginController;
 import login.StaticInfo;
 
 public class FactureController implements Initializable{
@@ -99,6 +95,11 @@ public class FactureController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//-----------------------------------------------
+		refPrixTotal.setText("0.0 F CFA");
+		montantverser.setText("0.0 F CFA");
+		montantReduu.setText("0.0 F CFA");
+//		prixUnitairee.setText("0.0 F CFA");
 	}
 // ---------------------------------------------------
 //----------------------------------------------------
@@ -176,8 +177,8 @@ public class FactureController implements Initializable{
 		   System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
 		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
-		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idProduit") );
-			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomProduit") );
+		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idArticle") );
+			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomArticleNom") );
 			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( "qteStock" ));
 			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( "prixUnitaire" ) );
 			//-----------------------------------------------------------------------------------------------------------------------
@@ -387,14 +388,14 @@ public class FactureController implements Initializable{
 		// COMPLETER LES MOTS QUAND ON COMEMECE A ECRIRE UN MOT QUI EXISTE DANS LA BASE DE DONNEE
 		public void autoCopleteWords() throws SQLException {
 			Connection connexion = ConnectionDB.maConnection();
-			String rekett = "SELECT nomProduit FROM Article "; 
+			String rekett = "SELECT nomArticleNom FROM Article "; 
 			
 			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
 			ResultSet rs = pst.executeQuery();
 			
 			String artclMam = null;
 			while (rs.next()) {
-				artclMam = rs.getString("nomProduit");
+				artclMam = rs.getString("nomArticleNom");
 				TextFields.bindAutoCompletion(nomArticle, artclMam);  // AUTOCOMPLETE WORDS
 			}
 		}

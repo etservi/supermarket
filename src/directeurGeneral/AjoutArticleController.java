@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXTextField;
+
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.DomaineCategorie;
 import javaBeansClass.Fournisseur;
@@ -19,10 +21,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import login.StaticInfo;
 
 public class AjoutArticleController implements Initializable {
 	
@@ -32,13 +38,42 @@ public class AjoutArticleController implements Initializable {
 	@FXML Button ajoutRy;
 	@FXML Button AjtCAt;
 	@FXML Button AjtFrnsseur;
+	
+	@FXML private Label nomUser;
+	
+	@FXML private TextField tdCodeBarre, tfNomArticl;
+    @FXML private TextField tfQt;
+    @FXML private TextField tfPrixUnitaire;
+    @FXML private TextField tfPrixDeVente;
+
 	//-----------------------------------------------------
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		affichLogin();
 	}
 	
 	//--------------------------------------------------------------------------
+	
+public void affichLogin() {
+		
+		Connection connexion = ConnectionDB.maConnection();
+		String sqll = "SELECT prenom, nom FROM Utilisateur WHERE telephone =" +StaticInfo.USERNAME +" OR login = "+ StaticInfo.USERNAME + " ";
+		
+			PreparedStatement pst;
+			try {
+				pst = (PreparedStatement) connexion.prepareStatement(sqll);
+				ResultSet rs = pst.executeQuery();
+				if(rs.next()) {
+					nomUser.setText( rs.getString(1) +" "+ rs.getString(2) + ", Veuillez ajouter des artciles " );
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+				
+	}
+	
+	
+	//-----------------------------------------------------------------
 	@FXML ComboBox<String> comboRaisonSociale;
 	final ObservableList<String> optionsComboboxRaisonSociale = FXCollections.observableArrayList();
 	
@@ -93,7 +128,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	public void comboBoxCategorie() {
 		try {
 			Connection connexion = ConnectionDB.maConnection();
-			String sql = "SELECT DISTINCT idCategoriee FROM DomaineCategorie";
+			String sql = "SELECT DISTINCT idCategoriee FROM Categorie";
 
 			java.sql.Statement statement = connexion.createStatement();
 			ResultSet rs = statement.executeQuery(sql);
@@ -152,6 +187,44 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 			}
 	//----------------------------------------------------------------------------------
 	//----------------------------------------------------------------------------------
-	
+			
+			public void ajouterArticle() throws SQLException {
+				
+				Connection con = ConnectionDB.maConnection();
+				
+				String sqlFirs = "SELECT id FROM Utilisateur WHERE telephone =" + StaticInfo.USERNAME +" OR login = "+ StaticInfo.USERNAME + " ";
+				
+				PreparedStatement pst = con.prepareStatement(sqlFirs);
+				ResultSet rs = pst.executeQuery();
+				
+				Integer idInsert = null;
+				
+				if(rs.next()) {
+					idInsert = rs.getInt("id");
+				}
+				
 
+				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixTotal,nonLivrer  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', 1)";
+				
+				int statut;
+				try {
+					statut = con.createStatement().executeUpdate(sqlAjoutArticle);
+					
+					if (statut != 0) {
+						
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						alert.setTitle("Article ajouté");
+						alert.setHeaderText(tfNomArticl.getText() + " a été bien ajouté");
+						alert.showAndWait();
+					} else {
+						System.out.println("NOPE");
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+			}
+			
+	//-----------------------------------------------------------------------------------
+			
 }

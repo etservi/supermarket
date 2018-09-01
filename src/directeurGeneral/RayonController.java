@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import baseDeDonnées.ConnectionDB;
-import javaBeansClass.Fournisseur;
 import javaBeansClass.Rayon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,6 +27,8 @@ public class RayonController implements Initializable{
 	
 	@FXML private TableColumn<Rayon, String> colonneIdRayon;
 	@FXML private TableColumn<Rayon, String> colonneDomaine;
+	
+	
 	
 	ObservableList<Rayon> fournisseurList = FXCollections.observableArrayList();
 

@@ -15,3 +15,14 @@
     -fx-scale-z: 1.1;
     -fx-font-weight: bold;
 }
+
+.combo-box .arrow-button .arrow {
+	 -fx-background-color: transparent; 
+	 -fx-opacity: 0.0;	
+}
+
+.combo-box .arrow-button{
+	-fx-background-position: center;
+	-fx-background-repeat: no-repeat;
+    -fx-background-image: url("/images/lock.png");
+}

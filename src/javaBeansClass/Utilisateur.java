@@ -19,14 +19,24 @@ public class Utilisateur {
 	public Utilisateur() {
 		
 	}
-
-	public Utilisateur(int id, String prenom) {
-		this.id = id;
+// CONSTRUCTEUR TABLEAU - AJOUTER UTILISATEUR
+	public Utilisateur(String prenom, String nom ) {
 		this.prenom = prenom;
+		this.nom = nom;
 	}
-
+	
+	
+// CONSTRUCTEUR VOIR LISTE UTILISATEUR - PARAMETRE 
+	
+	public Utilisateur(String nom, String prenom, String role, String login) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.role = role;
+		this.login = login;
+	}
+//-------------------------------------------------------------
 	public Utilisateur(int id, String nom, String prenom, String adresse, String telephone, String login,
-			String password, String email, byte[] image, Date date) {
+			String password, String email, byte[] image, Date date, String role) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -37,6 +47,7 @@ public class Utilisateur {
 		this.email = email;
 		this.image = image;
 		this.date = date;
+		this.role = role;
 	}
 
 	public int getId() {

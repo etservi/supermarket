@@ -3,18 +3,18 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/mysql-connector-java-5.1.46-bin.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/Téléchargements/lib/controlsfx-8.40.11/controlsfx-8.40.12.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/itextpdf-5.5.0.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/barcode4j-2.1.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/jfoenix-9.0.5.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/gmail/smtp.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/gmail/mailapi.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/gmail/activation.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/gmail/pop3.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/gmail/imap.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/gmail/dsn.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/zxing-javase.jar"/>
-	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/Gestion commerciale supermarché/Librairies/zxing-core-2.0.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/controlsfx-8.40.12.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/itextpdf-5.5.0.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/barcode4j-2.1.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/jfoenix-9.0.5.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/gmail/smtp.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/gmail/mailapi.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/gmail/activation.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/gmail/pop3.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/gmail/imap.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/gmail/dsn.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/zxing-javase.jar"/>
+	<classpathentry kind="lib" path="/home/gaye/eclipse-workspace/supMarket/Librairies/zxing-core-2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

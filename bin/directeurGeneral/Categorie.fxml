@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -20,9 +20,9 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <TextField fx:id="tfIdCategorie" layoutX="145.0" layoutY="165.0" prefHeight="26.0" prefWidth="194.0" promptText="id Catégorie" />
-      <TextField fx:id="TextFieldDomaine" layoutX="145.0" layoutY="297.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
-      <ComboBox fx:id="comboxRayncat" layoutX="145.0" layoutY="232.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="id Rayon" />
+      <JFXTextField fx:id="tfIdCategorie" focusColor="#f50101" layoutX="145.0" layoutY="165.0" prefHeight="26.0" prefWidth="194.0" promptText="id Catégorie" />
+      <JFXTextField fx:id="TextFieldDomaine" focusColor="#f80101" layoutX="145.0" layoutY="297.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
+      <JFXComboBox fx:id="comboxRayncat" focusColor="#f50101" layoutX="145.0" layoutY="232.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="id Rayon" />
       <Label layoutX="31.0" layoutY="302.0" prefHeight="18.0" prefWidth="94.0" text="Libellé">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -35,7 +35,7 @@
          </font>
       </Label>
       <Separator layoutX="53.0" layoutY="433.0" prefHeight="3.0" prefWidth="255.0" />
-      <TextField layoutX="152.0" layoutY="52.0" prefHeight="26.0" prefWidth="172.0" text="recherche" />
+      <JFXTextField focusColor="#f50101" layoutX="152.0" layoutY="52.0" prefHeight="26.0" prefWidth="172.0" text="recherche" />
       <Hyperlink layoutX="47.0" layoutY="404.0" onAction="#ajouterCategorie" text="Enregistrer">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -46,5 +46,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
+<!--       <JFXTextField layoutX="161.0" layoutY="46.0" /> -->
    </children>
 </AnchorPane>

@@ -7,8 +7,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import baseDeDonnées.ConnectionDB;
+import javaBeansClass.Admin;
+import javaBeansClass.Article;
+import javaBeansClass.Rayon;
+import javaBeansClass.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,13 +22,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -31,11 +44,27 @@ public class ParametreController implements Initializable{
 	
 	@FXML private AnchorPane rootPane;
 	
+	@FXML private TableView<Utilisateur> tableViewUtilisateur;
+	
+	@FXML private TableColumn<Utilisateur, String> colonnePrenom;
+	@FXML private TableColumn<Utilisateur, String> colonneNom;
+	@FXML private TableColumn<Utilisateur, String> colonneRole;
+	@FXML private TableColumn<Utilisateur, String> colonneLogin;
+	
+	
 	@FXML private TextField refUtilisateur;
 	@FXML private PasswordField refOldPssd,refNewPssd, refConfPssd;
 
 	@FXML private PieChart pieChart;
 	@FXML Label pourcentz;
+	
+	
+//    @FXML private JFXComboBox<?> comboxCaissier;
+	
+	// BARCHART ======================================
+	@FXML BarChart<Article, String> barrChart;
+	@FXML CategoryAxis x;
+	@FXML NumberAxis y;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -43,6 +72,7 @@ public class ParametreController implements Initializable{
 //		rootPane.getChildren().add(textFd);
 //		AnchorPane.setBottomAnchor(textFd, 20d);
 //		AnchorPane.setLeftAnchor(textFd, 500d);	
+		
 		//---------------------------------------
 		
 		// STATISTIQUE
@@ -51,6 +81,8 @@ public class ParametreController implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//---------------------------------------
+		ActualiserDonneesUtilisateurTableau();
 		
 	}
 	
@@ -60,15 +92,19 @@ public class ParametreController implements Initializable{
 		Connection connexion = ConnectionDB.maConnection();
 	
 			try {
-				String requetteChange = "SELECT * FROM Utilisateur WHERE id= '" + refUtilisateur.getText() + "' AND password= '" + refOldPssd.getText() + "' ";
+				String requetteChange = "SELECT * FROM Utilisateur WHERE login = '" + refUtilisateur.getText( ) + "' || telephone  = '" + refUtilisateur.getText() + "' AND password= '" + refOldPssd.getText() + "' ";
+				System.out.println(requetteChange);
+				
 				PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(requetteChange);
 				ResultSet rs = pst.executeQuery();
 
 				String logDataBase = null;
+				String numPhone = null;
 				String motDePass = null;
 
 				if (rs.next()) {
-					logDataBase = rs.getString("id");
+					logDataBase = rs.getString("login");
+					numPhone = rs.getString("telephone");
 					motDePass = rs.getString("password");
 				}
 
@@ -146,14 +182,14 @@ public class ParametreController implements Initializable{
 	public void articleVendu() throws SQLException {
 		
 		Connection connexion = ConnectionDB.maConnection();
-		String rekett = "SELECT nomProduit, dateVendu FROM Article "; 
+		String rekett = "SELECT nomArticleNom, dateVendu FROM Article "; 
 		
 		PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
 		ResultSet rs = pst.executeQuery();
 		
 		String artclMam = null;
 		while (rs.next()) {
-			artclMam = rs.getString("nomProduit");
+			artclMam = rs.getString("nomArticleNom");
 		}
 		
 		ObservableList<Data> list = FXCollections.observableArrayList(
@@ -179,4 +215,92 @@ public class ParametreController implements Initializable{
 
 	
 	//---------------------------------------------------------
+	
+	
+	//=============================================================
+	//----------------------------------------------------------------------------------
+	// ---------------------------------------------------------------------------------
+	
+	ObservableList<Utilisateur> UtilisateurList = FXCollections.observableArrayList();
+		// ACTUALISER LES DONNEES SUR TABLEAU
+		public void ActualiserDonneesUtilisateurTableau() {
+			UtilisateurList.clear(); // EFFACE REPERTION DONNEES TABLEAU
+			Connection connexion = ConnectionDB.maConnection();
+			
+			String requetteIni = "SELECT nom, prenom, role, login FROM Utilisateur"; 
+			
+			try {
+				PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(requetteIni);
+				ResultSet rs = pst.executeQuery();
+				while (rs.next()) {
+					UtilisateurList.addAll(new Utilisateur(rs.getString(1), rs.getString(2),rs.getString(3), rs.getString(4) ));
+				}
+				tableViewUtilisateur.setItems(UtilisateurList);
+				
+				colonnePrenom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+				colonneNom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+				colonneRole.setCellValueFactory(new PropertyValueFactory<>("role"));
+				colonneLogin.setCellValueFactory(new PropertyValueFactory<>("login"));
+				
+			} catch (Exception exActualiserDonneesFournisseurTableau) {
+				Logger.getLogger(ParametreController.class.getName()).log(Level.SEVERE, null, exActualiserDonneesFournisseurTableau);
+			}
+		}
+
+	//=============================================================
+		@FXML ComboBox<Admin> comboxAdmin;
+		final ObservableList<Admin> optionsComboboxcomboxAdmin = FXCollections.observableArrayList();
+
+		public void comboBoxAdmin() {   // NOM DE LA METHODE
+			
+			try {
+				Connection connexion = ConnectionDB.maConnection();
+				String sql = "SELECT idAdmin FROM Admin";
+
+				PreparedStatement pst = connexion.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+
+				while (rs.next()) {
+					optionsComboboxcomboxAdmin.add(new Admin ( rs.getInt("idAdmin")  ));
+				}
+				comboxAdmin.getItems().addAll(optionsComboboxcomboxAdmin);
+				rs.close();
+				connexion.close();
+			} catch (SQLException er_rs) {
+				er_rs.printStackTrace();
+			}
+		}
+		//================================================================
+		
+		//=============================================================
+				@FXML ComboBox<Integer> comboxCaissier;
+				/*	final ObservableList<Integer> optionsComboboxcomboxCaissier = FXCollections.observableArrayList();
+
+				public void comboBoxCaissier() {   // NOM DE LA METHODE
+					
+					try {
+						Connection connexion = ConnectionDB.maConnection();
+						String sql = "SELECT id FROM Utilisateur";
+
+						PreparedStatement pst = connexion.prepareStatement(sql);
+						ResultSet rs = pst.executeQuery();
+
+						while (rs.next()) {
+							optionsComboboxcomboxCaissier.add(new Rayon  (   rs.getInt(1)).getIdRayon()  );
+						}
+						comboxAdmin.getItems().addAll(optionsComboboxcomboxCaissier);
+						rs.close();
+						connexion.close();
+					} catch (SQLException er_rs) {
+						er_rs.printStackTrace();
+					}
+				}*/
+				//================================================================
+		
+		
+		
+		
+		
+		
+		
 }

@@ -86,7 +86,7 @@ public class AjoutFournisseurController implements Initializable{
 	@FXML private TextField TextFieldCourriel;
 	@FXML private Label duJour;
 	
-	 ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
+	 
 	 
 	 
 	@FXML private TextField recherch;
@@ -141,6 +141,9 @@ public class AjoutFournisseurController implements Initializable{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		//========================
+		
 }
 //---------------------------------------------------------------------------------	
 //---------------------------------------------------------------------------------
@@ -909,11 +912,12 @@ private boolean validerEmail() {
 	//------------------------------------------------------------///////////////////////////////////
 	
 //	ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
+	ObservableList<Fournisseur> masterData = FXCollections.observableArrayList();
 	
 	@FXML
     private void rechercheFournisseur(KeyEvent ke) {
         
-        FilteredList<Fournisseur> filterData = new FilteredList<>(masterData, p -> true);
+        FilteredList<Fournisseur> filterData = new FilteredList<>(masterData,p->true);
         recherch.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
             filterData.setPredicate(e -> {
 
@@ -928,7 +932,7 @@ private boolean validerEmail() {
 
                     return true;
                 }
-                if (e.getAdresse().toLowerCase().indexOf(typedText) != -1) {
+                if (e.getAdresse().toLowerCase().indexOf(typedText) != -1) { 
                     return true;
                 }
 

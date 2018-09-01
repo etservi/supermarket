@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class Article {
 
-	private int idProduit;
+	private int idArticle;
 	private int idRayon;
-	private int idCategorie;
+	private int idCategoriee;
 	private String raisonSociale;
 	private int id;
-	private String nomProduit;
+	private String nomArticleNom;
 	private int qteStock;
 	private int nombreArticle;
 	private double prixUnitaire;
@@ -20,26 +20,47 @@ public class Article {
 	private Date dateAjoutee;
 	private Date dateVendu;
 	private int limteAlert;
-	private double prixTotal;
+	private double prixAvendre;
 
 	public Article() {
 		super();
 	}
 
-	public Article(int idProduit, String nomProduit, int qteStock, double prixUnitaire) {
-		this.idProduit = idProduit;
-		this.nomProduit = nomProduit;
+	public Article(int idArticle, String nomArticleNom, int qteStock, double prixUnitaire) {
+		this.idArticle = idArticle;
+		this.nomArticleNom = nomArticleNom;
 		this.qteStock = qteStock;
 		this.prixUnitaire = prixUnitaire;
 
 	}
+	
+	//-------- Article Details Constructor
+//	nomArticleNom`, `idRayon`, `idCategoriee`, `raisonSociale`, `codeBarre`, qteStock, prixUnitaire,prixTotal
+	
+	public Article(String nomArticleNom, int idRayon, int idCategoriee, String raisonSociale, String codeBarre,  int qteStock,
+			double prixUnitaire, double prixAvendre) {
+		super();
+		this.nomArticleNom = nomArticleNom;
+		this.idRayon = idRayon;
+		this.idCategoriee = idCategoriee;
+		this.raisonSociale = raisonSociale;
+		this.codeBarre = codeBarre;
+		this.qteStock = qteStock;
+		this.prixUnitaire = prixUnitaire;
+		this.prixAvendre = prixAvendre;
+		
+	}
+	
+	//-------------------------------------------
 
-	public int getIdProduit() {
-		return idProduit;
+	public int getIdArticle() {
+		return idArticle;
 	}
 
-	public void setIdProduit(int idProduit) {
-		this.idProduit = idProduit;
+	
+
+	public void setIdArticle(int idArticle) {
+		this.idArticle = idArticle;
 	}
 
 	public int getIdRayon() {
@@ -50,12 +71,12 @@ public class Article {
 		this.idRayon = idRayon;
 	}
 
-	public int getIdCategorie() {
-		return idCategorie;
+	public int getIdCategoriee() {
+		return idCategoriee;
 	}
 
-	public void setIdCategorie(int idCategorie) {
-		this.idCategorie = idCategorie;
+	public void setIdCategoriee(int idCategoriee) {
+		this.idCategoriee = idCategoriee;
 	}
 
 	public String getRaisonSociale() {
@@ -74,12 +95,12 @@ public class Article {
 		this.id = id;
 	}
 
-	public String getNomProduit() {
-		return nomProduit;
+	public String getNomArticleNom() {
+		return nomArticleNom;
 	}
 
-	public void setNomProduit(String nomProduit) {
-		this.nomProduit = nomProduit;
+	public void setNomArticleNom(String nomArticleNom) {
+		this.nomArticleNom = nomArticleNom;
 	}
 
 	public int getQteStock() {
@@ -162,12 +183,12 @@ public class Article {
 		this.limteAlert = limteAlert;
 	}
 
-	public double getPrixTotal() {
-		return prixTotal;
+	public double getPrixAvendre() {
+		return prixAvendre;
 	}
 
-	public void setPrixTotal(double prixTotal) {
-		this.prixTotal = prixTotal;
+	public void setPrixAvendre(double prixAvendre) {
+		this.prixAvendre = prixAvendre;
 	}
 
 	public void sortie() {

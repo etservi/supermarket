@@ -47,7 +47,7 @@ public class StatistiqueController implements Initializable {
 		ObservableList<PieChart.Data> details = FXCollections.observableArrayList();
 		
 		Connection connexion = ConnectionDB.maConnection();
-		String sql = "SELECT nomProduit,  qteStock FROM Article ";
+		String sql = "SELECT nomArticleNom,  qteStock FROM Article ";
 		
 		PreparedStatement pst =  (PreparedStatement) connexion.prepareStatement(sql);
 		ResultSet rs = pst.executeQuery();

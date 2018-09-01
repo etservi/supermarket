@@ -34,23 +34,11 @@
                       <Menu mnemonicParsing="false" text="Gérer les Stocks">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#ajouterArticle" text="Ajouter Article" />
-                        <MenuItem mnemonicParsing="false" text="Voire Details Articles" />
+                        <MenuItem mnemonicParsing="false" onAction="#voireDetailsStocks" text="Voire Details Articles" />
                         <MenuItem mnemonicParsing="false" text="Details Articles par date" />
                         <MenuItem mnemonicParsing="false" text="Mise à jourt Stock" />
                         <SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Seuil Alert Stock" />
-                        	 <Menu mnemonicParsing="false" text="Catégorie">
-                        	 	<items>
-                        			<MenuItem mnemonicParsing="false" onAction="#ouvrirCategorie" text="Ajouter Catégorie" />
-                        			<MenuItem mnemonicParsing="false" text="Liste de Catégorie" />
-                        		</items>
-                        	 </Menu>
-                       		 <Menu mnemonicParsing="false" text="Rayon">
-                        	 	<items>
-                        			<MenuItem mnemonicParsing="false" onAction="#ouvrirRayon" text="Ajouter Rayon" />
-                        			<MenuItem mnemonicParsing="false" text="Liste de Rayon" />
-                        		</items>
-                        	 </Menu>
                      </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Gérer les Fournisseurs">
@@ -153,11 +141,32 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Label fx:id="affichUser" layoutX="82.0" layoutY="212.0" textFill="#a47753">
+                  <Label fx:id="affichUser" layoutX="82.0" layoutY="230.0" textFill="#a47753">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
+                  <Hyperlink layoutX="82.0" layoutY="160.0" onAction="#ouvrirCategorie" text="Ajouter Catégorie" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="253.0" layoutY="160.0" onAction="#ouvrirRayon" text="Ajouter Rayon" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="400.0" layoutY="160.0" text="Liste Catégorie" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="553.0" layoutY="160.0" text="Liste Rayon" textFill="#f80101">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
+                  <Separator layoutX="86.0" layoutY="187.0" prefHeight="0.0" prefWidth="566.0" />
                </children>
              </AnchorPane>
          </center>  

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
@@ -13,10 +18,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.ParametreController">
    <children>
@@ -27,27 +34,21 @@
                   <Rectangle arcHeight="800.0" arcWidth="5.0" fill="DODGERBLUE" height="46.0" layoutY="21.0" stroke="#9a714c" strokeType="INSIDE" width="902.0" />
                   <TabPane layoutY="31.0" prefHeight="493.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="COMPTE">
+                      <Tab text="UTILISATEUR">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="800.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="377.0" layoutX="31.0" layoutY="31.0" stroke="#9a714c" strokeType="INSIDE" width="713.0" />
-                                    <TableView layoutX="50.0" layoutY="81.0" prefHeight="261.0" prefWidth="678.0">
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="377.0" layoutX="31.0" layoutY="31.0" opacity="0.79" stroke="#9a714c" strokeType="INSIDE" width="713.0" />
+                                    <TableView fx:id="tableViewUtilisateur" layoutX="50.0" layoutY="81.0" prefHeight="261.0" prefWidth="678.0">
                                       <columns>
-                                        <TableColumn prefWidth="78.0" text="ID" />
-                                        <TableColumn prefWidth="107.0" text="NOM" />
-                                          <TableColumn prefWidth="115.0" text="PRENOM" />
-                                          <TableColumn prefWidth="160.0" text="Type de compte" />
-                                          <TableColumn prefWidth="96.0" text="Login" />
-                                          <TableColumn prefWidth="96.0" text="Mot de passe" />
+                                        <TableColumn fx:id="colonneNom" prefWidth="107.0" text="NOM" />
+                                          <TableColumn fx:id="colonnePrenom" prefWidth="115.0" text="PRENOM" />
+                                          <TableColumn fx:id="colonneRole" prefWidth="221.0" text="Type de compte" />
+                                          <TableColumn fx:id="colonneLogin" prefWidth="234.0" text="Login" />
                                       </columns>
                                     </TableView>
-                                    <TextField layoutX="475.0" layoutY="47.0" promptText="recherche" />
                                     <RadioButton layoutX="58.0" layoutY="364.0" mnemonicParsing="false" text="Bloquer" />
                                     <RadioButton layoutX="149.0" layoutY="364.0" mnemonicParsing="false" text="Débloquer" />
-                                    <Button layoutX="379.0" layoutY="360.0" mnemonicParsing="false" text="Ajouter" />
-                                    <Button layoutX="463.0" layoutY="360.0" mnemonicParsing="false" text="Modifier" />
-                                    <Button layoutX="552.0" layoutY="360.0" mnemonicParsing="false" text="Supprimer" />
                                     <Button layoutX="50.0" layoutY="47.0" mnemonicParsing="false" text="VALIDER" />
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a47753" height="29.0" layoutX="649.0" layoutY="360.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" width="78.0" />
                                     <Hyperlink layoutX="655.0" layoutY="361.0" onAction="#retourAuMenu" text="Menu">
@@ -55,6 +56,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Hyperlink>
+<!--                                     <JFXTextField focusColor="#f80505" layoutX="572.0" layoutY="45.0" promptText=" recherche" /> -->
                                  </children></AnchorPane>
                         </content>
                       </Tab>
@@ -84,14 +86,45 @@
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                            </content>
                         </Tab>
-                        <Tab text="RAYONS">
+                        <Tab text="ADMIN">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="302.0" layoutX="59.0" layoutY="55.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" width="580.0" />
+                                    <ComboBox fx:id="comboxAdmin" layoutX="295.0" layoutY="183.0" prefHeight="26.0" prefWidth="207.0" />
+                                    <Label layoutX="101.0" layoutY="189.0" text="Admin- Utilisateur Id">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Text fill="#fc0505" layoutX="92.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rq : Avant d'ajouter un article, il faut préciser qui a le doit d'ajout et de vendre" />
+                                    <JFXButton layoutX="405.0" layoutY="237.0" text="Valider">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="CATÉGORIES">
+                        <Tab text="CAISSIER">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="340.0" layoutX="33.0" layoutY="53.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" width="611.0" />
+                                    <Text fill="#f50606" layoutX="58.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rq : Avant d'ajouter un article, il faut préciser qui a le doit de vendre chez les Caissier" />
+                                    <ComboBox fx:id="comboxCaissier" layoutX="260.0" layoutY="177.0" prefHeight="26.0" prefWidth="200.0" />
+                                    <Label layoutX="58.0" layoutY="190.0" text="Caissier - Utilisateur Id">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXButton layoutX="363.0" layoutY="237.0" text="Valider">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                    </JFXButton>
+<!--                                     <ComboBox layoutX="264.0" layoutY="326.0" prefWidth="150.0" /> -->
+                                 </children></AnchorPane>
                            </content>
                         </Tab>
                         <Tab text="Changer Mot de Passe">
@@ -101,10 +134,23 @@
                                     <AnchorPane layoutX="2.0" layoutY="3.0" prefHeight="451.0" prefWidth="794.0">
                                        <children>
                                           <Rectangle arcHeight="800.0" arcWidth="5.0" fill="DODGERBLUE" height="324.0" layoutX="140.0" layoutY="76.0" stroke="#9a714c" strokeType="INSIDE" width="394.0" />
-                                          <TextField fx:id="refUtilisateur" layoutX="333.0" layoutY="150.0" />
-                                          <PasswordField fx:id="refOldPssd" layoutX="333.0" layoutY="187.0" />
-                                          <PasswordField fx:id="refNewPssd" layoutX="333.0" layoutY="221.0" />
-                                          <PasswordField fx:id="refConfPssd" layoutX="333.0" layoutY="255.0" />
+                                          <JFXTextField fx:id="refUtilisateur" focusColor="#f50000" layoutX="333.0" layoutY="150.0">
+                                             <effect>
+                                                <Reflection />
+                                             </effect></JFXTextField>
+                                          <JFXPasswordField fx:id="refOldPssd" focusColor="#f50202" layoutX="333.0" layoutY="187.0">
+                                             <effect>
+                                                <Reflection />
+                                             </effect>
+                                          </JFXPasswordField>
+                                          <JFXPasswordField fx:id="refNewPssd" focusColor="#fc0000" layoutX="333.0" layoutY="221.0">
+                                             <effect>
+                                                <Reflection />
+                                             </effect></JFXPasswordField>
+                                          <JFXPasswordField fx:id="refConfPssd" focusColor="#fc0000" layoutX="333.0" layoutY="255.0">
+                                             <effect>
+                                                <Reflection />
+                                             </effect></JFXPasswordField>
                                           <Label layoutX="161.0" layoutY="155.0" text="ID Utilisateur" />
                                           <Label layoutX="161.0" layoutY="192.0" text="Ancien Mot de passe" />
                                           <Label layoutX="161.0" layoutY="226.0" text="Nouveau Mot de passe" />
@@ -112,8 +158,9 @@
                                           <Separator layoutX="161.0" layoutY="127.0" prefWidth="200.0" />
                                           <Separator layoutX="161.0" layoutY="304.0" prefWidth="200.0" />
                                           <Button layoutX="184.0" layoutY="326.0" mnemonicParsing="false" onAction="#effacerChamps" text="Effacer" />
-                                          <Button layoutX="296.0" layoutY="326.0" mnemonicParsing="false" onAction="#changerPassd" text="ider" />
+                                          <Button layoutX="296.0" layoutY="326.0" mnemonicParsing="false" onAction="#changerPassd" text="Valider" />
                                           <Label layoutX="161.0" layoutY="100.0" text="Changement Mot de passe" />
+<!--                                           <JFXPasswordField layoutX="379.0" layoutY="281.0" /> -->
                                        </children>
                                     </AnchorPane>
                                  </children></AnchorPane>
@@ -130,6 +177,14 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
+                                    <BarChart layoutX="422.0" layoutY="36.0" prefHeight="388.0" prefWidth="448.0" title="Stocks Articles">
+                                      <xAxis>
+                                        <CategoryAxis side="BOTTOM" fx:id="x" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="y" side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
                                  </children></AnchorPane>
                            </content>
                         </Tab>

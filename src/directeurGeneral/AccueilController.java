@@ -109,8 +109,7 @@ public class AccueilController implements Initializable {
 	private void deconnexion() throws IOException {
 		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/login/Login.fxml"));
 		rootPane.getChildren().removeAll();
-		rootPane.getChildren().setAll(fxml);
-		
+		rootPane.getChildren().setAll(fxml);	
 	}
 	//------------------------------------------------------------------------------	
 	// REDIRECTION NOUVEAU CLIENT
@@ -156,7 +155,18 @@ public class AccueilController implements Initializable {
 	}
 		// ----------------------------------------------------------------------------------	
 		//-----------------------------------------------------------------------------------
-		
+		//------------------------------------------------------------------------------
+		// REDIRECTION AJOUTER CATEGORIE
+		@FXML
+		private void voireDetailsStocks() throws IOException {
+			Stage stage = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/DetailsArticleParDate.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root,370,500);
+			scene.getStylesheets().add(getClass().getResource("DetailsArticleParDate.css").toExternalForm());
+			stage.setScene(scene);
+			stage.showAndWait();
+		}
 	
 			// ----------------------------------------------------------------------------------	
 			//-----------------------------------------------------------------------------------

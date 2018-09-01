@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import org.controlsfx.control.textfield.TextFields;
 
@@ -21,7 +20,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
-import javaBeansClass.Fournisseur;
 import javafx.beans.binding.BooleanExpression;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,8 +37,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import login.LoginController;
+import javafx.scene.paint.Color;
 import login.StaticInfo;
 
 public class FactureController implements Initializable{
@@ -59,7 +56,7 @@ public class FactureController implements Initializable{
 //	@FXML private TextField qtite;
 	@FXML private TextField prixUnitairee;
 	@FXML private TextField codeBarr;
-	@FXML private TextField refPrixTotal;
+	@FXML private TextField refPrixTotal ;
 	
 	@FXML private TextField montantverser;
 	@FXML private TextField montantReduu;
@@ -70,7 +67,7 @@ public class FactureController implements Initializable{
 
 	@FXML private Label dateduJour;
 	
-	@FXML Button btAnnulArticle, btModif, btvalidAcht, btvalidModif;
+	@FXML Button btAnnulArticle;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -79,8 +76,7 @@ public class FactureController implements Initializable{
 		dateDuJourMethode(); // AFFICHE DATE AUTOMATIQUE
 		//................................................
 //		refNamCashier.setText("Bienvenue "+StaticInfo.USERNAME);  // RECUPERATION NOM LOGIN
-		affichLogin();  // RECUPERATION NOM LOGIN
-		
+		affichLogin(); // RECUPERATION NOM LOGIN
 		//------------------------------------------------
 		valideCombox(); 			// VERIFICATION CHIFFRE
 		validPrixUnitMtd();			// VERIFICATION CHIFFRE
@@ -91,11 +87,7 @@ public class FactureController implements Initializable{
 		
 		// DESACTIVER LE BOUTTON TANT QU'UN ARTICLE N'EST SELECTIONNE
 		this.btAnnulArticle.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
-		this.btModif.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
-		this.btvalidAcht.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()  ));
-		this.btvalidModif.disableProperty().bind(BooleanExpression.booleanExpression(this.tbViewFacture.getSelectionModel().selectedItemProperty().isNull()));
 		//-------------------------------------------------
-	
 		
 		// COMPLETER LES MOTS AUTOMATIQUES
 		try {
@@ -104,29 +96,38 @@ public class FactureController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//--------------------------
+		refPrixTotal.setText("0.0 F CFA");
+		refPrixTotal.setStyle("-fx-text-inner-color: red;");
+		
+		montantverser.setText("0.0 F CFA");
+		montantReduu.setText("0.0 F CFA");
+//		prixUnitairee.setText("0.0 F CFA");
 	}
 // ---------------------------------------------------
 //----------------------------------------------------
 	
-//====================================================
-public void affichLogin() {
-		
-		Connection connexion = ConnectionDB.maConnection();
-		String sqll = "SELECT prenom, nom FROM Utilisateur WHERE telephone =" +StaticInfo.USERNAME +" OR login = "+ StaticInfo.USERNAME + " ";
-		
-			PreparedStatement pst;
-			try {
-				pst = (PreparedStatement) connexion.prepareStatement(sqll);
-				ResultSet rs = pst.executeQuery();
-				if(rs.next()) {
-					refNamCashier.setText( rs.getString(1) +" "+ rs.getString(2));
+	//====================================================
+	public void affichLogin() {
+			
+			Connection connexion = ConnectionDB.maConnection();
+			String sqll = "SELECT prenom, nom FROM Utilisateur WHERE telephone =" +StaticInfo.USERNAME +" OR login = "+ StaticInfo.USERNAME + " ";
+			
+				PreparedStatement pst;
+				try {
+					pst = (PreparedStatement) connexion.prepareStatement(sqll);
+					ResultSet rs = pst.executeQuery();
+					if(rs.next()) {
+						refNamCashier.setText( rs.getString(1) +" "+ rs.getString(2));
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-				
-	}
-//====================================================
+					
+		}
+	//====================================================
+		
 	
 	public void retourMenu() throws IOException {
 		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
@@ -141,11 +142,12 @@ public void affichLogin() {
 		
 		idArticl.setText("");
 		nomArticle.setText("");
-		prixUnitairee.setText("");
+		prixUnitairee.setText("0.0 F CFA");
 		codeBarr.setText("");
-		refPrixTotal.setText("");
-		montantverser.setText("");
-		montantReduu.setText("");
+		refPrixTotal.setText("0.0 F CFA");
+		montantverser.setText("0.0 F CFA");
+		montantReduu.setText("0.0 F CFA");
+//		prixUnitairee.setText("0.0 F CFA");
 		
 		// VIDER LE COMBOBOX
 		comboBoxQuatite.getSelectionModel().clearSelection();
@@ -180,8 +182,8 @@ public void affichLogin() {
 		   System.out.println("Prix"+price); System.out.println("Montant"+ amount);
 		   //------------------------------------------------------------------------------------------------------------------------
 		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
-		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idProduit") );
-			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomProduit") );
+		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idArticle") );
+			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomArticleNom") );
 			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( "qteStock" ));
 			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( "prixUnitaire" ) );
 			//-----------------------------------------------------------------------------------------------------------------------
@@ -238,18 +240,19 @@ public void affichLogin() {
 
 	   //-------------------------------------
 	   
-	   public double parseDouble(String s) {
+	   public void moneyRendu() {
 		   
 		   int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
 	        
 	        	
 		double  p = Double.parseDouble( refPrixTotal.getText() ) - Double.parseDouble( montantverser.getText() );
+	        if (selectedIndex == 0) {
+	        	System.out.println("nop");
+	        } else
+//		montantReduu.setText( String.valueOf( p ));
 	        if (selectedIndex >= 0) {
 	        	System.out.println(p);
-	        } 
-//		montantReduu.setText( String.valueOf( p ));
-			return p;
-	      
+	        }
 	   }
 	   
 	//------------------------------------------
@@ -284,10 +287,7 @@ public void affichLogin() {
 	}
 	
 }*/
-	//------------------------------// RECUPERER USER CONNECTER
-	public void myFunction(String userConnect) {
-		refNamCashier.setText(userConnect);
-	}
+	
 	//--------------------------------- VERIFICATION CHAMPS VIDE
 	
 	public void verifivationChampVide() {
@@ -393,14 +393,14 @@ public void affichLogin() {
 		// COMPLETER LES MOTS QUAND ON COMEMECE A ECRIRE UN MOT QUI EXISTE DANS LA BASE DE DONNEE
 		public void autoCopleteWords() throws SQLException {
 			Connection connexion = ConnectionDB.maConnection();
-			String rekett = "SELECT nomProduit FROM Article "; 
+			String rekett = "SELECT nomArticleNom FROM Article "; 
 			
 			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
 			ResultSet rs = pst.executeQuery();
 			
 			String artclMam = null;
 			while (rs.next()) {
-				artclMam = rs.getString("nomProduit");
+				artclMam = rs.getString("nomArticleNom");
 				TextFields.bindAutoCompletion(nomArticle, artclMam);  // AUTOCOMPLETE WORDS
 			}
 		}
