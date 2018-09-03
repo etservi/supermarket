@@ -7,13 +7,19 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.Timer;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +33,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import login.TimerTest.RepeatTask;
 
 
 public class LoginController implements Initializable{
@@ -45,34 +55,25 @@ public class LoginController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
-		
+		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN	
 	}
-
-// -------------------------------------------- s
-//	-------------------------------------------	s
 	
 	//================================================================================
-/*	public void dateDuJourMethode() {
-		DateFormat df = new SimpleDateFormat("HH:mm");
-		Date today = Calendar.getInstance().getTime();
-		String reportDate = df.format(today);
-		dateduJour.setText( reportDate);
- }	*/
-	//=================================================================================
 	
 		// REDIRECTION SUR ACCUEIL ! CAISSIER / DIRECTEUR / RESPONSABLE DE STOCKS
 		@FXML
 		private void validerConnexion(ActionEvent event) throws IOException {
 			
-			//------------------------- HEUURE DE CONNEXION
-			DateFormat df = new SimpleDateFormat("HH:mm");
-			Date today = Calendar.getInstance().getTime();
-			String reportDate = df.format(today);
+			// INTERVALLE HEURE DE CONNEXION ---------------------------------
+			var currentTime = LocalTime.now();
+			LocalTime before = LocalTime.parse("07:00");
+	        LocalTime after = LocalTime.parse("18:00");
+
+	        if (currentTime.isBefore(after) && currentTime.isAfter(before) ) {
 			//----------------------------------------------
 			
 			if( !(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) ){
-				
+					
 			try {
 				
 				Connection connexion = ConnectionDB.maConnection();
@@ -99,12 +100,13 @@ public class LoginController implements Initializable{
 //					// ------------------------------------
 					logRole = rs.getString("role");
 					//-------------------------------------
-					if (logRole.equalsIgnoreCase("Administrateur")) {
+
+					if ( logRole.equalsIgnoreCase("Administrateur") ) {
 						
 						Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(fxml);
-					
+						
 					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
@@ -128,21 +130,25 @@ public class LoginController implements Initializable{
 						
 					} 
 				} else {
+		
 					signError.setText("Veuillez vérifier vos identifiants.");
 					effacer();
 					// Show the error message.
 		            Alert alert = new Alert(AlertType.ERROR);
 		            alert.setTitle("Utilisateur n'existe pas!!");
 		            alert.setHeaderText("Utilisateur incorrect");
-//		            alert.setContentText(errorMessage);
-		            
 		            alert.showAndWait();
 				} 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	}	
-
+	}
+		} else {
+			Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("HEURE DE TRAVAIL");
+            alert.setHeaderText(" 07H00 à 18H00 ! \n Merci de réssayer à partir de 07H");
+            alert.showAndWait();
+		}
 }		
 //////////////////////////////////////////
 		//////////////////////////
