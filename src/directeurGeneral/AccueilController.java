@@ -99,9 +99,19 @@ public class AccueilController implements Initializable {
 	// REDIRECTION SUR ACCUEIL
 	@FXML
 	private void parametre() throws IOException {
+		
 		AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Parametre.fxml"));
 		rootPane.getChildren().removeAll();
 		rootPane.getChildren().setAll(fxml);
+		
+		/*
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/ConfirmPassWord.fxml"));
+		Parent root = loader.load();
+		Scene scene = new Scene(root,370,250);
+		scene.getStylesheets().add(getClass().getResource("ConfirmPassWord.css").toExternalForm());
+		stage.setScene(scene);
+		stage.showAndWait();*/
 	}
 //------------------------------------------------------------------------------	
 	// REDIRECTION LOGIN
@@ -162,7 +172,7 @@ public class AccueilController implements Initializable {
 			Stage stage = new Stage();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/DetailsArticleParDate.fxml"));
 			Parent root = loader.load();
-			Scene scene = new Scene(root,370,500);
+			Scene scene = new Scene(root,950,500);
 			scene.getStylesheets().add(getClass().getResource("DetailsArticleParDate.css").toExternalForm());
 			stage.setScene(scene);
 			stage.showAndWait();
@@ -170,7 +180,18 @@ public class AccueilController implements Initializable {
 	
 			// ----------------------------------------------------------------------------------	
 			//-----------------------------------------------------------------------------------
+		@FXML
+		private void voireDetailsUtilsateur() throws IOException {
+			Stage stage = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/ConfirmPassWord.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root,370,250);
+			scene.getStylesheets().add(getClass().getResource("ConfirmPassWord.css").toExternalForm());
+			stage.setScene(scene);
+			stage.showAndWait();
+		}
 		
 // ---------------------------------------------------
+		
 
 }

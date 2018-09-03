@@ -85,9 +85,6 @@ public class AjoutFournisseurController implements Initializable{
 	@FXML private TextField TextFieldAdresse;
 	@FXML private TextField TextFieldCourriel;
 	@FXML private Label duJour;
-	
-	 
-	 
 	 
 	@FXML private TextField recherch;
 	Fournisseur fourni;
@@ -354,7 +351,6 @@ public class AjoutFournisseurController implements Initializable{
 			System.out.println(updateFournisseur);
 				int statut = connexion.createStatement().executeUpdate(updateFournisseur);
 				if (statut != 0) {
-					System.out.println("Modification reuussii");
 					
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setTitle("Fournisseur modifié");
@@ -769,7 +765,6 @@ private boolean validerEmail() {
 				CodeBarreImage.createImage(rs.getString(1), rs.getString(1)); // CREE LE CODE IMAGE
 				LireCodeBArre.generete_qr( rs.getString(2), rs.getString(1) ); // CREE LE Qr_Code
 			}
-			System.out.println("Réussie");
 		}
 	}
 		//--------------------------------------------------------/////////////////////////////////

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import org.controlsfx.control.textfield.TextFields;
+
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
@@ -39,9 +41,14 @@ public class prixArticleController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-//		voirPrixArticle();
-		
+	//---------------------- AUTOCOMPLETE WORD --------------------------
+		try {
+			autoCopleteWords();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	//-------------------------------------------------------------------	
 	}
 	
 	//-----------------------------------------------------------------------------------
@@ -60,6 +67,7 @@ public class prixArticleController implements Initializable{
 		Connection connexion = ConnectionDB.maConnection();
 		
 		String sql = "SELECT * FROM Article ";
+		String sql2 = "SELECT * from Categorie";
 		
 		System.out.println(sql);
 		
@@ -77,7 +85,7 @@ public class prixArticleController implements Initializable{
 			if(rs.next()) {
 				System.out.println("existe");
 				
-				nomProd = rs.getString("nomProduit");
+				nomProd = rs.getString("nomArticleNom");
 				idRyn = rs.getString("idRayon");
 				qtReste = rs.getString("qteStock");
 				prxUt = rs.getString("prixUnitaire");
@@ -85,11 +93,11 @@ public class prixArticleController implements Initializable{
 				
 				if(nomProd.equalsIgnoreCase(tfReserch.getText())) {
 			
-					labIdRayon.setText(rs.getString("idProduit"));		 
+					labIdRayon.setText(rs.getString("idRayon"));		 
 					LabIdCat.setText(rs.getString("idCategoriee"));		
-					labNomAr.setText(rs.getString("nomProduit"));		
+					labNomAr.setText(rs.getString("nomArticleNom"));		
 					labQtRestante.setText(rs.getString("qteStock"));	
-					labPrxUnitaire.setText(rs.getString("prixUnitaire"));
+					labPrxUnitaire.setText(rs.getString("prixAvendre"));
 					
 				} else {
 					labIdRayon.setText("");
@@ -132,4 +140,26 @@ public class prixArticleController implements Initializable{
         
         */
     }
+	
+	//===============================================================
+	
+	
+	// COMPLETER LES MOTS QUAND ON COMEMECE A ECRIRE UN MOT QUI EXISTE DANS LA BASE DE DONNEE
+	public void autoCopleteWords() throws SQLException {
+		Connection connexion = ConnectionDB.maConnection();
+		String rekett = "SELECT nomArticleNom FROM Article "; 
+		
+		PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(rekett);
+		ResultSet rs = pst.executeQuery();
+		
+		String artclMam = null;
+		while (rs.next()) {
+			artclMam = rs.getString("nomArticleNom");
+			TextFields.bindAutoCompletion(tfReserch, artclMam);  // AUTOCOMPLETE WORDS
+		}
+	}
+	
+	
+	
+	//===============================================================
 }

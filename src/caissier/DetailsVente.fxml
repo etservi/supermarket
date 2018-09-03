@@ -1,16 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.prixArticleController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.DetailsVenteController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="31.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
-      <TextField layoutX="761.0" layoutY="29.0" text="recherche" />
-      <Label layoutX="20.0" layoutY="34.0" text="Date Article Vendu" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="à" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="37.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
+      <JFXTextField fx:id="tfRecherche" focusColor="#f20202" layoutX="770.0" layoutY="25.0" promptText=" recherche" unFocusColor="#d166ac" />
+      <JFXDatePicker fx:id="dateA" defaultColor="#d166ac" layoutX="202.0" layoutY="21.0" prefHeight="29.0" prefWidth="140.0" />
+      <JFXDatePicker fx:id="dateB" defaultColor="#d166ac" layoutX="405.0" layoutY="21.0" prefHeight="29.0" prefWidth="140.0" />
+      <Text layoutX="363.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="à">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <JFXButton layoutX="565.0" layoutY="21.0" onAction="#listerArticleVenduCaissierParDate" text="ok">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="treeview" layoutX="20.0" layoutY="68.0" prefHeight="418.0" prefWidth="910.0">
+        <columns>
+          <TableColumn fx:id="clNomArticle" prefWidth="124.0" text="Nom Article" />
+          <TableColumn fx:id="clCodeBarre" prefWidth="166.0" text="Code Barre" />
+            <TableColumn fx:id="clDate" prefWidth="181.0" text="Date" />
+            <TableColumn fx:id="clQuantite" prefWidth="45.0" text="Qt." />
+            <TableColumn fx:id="clPrix" prefWidth="118.0" text="Prix" />
+            <TableColumn fx:id="clMontantVerse" prefWidth="131.0" text="Montant versé" />
+            <TableColumn fx:id="clMontantRendu" prefWidth="128.0" text="Montant rendu" />
+        </columns>
+      </TableView>
+      <Text fill="#d166ac" layoutX="20.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Articles vendus">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -26,7 +26,7 @@
               <Menu mnemonicParsing="false" text="Gérer les Utilisateurs">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#ajouterUtilsateur" text="Ajouter Utilisateur" />
-                        <MenuItem mnemonicParsing="false" text="Voire Details Utilisateur" />
+                        <MenuItem mnemonicParsing="false" onAction="#voireDetailsUtilsateur" text="Voire Details Utilisateur" />
                         <MenuItem mnemonicParsing="false" text="Details Utilisateur par date" />
                      </items>
                   </Menu>

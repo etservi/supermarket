@@ -91,7 +91,7 @@
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="302.0" layoutX="59.0" layoutY="55.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" width="580.0" />
-                                    <ComboBox fx:id="comboxAdmin" layoutX="295.0" layoutY="183.0" prefHeight="26.0" prefWidth="207.0" />
+                                    <ComboBox fx:id="comboxAdmin" layoutX="295.0" layoutY="183.0" onMouseClicked="#comboBoxAdmin" prefHeight="26.0" prefWidth="207.0" />
                                     <Label layoutX="101.0" layoutY="189.0" text="Admin- Utilisateur Id">
                                        <font>
                                           <Font name="System Bold" size="14.0" />
@@ -112,7 +112,7 @@
                                  <children>
                                     <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="340.0" layoutX="33.0" layoutY="53.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" width="611.0" />
                                     <Text fill="#f50606" layoutX="58.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rq : Avant d'ajouter un article, il faut préciser qui a le doit de vendre chez les Caissier" />
-                                    <ComboBox fx:id="comboxCaissier" layoutX="260.0" layoutY="177.0" prefHeight="26.0" prefWidth="200.0" />
+                                    <ComboBox fx:id="comboxCaissier" layoutX="260.0" layoutY="177.0" onMouseClicked="#comboBoxCaissier" prefHeight="26.0" prefWidth="200.0" />
                                     <Label layoutX="58.0" layoutY="190.0" text="Caissier - Utilisateur Id">
                                        <font>
                                           <Font name="System Bold" size="14.0" />

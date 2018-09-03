@@ -37,6 +37,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import login.StaticInfo;
 
 public class FactureController implements Initializable{
@@ -45,8 +46,9 @@ public class FactureController implements Initializable{
 	
 	@FXML private TableView<Article> tbViewFacture;
 	
-	@FXML private TableColumn<Article, Integer> tcIdArticle;
+//	@FXML private TableColumn<Article, Integer> tcIdArticle;
 	@FXML private TableColumn<Article, String> tcNom;
+	@FXML private TableColumn<Article, Integer> tcCodeBarre;
 	@FXML private TableColumn<Article, Integer> tcQuantite;
 	@FXML private TableColumn<Article, Double> tcPrixUnitaire;
 	
@@ -55,7 +57,7 @@ public class FactureController implements Initializable{
 //	@FXML private TextField qtite;
 	@FXML private TextField prixUnitairee;
 	@FXML private TextField codeBarr;
-	@FXML private TextField refPrixTotal;
+	@FXML private TextField refPrixTotal ;
 	
 	@FXML private TextField montantverser;
 	@FXML private TextField montantReduu;
@@ -74,8 +76,8 @@ public class FactureController implements Initializable{
 		viderLesCambre();  //VIDE LES CHAMPS AVANT D'AJOUT
 		dateDuJourMethode(); // AFFICHE DATE AUTOMATIQUE
 		//................................................
-//		refNamCashier.setText("Bienvenue "+StaticInfo.USERNAME);  // RECUPERATION NOM LOGIN
 		affichLogin(); // RECUPERATION NOM LOGIN
+		autoCompletePrix();
 		//------------------------------------------------
 		valideCombox(); 			// VERIFICATION CHIFFRE
 		validPrixUnitMtd();			// VERIFICATION CHIFFRE
@@ -95,11 +97,11 @@ public class FactureController implements Initializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//-----------------------------------------------
-		refPrixTotal.setText("0.0 F CFA");
-		montantverser.setText("0.0 F CFA");
-		montantReduu.setText("0.0 F CFA");
-//		prixUnitairee.setText("0.0 F CFA");
+		
+		//--------------------------
+		refPrixTotal.setStyle("-fx-text-inner-color: red;");
+		montantReduu.setStyle("-fx-text-inner-color: red;");
+		
 	}
 // ---------------------------------------------------
 //----------------------------------------------------
@@ -121,7 +123,7 @@ public class FactureController implements Initializable{
 					e.printStackTrace();
 				}
 					
-		}
+	}
 	//====================================================
 		
 	
@@ -143,6 +145,7 @@ public class FactureController implements Initializable{
 		refPrixTotal.setText("");
 		montantverser.setText("");
 		montantReduu.setText("");
+		prixUnitairee.setText("");
 		
 		// VIDER LE COMBOBOX
 		comboBoxQuatite.getSelectionModel().clearSelection();
@@ -171,24 +174,22 @@ public class FactureController implements Initializable{
 		   amount = price * Integer.parseInt(quantite);  // CALCUL MONTANT TOTAL
 		   
 		   listPurchase.add(articleName); listOfPrice.add(amount); 
-		   
-		   //TEST 
-		   System.out.println(quantite); System.out.println("Nom Article"+articleName);  
-		   System.out.println("Prix"+price); System.out.println("Montant"+ amount);
+		 
 		   //------------------------------------------------------------------------------------------------------------------------
-		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE
-		    tcIdArticle.setCellValueFactory( new PropertyValueFactory<>("idArticle") );
+		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE 
 			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomArticleNom") );
+			tcCodeBarre.setCellValueFactory( new PropertyValueFactory<>("codeBarre") );
 			tcQuantite.setCellValueFactory( new PropertyValueFactory<>( "qteStock" ));
 			tcPrixUnitaire.setCellValueFactory( new PropertyValueFactory<>( "prixUnitaire" ) );
 			//-----------------------------------------------------------------------------------------------------------------------
 			// REMPLIR LES DONNEES RECUPERER DANS LE TEXTFIELD SUR MON TABLEVIEW
-			int idA = Integer.parseInt( idArticl.getText() );
 	        String momArtcle =  nomArticle.getText();
+	        String barrCod =  codeBarr.getText();
+	        
 	        int qtte = Integer.parseInt(quantite );
 	        Double prixUnit = Double.valueOf( prixUnitairee.getText() );
 	        
-	        Article model = new Article(idA, momArtcle, qtte, prixUnit);
+	        Article model = new Article(momArtcle,barrCod, qtte, prixUnit);
 	        tbViewFacture.getItems().addAll(model);	   
 	  
 	total += amount;
@@ -233,21 +234,12 @@ public class FactureController implements Initializable{
 	        }   
 	   }
 
-	   //-------------------------------------
+	   //===========================VOIRE MONTANT RENDU
 	   
 	   public void moneyRendu() {
-		   
-		   int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
-	        
-	        	
-		double  p = Double.parseDouble( refPrixTotal.getText() ) - Double.parseDouble( montantverser.getText() );
-	        if (selectedIndex == 0) {
-	        	System.out.println("nop");
-	        } else
-//		montantReduu.setText( String.valueOf( p ));
-	        if (selectedIndex >= 0) {
-	        	System.out.println(p);
-	        }
+	        	Double  p = ( Double.parseDouble( montantverser.getText() ) ) - total ;
+	        	    montantReduu.setText( String.valueOf(p) +" F CFA");
+	        	    	
 	   }
 	   
 	//------------------------------------------
@@ -265,7 +257,7 @@ public class FactureController implements Initializable{
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
 		dateduJour.setText("Date : " + reportDate);
-}		
+ }		
 	
 	
 	
@@ -370,7 +362,7 @@ public class FactureController implements Initializable{
 		// METHODE VALIDER NOM
 		private boolean valideNom() {
 
-			Pattern p = Pattern.compile("[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
+			Pattern p = Pattern.compile("[a-zA-Z ]+", Pattern.CASE_INSENSITIVE);
 			Matcher m = p.matcher(nomArticle.getText());
 
 			if (m.find() && m.group().equals(nomArticle.getText())) {
@@ -401,4 +393,56 @@ public class FactureController implements Initializable{
 		}
 		
 		//----------------------------------
+		
+		public void validerVenteArticle() {
+			
+//			UPDATE `Article` SET `dateAjoutee` = '2014-08-30 21:05:00' WHERE `Article`.`idArticle` = 1;
+		}
+		
+	//
+		public void autoCompletePrix()  {
+			Connection con = ConnectionDB.maConnection();
+			String sqlT = "SELECT * FROM Article";
+			
+			PreparedStatement pst;
+			try {
+				pst = (PreparedStatement) con.prepareStatement(sqlT);
+				
+				ResultSet rs = pst.executeQuery();
+				
+				String nomComplete = null;
+				
+				if(rs.next()) {
+					nomComplete = rs.getString("nombreArticle");
+						
+					if(nomArticle.getText().equalsIgnoreCase(nomComplete)) {
+						prixUnitairee.setText(rs.getString("prixUnitaire"));
+//						nomArticle.setText("nombreArticle");
+					} else {
+						prixUnitairee.setText("");
+//						nomArticle.setText("");
+					}
+					
+				}
+				
+				
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+//==============================================================================
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }

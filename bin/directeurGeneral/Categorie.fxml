@@ -12,18 +12,13 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.CategorieController">
    <children>
       <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="436.0" layoutX="5.0" layoutY="20.0" opacity="0.75" stroke="#9a714c" strokeType="INSIDE" width="363.0" />
-      <Label layoutX="29.0" layoutY="170.0" prefHeight="18.0" prefWidth="106.0" text="Id Catégorie">
+      <Label layoutX="32.0" layoutY="206.0" prefHeight="18.0" prefWidth="94.0" text="Id Rayon">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="29.0" layoutY="237.0" prefHeight="18.0" prefWidth="94.0" text="Id Rayon">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></Label>
-      <JFXTextField fx:id="tfIdCategorie" focusColor="#f50101" layoutX="145.0" layoutY="165.0" prefHeight="26.0" prefWidth="194.0" promptText="id Catégorie" />
-      <JFXTextField fx:id="TextFieldDomaine" focusColor="#f80101" layoutX="145.0" layoutY="297.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
-      <JFXComboBox fx:id="comboxRayncat" focusColor="#f50101" layoutX="145.0" layoutY="232.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="id Rayon" />
-      <Label layoutX="31.0" layoutY="302.0" prefHeight="18.0" prefWidth="94.0" text="Libellé">
+      <JFXTextField fx:id="TextFieldDomaine" focusColor="#f80101" layoutX="148.0" layoutY="266.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
+      <JFXComboBox fx:id="comboxRayncat" focusColor="#f50101" layoutX="148.0" layoutY="201.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="id Rayon" />
+      <Label layoutX="34.0" layoutY="271.0" prefHeight="18.0" prefWidth="94.0" text="Libellé">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>

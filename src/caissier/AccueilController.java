@@ -76,7 +76,7 @@ public class AccueilController implements Initializable{
 		Stage stage = new Stage();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/caissier/SwGestionArticle.fxml"));
 		Parent root = loader.load();
-		Scene scene = new Scene(root,370,500);
+		Scene scene = new Scene(root,370,200);
 		scene.getStylesheets().add(getClass().getResource("SwGestionArticle.css").toExternalForm());
 		stage.setScene(scene);
 		stage.showAndWait();
@@ -102,7 +102,33 @@ public class AccueilController implements Initializable{
 		rootAccueil.getChildren().setAll(pane);
 
 	}
-//-------------------------------------------------------------------------
-//-------------------------------------------------------------------------
-	
+	//-------------------------------------------------------------------------
+	//-------------------------------------------------------------------------
+		// REDIRECTION SUR ACCUEIL - IMAGE
+		@FXML
+		private void voireStatistikVenteCaissier() throws IOException {
+			Stage stage = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/caissier/Statistique.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root,950, 500);
+			scene.getStylesheets().add(getClass().getResource("Statistique.css").toExternalForm());
+			stage.setScene(scene);
+			stage.showAndWait();
+
+		}
+		//-------------------------------------------------------------------------
+		//-------------------------------------------------------------------------
+		// REDIRECTION SUR ACCUEIL - IMAGE
+				@FXML
+				private void voireListeCategorieRayonCaissier() throws IOException {
+					Stage stage = new Stage();
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/caissier/ListeCategorieRayon.fxml"));
+					Parent root = loader.load();
+					Scene scene = new Scene(root,950, 500);
+					scene.getStylesheets().add(getClass().getResource("ListeCategorieRayon.css").toExternalForm());
+					stage.setScene(scene);
+					stage.showAndWait();
+
+				}
+//==================================================
 }

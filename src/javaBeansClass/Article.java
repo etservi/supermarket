@@ -1,6 +1,7 @@
 package javaBeansClass;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Article {
 
@@ -13,32 +14,32 @@ public class Article {
 	private int qteStock;
 	private int nombreArticle;
 	private double prixUnitaire;
-	private double prixVente;
+	private double prixAvendre;
 	private double montantVerse;
 	private double montantRendu;
 	private String codeBarre;
 	private Date dateAjoutee;
-	private Date dateVendu;
-	private int limteAlert;
-	private double prixAvendre;
+	private Timestamp dateVendu;
+	private int Livrer0nonLivrer1;
+	private byte[] facture;
 
-	public Article() {
-		super();
-	}
+//	public Article(String barrCod, String momArtcle, int qtte, Double prixUnit) {
+//		super();
+//	}
 
-	public Article(int idArticle, String nomArticleNom, int qteStock, double prixUnitaire) {
-		this.idArticle = idArticle;
+	public Article(String nomArticleNom, String codeBarre, int qteStock, double prixUnitaire) {
+
 		this.nomArticleNom = nomArticleNom;
+		this.codeBarre = codeBarre;
 		this.qteStock = qteStock;
 		this.prixUnitaire = prixUnitaire;
 
 	}
-	
-	//-------- Article Details Constructor
+//======================================================================================================================
+	// -------- Article Details Constructor
 //	nomArticleNom`, `idRayon`, `idCategoriee`, `raisonSociale`, `codeBarre`, qteStock, prixUnitaire,prixTotal
-	
-	public Article(String nomArticleNom, int idRayon, int idCategoriee, String raisonSociale, String codeBarre,  int qteStock,
-			double prixUnitaire, double prixAvendre) {
+
+	public Article(String nomArticleNom, int idRayon, int idCategoriee, String raisonSociale, String codeBarre, int qteStock, double prixUnitaire, double prixAvendre) {
 		super();
 		this.nomArticleNom = nomArticleNom;
 		this.idRayon = idRayon;
@@ -48,16 +49,27 @@ public class Article {
 		this.qteStock = qteStock;
 		this.prixUnitaire = prixUnitaire;
 		this.prixAvendre = prixAvendre;
-		
-	}
-	
-	//-------------------------------------------
 
+	}
+//======================================================================================================================
+	// ----------------------- CONSTRUCTION ARTICLE VENDU CAISSIER - nomArticleNom,
+	// codeBarre, dateVendu, qteStock, prixAvendre, montantVerse, montantRendu
+
+	public Article(String nomArticleNom, String codeBarre, Timestamp dateVendu, int qteStock, double prixAvendre, double montantVerse, double montantRendu) {
+		super();
+		this.nomArticleNom = nomArticleNom;
+		this.codeBarre = codeBarre;
+		this.dateVendu = dateVendu;
+		this.qteStock = qteStock;
+		this.prixAvendre = prixAvendre;
+		this.montantVerse = montantVerse;
+		this.montantRendu = montantRendu;
+
+	}
+//======================================================================================================================
 	public int getIdArticle() {
 		return idArticle;
 	}
-
-	
 
 	public void setIdArticle(int idArticle) {
 		this.idArticle = idArticle;
@@ -127,14 +139,6 @@ public class Article {
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	public double getPrixVente() {
-		return prixVente;
-	}
-
-	public void setPrixVente(double prixVente) {
-		this.prixVente = prixVente;
-	}
-
 	public double getMontantVerse() {
 		return montantVerse;
 	}
@@ -167,20 +171,12 @@ public class Article {
 		this.dateAjoutee = dateAjoutee;
 	}
 
-	public Date getDateVendu() {
+	public Timestamp getDateVendu() {
 		return dateVendu;
 	}
 
-	public void setDateVendu(Date dateVendu) {
+	public void setDateVendu(Timestamp dateVendu) {
 		this.dateVendu = dateVendu;
-	}
-
-	public int getLimteAlert() {
-		return limteAlert;
-	}
-
-	public void setLimteAlert(int limteAlert) {
-		this.limteAlert = limteAlert;
 	}
 
 	public double getPrixAvendre() {
@@ -191,8 +187,20 @@ public class Article {
 		this.prixAvendre = prixAvendre;
 	}
 
-	public void sortie() {
-		qteStock--;
+	public int getLivrer0nonLivrer1() {
+		return Livrer0nonLivrer1;
+	}
+
+	public void setLivrer0nonLivrer1(int livrer0nonLivrer1) {
+		Livrer0nonLivrer1 = livrer0nonLivrer1;
+	}
+
+	public byte[] getFacture() {
+		return facture;
+	}
+
+	public void setFacture(byte[] facture) {
+		this.facture = facture;
 	}
 
 }

@@ -12,18 +12,13 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.RayonController">
    <children>
       <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="436.0" layoutX="5.0" layoutY="20.0" opacity="0.88" stroke="#9a6c56" strokeType="INSIDE" width="363.0" />
-      <Label layoutX="28.0" layoutY="161.0" prefHeight="18.0" prefWidth="80.0" text="Id Rayon">
+      <Label layoutX="34.0" layoutY="209.0" prefHeight="18.0" prefWidth="87.0" text="Domaine">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="28.0" layoutY="228.0" prefHeight="18.0" prefWidth="87.0" text="Domaine">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></Label>
-      <JFXTextField fx:id="textFielidRayon" focusColor="#ff0202" layoutX="125.0" layoutY="156.0" prefHeight="26.0" prefWidth="194.0" promptText="rayon" />
-      <JFXTextField fx:id="TextFieldDomaine" focusColor="#ff0202" layoutX="125.0" layoutY="223.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
-      <JFXComboBox fx:id="comboxUser" focusColor="#f80000" layoutX="125.0" layoutY="296.0" onMouseClicked="#comboBoxUser" prefHeight="26.0" prefWidth="194.0" />
-      <Label layoutX="30.0" layoutY="297.0" prefHeight="18.0" prefWidth="87.0" text="id User">
+      <JFXTextField fx:id="TextFieldDomaine" focusColor="#ff0202" layoutX="131.0" layoutY="204.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
+      <JFXComboBox fx:id="comboxUser" focusColor="#f80000" layoutX="131.0" layoutY="277.0" onMouseClicked="#comboBoxUser" prefHeight="26.0" prefWidth="194.0" />
+      <Label layoutX="36.0" layoutY="278.0" prefHeight="18.0" prefWidth="87.0" text="id User">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>

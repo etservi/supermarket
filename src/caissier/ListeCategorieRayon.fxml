@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caissier.ListeCategorieRayonController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="37.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
+      <JFXTextField fx:id="tfRechercheCategorie" focusColor="#f20202" layoutX="303.0" layoutY="24.0" promptText=" recherche Catégorie" unFocusColor="#d166ac" />
+      <TableView fx:id="treeviewCategorie" layoutX="20.0" layoutY="68.0" opacity="0.92" prefHeight="404.0" prefWidth="452.0">
+        <columns>
+            <TableColumn fx:id="clLibelleCategorie" prefWidth="290.00001525878906" text="LIBELLE" />
+          <TableColumn fx:id="clRayonCat" prefWidth="147.0" text="ID RAYON" />
+        </columns>
+      </TableView>
+      <Text fill="#d166ac" layoutX="20.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catégorie">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <TableView fx:id="treeviewRayon" layoutX="515.0" layoutY="68.0" opacity="0.92" prefHeight="404.0" prefWidth="415.0">
+         <columns>
+            <TableColumn fx:id="clRayon" prefWidth="124.0" text="ID RAYON" />
+            <TableColumn fx:id="clDomaineRayon" prefWidth="275.0" text="DOMAINE" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="tfRecherche1" focusColor="#f20202" layoutX="761.0" layoutY="25.0" promptText=" recherche Rayon" unFocusColor="#d166ac" />
+      <Text fill="#d166ac" layoutX="515.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rayon">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

@@ -60,14 +60,4 @@ public class CategorieController implements Initializable{
 		}
 	}
 	//--------------------------------------------------------------------------
-	
-	public void ajouterFournsseur() {
-		
-//		String RaisonSocial = textFielidRayon.getText().trim();
-//		String Sigl = TextFieldSigle.getText().trim();
-//		String Telephon = TextFieldDomaine.getText();
-		
-		Connection connexion = ConnectionDB.maConnection();
-		
-	}
 }

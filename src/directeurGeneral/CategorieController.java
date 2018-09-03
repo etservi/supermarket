@@ -13,10 +13,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 
 public class CategorieController implements Initializable{
 	
@@ -65,19 +67,29 @@ public class CategorieController implements Initializable{
 		
 		Connection connexion = ConnectionDB.maConnection();
 		
-		String requette = "INSERT INTO `DomaineCategorie`(`idCategoriee`, `idRayon`, `libCategorie`) VALUES  (  "+ tfIdCategorie.getText() +" , "+ comboxRayncat.getValue() +", '"+ TextFieldDomaine.getText() +"' ) ";
+		String requette = "INSERT INTO `Categorie`( `idRayon`, `libCategorie`) VALUES  ( "+ comboxRayncat.getValue() +", '"+ TextFieldDomaine.getText() +"' ) ";
+		
+		if(TextFieldDomaine.getText().isEmpty()) {
+			Alert alerte = new Alert(AlertType.WARNING);
+			alerte.setHeaderText("Veuillez remplir tout les champs SVP !!!");
+			alerte.showAndWait();
+		} else {
 		
 		try {
 			int status = connexion.createStatement().executeUpdate(requette);
 			
 			if( status != 0 ) {
-				System.out.println("Reussi");
+				Alert alerte = new Alert(AlertType.INFORMATION);
+				alerte.setHeaderText(TextFieldDomaine.getText()+" a été bien ajouté");
+				alerte.showAndWait();
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			
-			System.out.println("Pas Reussi");
+			Alert alerte = new Alert(AlertType.WARNING);
+			alerte.setHeaderText("Erreur Ajout de Catégorie "+TextFieldDomaine.getText()+"");
+			alerte.showAndWait();
 		}
+	}
 	}
 }

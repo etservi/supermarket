@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Admin;
 import javaBeansClass.Article;
+import javaBeansClass.Caissier;
 import javaBeansClass.Rayon;
 import javaBeansClass.Utilisateur;
 import javafx.collections.FXCollections;
@@ -261,7 +262,7 @@ public class ParametreController implements Initializable{
 				ResultSet rs = pst.executeQuery();
 
 				while (rs.next()) {
-					optionsComboboxcomboxAdmin.add(new Admin ( rs.getInt("idAdmin")  ));
+					optionsComboboxcomboxAdmin.add(new Admin ( rs.getInt(1)  ));
 				}
 				comboxAdmin.getItems().addAll(optionsComboboxcomboxAdmin);
 				rs.close();
@@ -274,27 +275,27 @@ public class ParametreController implements Initializable{
 		
 		//=============================================================
 				@FXML ComboBox<Integer> comboxCaissier;
-				/*	final ObservableList<Integer> optionsComboboxcomboxCaissier = FXCollections.observableArrayList();
+					final ObservableList<Integer> optionsComboboxcomboxCaissier = FXCollections.observableArrayList();
 
 				public void comboBoxCaissier() {   // NOM DE LA METHODE
 					
 					try {
 						Connection connexion = ConnectionDB.maConnection();
-						String sql = "SELECT id FROM Utilisateur";
+						String sql = "SELECT idCaissier FROM Caissier";
 
 						PreparedStatement pst = connexion.prepareStatement(sql);
 						ResultSet rs = pst.executeQuery();
 
 						while (rs.next()) {
-							optionsComboboxcomboxCaissier.add(new Rayon  (   rs.getInt(1)).getIdRayon()  );
+							optionsComboboxcomboxCaissier.add(new Caissier  (   rs.getInt(1)).getIdCaissier()  );
 						}
-						comboxAdmin.getItems().addAll(optionsComboboxcomboxCaissier);
+						comboxCaissier.getItems().addAll(optionsComboboxcomboxCaissier);
 						rs.close();
 						connexion.close();
 					} catch (SQLException er_rs) {
 						er_rs.printStackTrace();
 					}
-				}*/
+				}
 				//================================================================
 		
 		

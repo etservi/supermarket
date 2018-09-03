@@ -5,6 +5,10 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.mysql.jdbc.PreparedStatement;
@@ -35,6 +39,8 @@ public class LoginController implements Initializable{
 	
 	@FXML private Button btValidCon,effacerChp;
 	
+    @FXML private Label dateduJour;
+	
 	int count = 0;
 	
 	@Override
@@ -46,10 +52,24 @@ public class LoginController implements Initializable{
 // -------------------------------------------- s
 //	-------------------------------------------	s
 	
+	//================================================================================
+/*	public void dateDuJourMethode() {
+		DateFormat df = new SimpleDateFormat("HH:mm");
+		Date today = Calendar.getInstance().getTime();
+		String reportDate = df.format(today);
+		dateduJour.setText( reportDate);
+ }	*/
+	//=================================================================================
+	
 		// REDIRECTION SUR ACCUEIL ! CAISSIER / DIRECTEUR / RESPONSABLE DE STOCKS
 		@FXML
 		private void validerConnexion(ActionEvent event) throws IOException {
-//			String errorMessage = "";
+			
+			//------------------------- HEUURE DE CONNEXION
+			DateFormat df = new SimpleDateFormat("HH:mm");
+			Date today = Calendar.getInstance().getTime();
+			String reportDate = df.format(today);
+			//----------------------------------------------
 			
 			if( !(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) ){
 				
@@ -63,12 +83,14 @@ public class LoginController implements Initializable{
 				pst.setString(2, loginnfild.getText().trim());
 				pst.setString(3, psswFild.getText());
 				ResultSet rs = pst.executeQuery();
-				
+				//==========================================================================================================
 				//-----------RECUPERATION LE NOM UTILISATEUR QUI EST CONNECTER
 				//----------------------------------------------
 				StaticInfo.USERNAME = loginnfild.getText();
-				//----------------------------------------------
 				
+				StaticInfo.PASSWORD = psswFild.getText(); // RECUPERER LE MOT DE PASSE POUR CONFIRMER ACCES AU PARAMETRE ...
+				//----------------------------------------------
+				//==========================================================================================================
 
 				String logRole = null;
 				
@@ -97,8 +119,6 @@ public class LoginController implements Initializable{
 						paneLogin.getChildren().setAll(pane);
 
 					} else {
-						
-						
 						
 						System.out.println("Pas confome");
 						AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -166,6 +186,11 @@ public void effacer() {
 						}
 					});
 				}
+				
+
+				
+				
+				
 	
 }
 

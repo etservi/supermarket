@@ -25,9 +25,7 @@
                <children>
                   <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="393.0" layoutX="49.0" layoutY="42.0" opacity="0.74" stroke="#a37553" strokeType="INSIDE" width="855.0" />
                   <Separator layoutX="193.0" layoutY="118.0" prefHeight="0.0" prefWidth="277.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="141.0" layoutY="161.0" stroke="#a37553" strokeType="INSIDE" width="190.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="367.0" layoutY="161.0" stroke="#a37553" strokeType="INSIDE" width="190.0" />
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="590.0" layoutY="161.0" stroke="#a37553" strokeType="INSIDE" width="190.0" />
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="#3580c1" height="98.0" layoutX="131.0" layoutY="173.0" opacity="0.7" stroke="#a37553" strokeType="INSIDE" width="190.0" />
                   <Hyperlink layoutX="360.0" layoutY="84.0" onAction="#deconnexion" text="Déconnexion">
                      <font>
                         <Font name="System Bold" size="14.0" />
@@ -38,17 +36,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink layoutX="151.0" layoutY="206.0" onAction="#gestionArticleClik" text="Gestion Article" textFill="#e40303">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Hyperlink>
-                  <Hyperlink layoutX="365.0" layoutY="208.0" text="Gestion Catégorie" textFill="#e40303">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Hyperlink>
-                  <Hyperlink layoutX="623.0" layoutY="206.0" text="Statistique" textFill="#e40303">
+                  <Hyperlink layoutX="144.0" layoutY="207.0" onAction="#gestionArticleClik" text="Gestion Article" textFill="#e40303">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -58,6 +46,18 @@
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="#3580c1" height="98.0" layoutX="636.0" layoutY="173.0" opacity="0.7" stroke="#a37553" strokeType="INSIDE" width="190.0" />
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="#3580c1" height="98.0" layoutX="340.0" layoutY="173.0" opacity="0.7" stroke="#a37553" strokeType="INSIDE" width="276.0" />
+                  <Hyperlink layoutX="352.0" layoutY="208.0" onAction="#voireListeCategorieRayonCaissier" text="Liste Catégorie &amp; Rayon" textFill="#e40303">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Hyperlink>
+                  <Hyperlink layoutX="669.0" layoutY="208.0" onAction="#voireStatistikVenteCaissier" text="Statistique" textFill="#e40303">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Hyperlink>
                </children>
              </AnchorPane>
          </center>          

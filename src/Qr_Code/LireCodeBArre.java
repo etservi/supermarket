@@ -53,7 +53,7 @@ public class LireCodeBArre {
 			
 			MatrixToImageWriter.writeToFile( matrix, filePath.substring( filePath.lastIndexOf(".") + 1 ), new File(filePath) );
 			
-			System.out.println("Creation reussi");
+//			System.out.println("Creation reussi");
 			
 		} catch (Exception e) {
 			

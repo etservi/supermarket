@@ -127,12 +127,12 @@ public class BonArticleDG {
 			table.addCell(cell);
 			cell.setPhrase(new Phrase(m.getIdRayon()));
 			table.addCell(cell);
-			cell.setPhrase(new Phrase(m.getIdCategorie()));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(m.getRaisonSociale()));
-			table.addCell(cell);
-			cell.setPhrase(new Phrase(m.getNomArticle()));
-			table.addCell(cell);
+//			cell.setPhrase(new Phrase(m.getIdCategorie()));
+//			table.addCell(cell);
+//			cell.setPhrase(new Phrase(m.getRaisonSociale()));
+//			table.addCell(cell);
+//			cell.setPhrase(new Phrase(m.getNomArticle()));
+//			table.addCell(cell);
 			cell.setPhrase(new Phrase(m.getQteStock()));
 			table.addCell(cell);
 			doc.add(table);

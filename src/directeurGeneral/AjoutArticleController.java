@@ -204,8 +204,8 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 				}
 				
 
-				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixTotal,nonLivrer  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', 1)";
-				
+				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixAvendre,livrer,nonLivrer  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', NULL, 1)";
+				System.out.println(sqlAjoutArticle);
 				int statut;
 				try {
 					statut = con.createStatement().executeUpdate(sqlAjoutArticle);

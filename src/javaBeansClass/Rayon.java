@@ -13,10 +13,20 @@ public class Rayon {
 	public Rayon(int idRayon) {
 		this.idRayon = idRayon;
 	}
-//------------------------------------------
+//----------------------- 	CONSTRUCTEUR CHEZ CAISSIER VOIR LISTE RAYON & CATEGORIE
+	
+	public Rayon(int idRayon, String domaine) {
+		super();
+		this.idRayon = idRayon;
+		this.domaine = domaine;
+	}
+//====================================
+	
 	public int getIdRayon() {
 		return idRayon;
 	}
+
+	
 
 	public void setIdRayon(int idRayon) {
 		this.idRayon = idRayon;
