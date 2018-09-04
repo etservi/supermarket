@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="responsableDeStocks.RayonController">
    <children>
@@ -16,8 +17,8 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <JFXTextField fx:id="TextFieldDomaine" focusColor="#f50707" layoutX="113.0" layoutY="186.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
-      <JFXComboBox fx:id="comboxUser" focusColor="#fc0707" layoutX="113.0" layoutY="256.0" onMouseClicked="#comboBoxUser" prefHeight="26.0" prefWidth="194.0" />
+      <JFXTextField fx:id="TextFieldDomaine" focusColor="#f50707" layoutX="138.0" layoutY="186.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
+      <JFXComboBox fx:id="comboxUser" focusColor="#fc0707" layoutX="138.0" layoutY="256.0" onMouseClicked="#comboBoxUser" prefHeight="26.0" prefWidth="194.0" />
       <Label layoutX="33.0" layoutY="262.0" prefHeight="18.0" prefWidth="87.0" text="id User">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -32,16 +33,18 @@
       <Separator layoutX="52.0" layoutY="403.0" prefHeight="3.0" prefWidth="255.0" />
 <!--       <JFXTextField layoutX="82.0" layoutY="53.0" /> -->
 <!--       <JFXComboBox layoutX="256.0" layoutY="88.0" /> -->
-      <JFXButton layoutX="56.0" layoutY="370.0" text="Enregistrer">
+      <JFXButton layoutX="56.0" layoutY="370.0" onAction="#insertrayon" text="Enregistrer">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="210.0" layoutY="370.0" text="Modifier">
+      <JFXButton disable="true" layoutX="210.0" layoutY="370.0" text="Modifier">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXTextField focusColor="#f50707" layoutX="92.0" layoutY="44.0" prefHeight="26.0" prefWidth="194.0" promptText=" recherche" />
+      <Text fill="#f80202" layoutX="106.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+      <Text fill="#f80202" layoutX="103.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
    </children>
 </AnchorPane>

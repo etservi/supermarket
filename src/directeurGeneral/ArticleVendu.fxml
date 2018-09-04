@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.DetailsArticleParDateController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.ArticleVenduController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="39.0" layoutY="25.0" opacity="0.8" stroke="#895b39" strokeType="INSIDE" width="950.0" />
       <TableView fx:id="tableViewDetails" layoutX="10.0" layoutY="74.0" prefHeight="409.0" prefWidth="928.0">
@@ -33,7 +33,7 @@
          </font>
       </Text>
       <JFXButton layoutX="807.0" layoutY="31.0" onAction="#listerParDate" text="rechercher" />
-      <Text fill="#895b39" layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Articles non vendu en stock">
+      <Text fill="#895b39" layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Articles vendus">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>

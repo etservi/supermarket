@@ -28,14 +28,11 @@ public class AccueilController implements Initializable {
 	 Stage stage = null;
 	@FXML TextField tfFirstName, tfLastName, tfEmail;
 	@FXML Label affichUser;
-	
-	
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 
-			affichLogin(); // AFFICHE UTILISATEUR
-		
+			affichLogin(); // AFFICHE UTILISATEUR		
 		
 	}
 	
@@ -168,15 +165,43 @@ public class AccueilController implements Initializable {
 		//------------------------------------------------------------------------------
 		// REDIRECTION AJOUTER CATEGORIE
 		@FXML
-		private void voireDetailsStocks() throws IOException {
+		private void articleNonVendu() throws IOException {
 			Stage stage = new Stage();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/DetailsArticleParDate.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/ArticleNonVendu.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root,950,500);
-			scene.getStylesheets().add(getClass().getResource("DetailsArticleParDate.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("ArticleNonVendu.css").toExternalForm());
 			stage.setScene(scene);
 			stage.showAndWait();
 		}
+		
+		//-----------------------------------------------------------------------------------
+				//------------------------------------------------------------------------------
+				// REDIRECTION AJOUTER CATEGORIE
+				@FXML
+				private void articleVendu() throws IOException {
+					Stage stage = new Stage();
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/ArticleVendu.fxml"));
+					Parent root = loader.load();
+					Scene scene = new Scene(root,950,500);
+					scene.getStylesheets().add(getClass().getResource("ArticleVendu.css").toExternalForm());
+					stage.setScene(scene);
+					stage.showAndWait();
+				}
+				
+				//-----------------------------------------------------------------------------------
+				//------------------------------------------------------------------------------
+				// REDIRECTION AJOUTER CATEGORIE
+				@FXML
+				private void articleenStock() throws IOException {
+					Stage stage = new Stage();
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/ArticleEnStock.fxml"));
+					Parent root = loader.load();
+					Scene scene = new Scene(root,950,500);
+					scene.getStylesheets().add(getClass().getResource("ArticleEnStock.css").toExternalForm());
+					stage.setScene(scene);
+					stage.showAndWait();
+				}
 	
 			// ----------------------------------------------------------------------------------	
 			//-----------------------------------------------------------------------------------
@@ -190,6 +215,19 @@ public class AccueilController implements Initializable {
 			stage.setScene(scene);
 			stage.showAndWait();
 		}
+		
+		// ----------------------------------------------------------------------------------	
+		//-----------------------------------------------------------------------------------
+	@FXML
+	private void listeCategorieEtRayon() throws IOException {
+		Stage stage = new Stage();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/ListeCategorieRayon.fxml"));
+		Parent root = loader.load();
+		Scene scene = new Scene(root,950,500);
+		scene.getStylesheets().add(getClass().getResource("ListeCategorieRayon.css").toExternalForm());
+		stage.setScene(scene);
+		stage.showAndWait();
+	}
 		
 // ---------------------------------------------------
 		

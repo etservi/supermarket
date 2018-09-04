@@ -27,18 +27,16 @@
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#ajouterUtilsateur" text="Ajouter Utilisateur" />
                         <MenuItem mnemonicParsing="false" onAction="#voireDetailsUtilsateur" text="Voire Details Utilisateur" />
-                        <MenuItem mnemonicParsing="false" text="Details Utilisateur par date" />
+                        <MenuItem mnemonicParsing="false" text="Tache Utilisateur par date" />
                      </items>
                   </Menu>
                 
                       <Menu mnemonicParsing="false" text="Gérer les Stocks">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#ajouterArticle" text="Ajouter Article" />
-                        <MenuItem mnemonicParsing="false" onAction="#voireDetailsStocks" text="Voire Details Articles" />
-                        <MenuItem mnemonicParsing="false" text="Details Articles par date" />
-                        <MenuItem mnemonicParsing="false" text="Mise à jourt Stock" />
+                        <MenuItem mnemonicParsing="false" onAction="#articleenStock" text="Articles en stock" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" text="Seuil Alert Stock" />
+                        <MenuItem mnemonicParsing="false" text="Mise à jourt" />
                      </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Gérer les Fournisseurs">
@@ -54,6 +52,8 @@
                   <Menu mnemonicParsing="false" text="Gérer les Articles ">
                   	<items>
                         <MenuItem mnemonicParsing="false" onAction="#NouveauClient" text="Nouveau Client" />
+                        <MenuItem mnemonicParsing="false" onAction="#articleVendu" text="Articles venuds" />
+                        <MenuItem mnemonicParsing="false" onAction="#articleNonVendu" text="Articles non vendu" />
                         <MenuItem mnemonicParsing="false" text="Mise à jourt Achat" />
                     </items>
                   </Menu>
@@ -156,12 +156,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink layoutX="400.0" layoutY="160.0" text="Liste Catégorie" textFill="#f80101">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Hyperlink>
-                  <Hyperlink layoutX="553.0" layoutY="160.0" text="Liste Rayon" textFill="#f80101">
+                  <Hyperlink layoutX="400.0" layoutY="160.0" onAction="#listeCategorieEtRayon" text="Liste Catégorie &amp; Rayon" textFill="#f80101">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

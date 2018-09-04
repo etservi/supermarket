@@ -25,9 +25,8 @@
                 
                       <Menu mnemonicParsing="false" text="Gérer les Stocks">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Ajouter Article" />
-                        <MenuItem mnemonicParsing="false" text="Voire Details Articles" />
-                        <MenuItem mnemonicParsing="false" text="Details Articles par date" />
+                        <MenuItem mnemonicParsing="false" onAction="#ajouterArticle" text="Ajouter Article" />
+                        <MenuItem mnemonicParsing="false" onAction="#listeArticle" text="Liste des articles en stock" />
 								<SeparatorMenuItem mnemonicParsing="false" />
                         <MenuItem mnemonicParsing="false" text="Alert Stocks" />
 <!--     FIN SOUS MENU -->
@@ -35,9 +34,8 @@
                   </Menu>
                 <Menu mnemonicParsing="false" text="Gérer les Fournisseurs">
                      <items>
-                        <MenuItem mnemonicParsing="false" text="Ajouter Fournisseur" />
-                        <MenuItem mnemonicParsing="false" text="Voire Details Fournisseurs" />
-                        <MenuItem mnemonicParsing="false" text="Details Fournisseurs par date" />
+                        <MenuItem mnemonicParsing="false" onAction="#ajouterFournisseur" text="Fournisseur" />
+                        <MenuItem mnemonicParsing="false" text="Articles commendés" />
                      </items>
                   </Menu>
                   
@@ -49,7 +47,7 @@
                <children>
                   <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="336.0" layoutX="49.0" layoutY="99.0" opacity="0.74" stroke="#8d583c" strokeType="INSIDE" width="855.0" />
                   <Circle fill="#a9afad" layoutX="264.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
-                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="233.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="233.0" layoutY="337.0" onMouseClicked="#statistique" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Statistique.png" />
                      </image>
@@ -58,7 +56,7 @@
                      </cursor>
                   </ImageView>
                   <Circle fill="#a9afad" layoutX="135.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
-                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="104.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="104.0" layoutY="336.0" onMouseClicked="#listeArticle" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/storage.png" />
                      </image>
@@ -78,7 +76,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="508.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="508.0" layoutY="336.0" onMouseClicked="#notification" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/alert.png" />
                      </image>
@@ -86,7 +84,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="374.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="374.0" layoutY="336.0" onMouseClicked="#ajouterFournisseur" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Fournisseur.png" />
                      </image>
@@ -106,12 +104,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink layoutX="742.0" layoutY="284.0" text="Statistique" textFill="#f80303">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Hyperlink>
-                  <Hyperlink layoutX="744.0" layoutY="175.0" text="Paramètre" textFill="#f80303">
+                  <Hyperlink layoutX="742.0" layoutY="284.0" onMouseClicked="#statistique" text="Statistique" textFill="#f80303">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -126,12 +119,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Hyperlink layoutX="422.0" layoutY="119.0" text="Liste Catégorie" textFill="#f80303">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Hyperlink>
-                  <Hyperlink layoutX="567.0" layoutY="118.0" text="Liste Rayon" textFill="#f80303">
+                  <Hyperlink layoutX="422.0" layoutY="119.0" onAction="#ouvrireListeCategorieRayon" text="Liste Catégorie &amp; Rayon" textFill="#f80303">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

@@ -64,7 +64,7 @@ public void affichLogin() {
 				pst = (PreparedStatement) connexion.prepareStatement(sqll);
 				ResultSet rs = pst.executeQuery();
 				if(rs.next()) {
-					nomUser.setText( rs.getString(1) +" "+ rs.getString(2) + ", Veuillez ajouter des artciles " );
+					nomUser.setText( rs.getString(1) +" "+ rs.getString(2) + ", Vous pouvez ajouter vos artciles. " );
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -204,7 +204,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 				}
 				
 
-				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixAvendre,livrer,nonLivrer  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', NULL, 1)";
+				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixAvendre, Livrer0nonLivrer1  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', 1)";
 				System.out.println(sqlAjoutArticle);
 				int statut;
 				try {

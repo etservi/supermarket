@@ -144,8 +144,6 @@ public class AjoutFournisseurController implements Initializable{
 }
 //---------------------------------------------------------------------------------	
 //---------------------------------------------------------------------------------
-	
-	
 
 	// INSERTION FOURNISSEUR ////////////////////////////////////////////////////// METHODE AJOUTER FOURNISSEUR
 	public void ajouterFournsseur() {
@@ -941,9 +939,6 @@ private boolean validerEmail() {
         });
        
     }
-	
-
-
 }
 
 

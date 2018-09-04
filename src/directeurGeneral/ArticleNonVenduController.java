@@ -25,7 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-public class DetailsArticleParDateController implements Initializable{
+public class ArticleNonVenduController implements Initializable{
 	
 	@FXML private AnchorPane root;
 	
@@ -83,7 +83,7 @@ public class DetailsArticleParDateController implements Initializable{
 				
 				
 			} catch (Exception exActualiserDonneesFournisseurTableau) {
-				Logger.getLogger(DetailsArticleParDateController.class.getName()).log(Level.SEVERE, null, exActualiserDonneesFournisseurTableau);
+				Logger.getLogger(ArticleNonVenduController.class.getName()).log(Level.SEVERE, null, exActualiserDonneesFournisseurTableau);
 			}
 		}
 		
@@ -120,7 +120,7 @@ public class DetailsArticleParDateController implements Initializable{
 				
 				
 			} catch (Exception exActualiserDonneesFournisseurTableau) {
-				Logger.getLogger(DetailsArticleParDateController.class.getName()).log(Level.SEVERE, null, exActualiserDonneesFournisseurTableau);
+				Logger.getLogger(ArticleNonVenduController.class.getName()).log(Level.SEVERE, null, exActualiserDonneesFournisseurTableau);
 			} 
 			} 
 		

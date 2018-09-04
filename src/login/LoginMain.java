@@ -3,25 +3,26 @@ package login;
 import java.sql.Connection;
 
 import baseDeDonnées.ConnectionDB;
-import directeurGeneral.FactureController;
-import javaBeansClass.Utilisateur;
 import javafx.application.Application;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 
 public class LoginMain extends Application {
+	
+	 
 
 	@Override
 	public void start(Stage StgLogin) {
 
 //		StgLogin.setTitle("ATHENTIFICATION");
 		StgLogin.setResizable(false);
-
+		
 		VericationConnexionBaseDeDonnees();
 
 		try {
@@ -31,6 +32,14 @@ public class LoginMain extends Application {
 			scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 			StgLogin.setScene(scene);
 			StgLogin.show();
+			
+			// ADAPTER L'ECRAN SELON L'ORDINATEUR
+			Rectangle2D rd = Screen.getPrimary().getVisualBounds();
+			StgLogin.setX( (rd.getWidth() - StgLogin.getWidth()) /2 );
+			StgLogin.setY( (rd.getHeight() - StgLogin.getHeight()) /2 );
+			
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

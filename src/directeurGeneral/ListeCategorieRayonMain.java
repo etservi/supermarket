@@ -6,17 +6,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
-public class DetailsArticleParDateMain extends Application {
+public class ListeCategorieRayonMain extends Application {
 	@Override
 	public void start(Stage StgDetailsArticleParDate) {
 
-		StgDetailsArticleParDate.setTitle("ADMINISTRATEUR");
+//		StgDetailsArticleParDate.setTitle("ADMINISTRATEUR");
 		StgDetailsArticleParDate.setResizable(false);
 
 		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("DetailsArticleParDate.fxml"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("ListeCategorieRayon.fxml"));
 			Scene scene = new Scene(root, 950, 500);
-			scene.getStylesheets().add(getClass().getResource("DetailsArticleParDate.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("ListeCategorieRayon.css").toExternalForm());
 			StgDetailsArticleParDate.setScene(scene);
 			StgDetailsArticleParDate.show();
 		} catch (Exception e) {

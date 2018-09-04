@@ -31,7 +31,6 @@ public class RayonController implements Initializable{
 	@FXML private TableColumn<Rayon, String> colonneIdRayon;
 	@FXML private TableColumn<Rayon, String> colonneDomaine;
 	
-	
 	ObservableList<Rayon> fournisseurList = FXCollections.observableArrayList();
 
 	@Override

@@ -5,39 +5,34 @@ import java.net.InetAddress;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.Timer;
 
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import login.TimerTest.RepeatTask;
 
 
 public class LoginController implements Initializable{
@@ -51,14 +46,32 @@ public class LoginController implements Initializable{
 	
     @FXML private Label dateduJour;
 	
-	int count = 0;
+    int compteurAdminStock = 0;
+    int compteurCaissier = 0;
+    int compteurAdminGeneral = 0;
+    int compteurEchec = 0;
+    
+   Stage StgLogin;
+    
+	
+	// LONGUEUR - LARGEUR - DEMARAGE AVEC IMAGE - COMPLEMENT VOIR LIGNE 67 -------------------
+		private static final double height = Screen.getPrimary().getVisualBounds().getHeight();
+		private static final double width = Screen.getPrimary().getVisualBounds().getWidth();
+		private Image app, splash;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN	
+		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
+		
+		// DEMARAGE AVEC UNE IMAGE---------------- COMPLEMENT VOIR LIGNE 57 ---------------------------------------------
+			app = new Image(getClass().getResource("/images/ajouter.png").toExternalForm());
+			splash = new Image(getClass().getResource("/images/supermarkeT.jpg").toExternalForm());
+			SplashScreen.render(new double[] { LoginController.height, LoginController.width } , app, splash).showAndWait();	
+		
+		//-----------------------------------------------------------------------------------------------------------------	
 	}
 	
-	//================================================================================
+	//=======================================================================
 	
 		// REDIRECTION SUR ACCUEIL ! CAISSIER / DIRECTEUR / RESPONSABLE DE STOCKS
 		@FXML
@@ -66,11 +79,14 @@ public class LoginController implements Initializable{
 			
 			// INTERVALLE HEURE DE CONNEXION ---------------------------------
 			var currentTime = LocalTime.now();
-			LocalTime before = LocalTime.parse("07:00");
-	        LocalTime after = LocalTime.parse("18:00");
-
+			LocalTime before = LocalTime.parse("00:00");
+	        LocalTime after = LocalTime.parse("07:00");
+	        
+//	        java.time.ZonedDateTime before = java.time.ZonedDateTime.parse("07:00");
+//	        java.time.ZonedDateTime after = java.time.ZonedDateTime.parse("07:00");
+	        
 	        if (currentTime.isBefore(after) && currentTime.isAfter(before) ) {
-			//----------------------------------------------
+			//----------------------------------------------------------------
 			
 			if( !(loginnfild.getText().isEmpty() && psswFild.getText().isEmpty()) ){
 					
@@ -100,7 +116,7 @@ public class LoginController implements Initializable{
 //					// ------------------------------------
 					logRole = rs.getString("role");
 					//-------------------------------------
-
+					
 					if ( logRole.equalsIgnoreCase("Administrateur") ) {
 						
 						Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
@@ -113,7 +129,6 @@ public class LoginController implements Initializable{
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 					
-						
 					} else if (logRole.equalsIgnoreCase("Responsable commercial")) {
 //						
 						Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
@@ -127,17 +142,37 @@ public class LoginController implements Initializable{
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 						effacer();
+						signError.setText("Veuillez vérifier vos identifiants.");
 						
 					} 
 				} else {
+					compteurEchec++;
+				    System.out.println("exit "+compteurEchec);
+				    
+				    if(compteurEchec==3) {
+//				    	System.exit(0);
+				    	signError.setText("Impossible de se connecter");
+				    	loginnfild.setEditable(false);
+				    	psswFild.setEditable(false);
+				    	
+				    	btValidCon.disabledProperty();
+//				    	effacerChp;
+				    	
+				    	Timer timer = new Timer();
+				        timer.schedule(new TimerTest.RepeatTask(timer, 10), 0, 2500);
+				    	System.out.println(TimerTest.val);
+				    		
+				    } 
 		
-					signError.setText("Veuillez vérifier vos identifiants.");
+				    
 					effacer();
 					// Show the error message.
 		            Alert alert = new Alert(AlertType.ERROR);
 		            alert.setTitle("Utilisateur n'existe pas!!");
 		            alert.setHeaderText("Utilisateur incorrect");
 		            alert.showAndWait();
+		            
+		            
 				} 
 			} catch (Exception e) {
 				e.printStackTrace();

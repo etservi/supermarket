@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.ArticleEnStockController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="39.0" layoutY="25.0" opacity="0.8" stroke="#895b39" strokeType="INSIDE" width="950.0" />
+      <TableView fx:id="tableViewDetails" layoutX="10.0" layoutY="74.0" prefHeight="409.0" prefWidth="928.0">
+        <columns>
+            <TableColumn fx:id="colonneNom" prefWidth="142.0" text="Nom Article" />
+          <TableColumn fx:id="colonneIdRayon" prefWidth="90.0" text="ID Rayon" />
+            <TableColumn fx:id="colonneIdCqtegorie" prefWidth="110.0" resizable="false" text="ID Catégorie" />
+            <TableColumn fx:id="colonneRaisonSociale" prefWidth="124.0" text="Raison sociale" />
+            <TableColumn fx:id="colonneCodeBarre" prefWidth="144.0" text="Code barre" />
+            <TableColumn fx:id="colonneQuantite" prefWidth="69.0" text="Qt." />
+            <TableColumn fx:id="colonnePrixQchat" prefWidth="124.0" text="Prix Achat" />
+            <TableColumn fx:id="colonnePrixVendu" prefWidth="124.0" text="Prix à Vdre" />
+        </columns>
+      </TableView>
+      <JFXDatePicker fx:id="dateA" defaultColor="#895b39" layoutX="413.0" layoutY="28.0" prefHeight="31.0" prefWidth="151.0" />
+      <JFXDatePicker fx:id="dateB" defaultColor="#895b39" layoutX="647.0" layoutY="30.0" prefHeight="29.0" prefWidth="151.0" />
+      <Text layoutX="594.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="à">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <JFXButton layoutX="807.0" layoutY="31.0" onAction="#listerParDate" text="rechercher" />
+      <Text fill="#895b39" layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Articles en stock">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="906.0" layoutY="32.0" mnemonicParsing="false" onAction="#selectionMutiple" text="o" />
+   </children>
+</AnchorPane>

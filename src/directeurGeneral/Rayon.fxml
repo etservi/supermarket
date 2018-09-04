@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.RayonController">
    <children>
@@ -16,8 +17,8 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <JFXTextField fx:id="TextFieldDomaine" focusColor="#ff0202" layoutX="131.0" layoutY="204.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
-      <JFXComboBox fx:id="comboxUser" focusColor="#f80000" layoutX="131.0" layoutY="277.0" onMouseClicked="#comboBoxUser" prefHeight="26.0" prefWidth="194.0" />
+      <JFXTextField fx:id="TextFieldDomaine" focusColor="#ff0202" layoutX="147.0" layoutY="204.0" prefHeight="26.0" prefWidth="194.0" promptText="domaine" />
+      <JFXComboBox fx:id="comboxUser" focusColor="#f80000" layoutX="147.0" layoutY="277.0" onMouseClicked="#comboBoxUser" prefHeight="26.0" prefWidth="194.0" />
       <Label layoutX="36.0" layoutY="278.0" prefHeight="18.0" prefWidth="87.0" text="id User">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -36,11 +37,13 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="222.0" layoutY="395.0" text="Modifier">
+      <Hyperlink disable="true" layoutX="222.0" layoutY="395.0" text="Modifier">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Hyperlink>
+      <Text fill="#f80202" layoutX="111.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+      <Text fill="#f80202" layoutX="108.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
 <!--       <JFXTextField layoutX="208.0" layoutY="88.0" /> -->
 <!--       <JFXComboBox layoutX="263.0" layoutY="336.0" /> -->
    </children>

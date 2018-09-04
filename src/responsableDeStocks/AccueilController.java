@@ -95,7 +95,7 @@ public class AccueilController implements Initializable{
 		}
 	//-------------------------------------------------------------------------
 	//-------------------------------------------------------------------------
-		// REDIRECTION SUR ACCUEIL - IMAGE
+		// REDIRECTION 
 		@FXML
 		private void listeRayon() throws IOException {  //OUVERTURE DANS MEME FENETRE
 			Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
@@ -104,13 +104,78 @@ public class AccueilController implements Initializable{
 		}
 	//-------------------------------------------------------------------------
 	//-------------------------------------------------------------------------
-		// REDIRECTION SUR ACCUEIL - IMAGE
+		// REDIRECTION 
 		@FXML
 		private void listeCategorie() throws IOException {
 			Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
 			rootPane.getChildren().setAll(pane);
 
 		}
-	//-------------------------------------------------------------------------
-	//-------------------------------------------------------------------------
+		
+		//-------------------------------------------------------------------------
+		//-------------------------------------------------------------------------
+			// REDIRECTION 
+			@FXML
+			private void ouvrireListeCategorieRayon() throws IOException {  //OUVERTURE DANS UNE AUTRE FENETRE
+				
+				Stage stage = new Stage();
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/ListeCategorieRayon.fxml"));
+				Parent root = loader.load();
+				Scene scene = new Scene(root,950,500);
+				scene.getStylesheets().add(getClass().getResource("ListeCategorieRayon.css").toExternalForm());
+				stage.setScene(scene);
+				stage.showAndWait();
+
+			}
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------	
+					@FXML
+					public void ajouterFournisseur() throws IOException {  
+						AnchorPane fxml = FXMLLoader.load(getClass().getResource("/responsableDeStocks/AjoutFournisseur.fxml"));
+						rootPane.getChildren().removeAll();
+						rootPane.getChildren().setAll(fxml);
+				}		
+// ----------------------------------------------------------------------------------	
+//-----------------------------------------------------------------------------------
+					@FXML
+					public void statistique() throws IOException {  
+						Stage stage = new Stage();
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Statistique.fxml"));
+						Parent root = loader.load();
+						Scene scene = new Scene(root,950, 500);
+						scene.getStylesheets().add(getClass().getResource("Statistique.css").toExternalForm());
+						stage.setScene(scene);
+						stage.showAndWait();
+				}
+// ----------------------------------------------------------------------------------	
+//-----------------------------------------------------------------------------------
+					@FXML
+					public void notification() throws IOException {  
+						AnchorPane fxml = FXMLLoader.load(getClass().getResource("/responsableDeStocks/"));
+						rootPane.getChildren().removeAll();
+						rootPane.getChildren().setAll(fxml);
+				}		
+// ----------------------------------------------------------------------------------	
+//-----------------------------------------------------------------------------------
+					@FXML
+					public void listeArticle() throws IOException {  
+						
+						Stage stage = new Stage();
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/DetailsArticleParDate.fxml"));
+						Parent root = loader.load();
+						Scene scene = new Scene(root,950, 500);
+						scene.getStylesheets().add(getClass().getResource("DetailsArticleParDate.css").toExternalForm());
+						stage.setScene(scene);
+						stage.showAndWait();
+				}		
+// ----------------------------------------------------------------------------------	
+//-----------------------------------------------------------------------------------
+					@FXML
+					public void ajouterArticle() throws IOException {  
+						AnchorPane fxml = FXMLLoader.load(getClass().getResource("/responsableDeStocks/AjoutArticle.fxml"));
+						rootPane.getChildren().removeAll();
+						rootPane.getChildren().setAll(fxml);
+				}		
+// ----------------------------------------------------------------------------------	
+//-----------------------------------------------------------------------------------
 }
