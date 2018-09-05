@@ -8,9 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXTextField;
+import com.mysql.jdbc.Statement;
 
+import Qr_Code.LireCodeBArre;
 import baseDeDonnées.ConnectionDB;
+import codeBarre.CodeBarreImage;
+import directeurGeneral.AjoutFournisseurController.codeBarreStart;
 import javaBeansClass.DomaineCategorie;
 import javaBeansClass.Fournisseur;
 import javaBeansClass.Rayon;
@@ -50,6 +53,14 @@ public class AjoutArticleController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		affichLogin();
+		
+//		-------------------------------------------------------------
+		// APPELLE METHODE - CREER CODE BARRE ========== VOIR LIGNE 245
+		try {
+			codeBarreStart.main(null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//--------------------------------------------------------------------------
@@ -226,5 +237,27 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 			}
 			
 	//-----------------------------------------------------------------------------------
+//=====================================================================================================
+			//---------------------------------------------- CODE BARRE - Qr_CODE
+			//////////////////////////////////////////////////////////////////
+			// DEMARRER CODE BARRE AUTOMATIQUE - J'AI CREE UNE METHODE MAIN //
+			//////////////////////////////////////////////////////////////////
+			public static class codeBarreStart{
+				public static void main(String[] args) throws SQLException {
+
+					Connection connexion = ConnectionDB.maConnection();
+					String query = "SELECT nomArticleNom, codeBarre from Article";
+					Statement stmt = null;
+					stmt = (Statement) connexion.createStatement();
+					ResultSet rs = stmt.executeQuery(query);
+					
+					while (rs.next()) {
+						CodeBarreImage.createImage(rs.getString(1), rs.getString(2)); // CREE LE CODE IMAGE
+						LireCodeBArre.generete_qr( rs.getString(1), rs.getString(2) ); // CREE LE Qr_Code
+					}
+				}
+			}
+//=======================================================================================================
+			
 			
 }

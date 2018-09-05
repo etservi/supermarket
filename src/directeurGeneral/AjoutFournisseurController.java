@@ -42,7 +42,6 @@ import com.mysql.jdbc.Statement;
 
 import Qr_Code.LireCodeBArre;
 import baseDeDonnées.ConnectionDB;
-import boiteAlert.Confirmation;
 import codeBarre.CodeBarreImage;
 import javaBeansClass.Fournisseur;
 import javafx.application.Platform;
@@ -75,7 +74,7 @@ import javafx.util.Duration;
 
 public class AjoutFournisseurController implements Initializable{
 	
-	UtilisateurModificationMain userUpdate;
+//	UtilisateurModificationMain userUpdate;
 	
 	@FXML private AnchorPane paneFournisseur;
 	
@@ -164,7 +163,7 @@ public class AjoutFournisseurController implements Initializable{
 		} else if( validerTelephone() && validerEmail() && textFieldRaisonSociale.getText()!= null && TextFieldAdresse.getText() != null ) {
 
 		try {
-			String requetteInsertion = "INSERT INTO `Fournisseur`(`raisonSociale`, `sigle`, `telephone`, `adresse`, `email`) VALUES ('"+RaisonSocial+"','"+Sigl+"','"+Telephon+"','"+Adess+"','"+Couriel+ "')";
+			String requetteInsertion = "INSERT INTO `Fournisseur`(`raisonSociale`, `sigle`, `telephone`, `adresse`, `email`, SUpprimer0NonSupprimer1=1) VALUES ('"+RaisonSocial+"','"+Sigl+"','"+Telephon+"','"+Adess+"','"+Couriel+ "', 1)";
 			
 			int statut = connexion.createStatement().executeUpdate(requetteInsertion);
 			if (statut != 0) {
@@ -173,6 +172,8 @@ public class AjoutFournisseurController implements Initializable{
 				alert.setTitle("Fournisseur ajouté");
 				alert.setHeaderText("Fournisseur a été bien ajouté");
 				alert.showAndWait();
+				
+
 				
 				new notificationThred().start();
 				ActualiserDonneesFournisseurTableau();	
@@ -371,7 +372,7 @@ public class AjoutFournisseurController implements Initializable{
 		fournisseurList.clear(); // EFFACE REPERTION DONNEES TABLEAU
 		Connection connexion = ConnectionDB.maConnection();
 		
-		String requetteIni = "SELECT `raisonSociale`, `sigle`, `telephone`, `adresse`, `email` FROM `Fournisseur` "; 
+		String requetteIni = "SELECT `raisonSociale`, `sigle`, `telephone`, `adresse`, `email` FROM `Fournisseur` WHERE SUpprimer0NonSupprimer1=1 "; 
 		
 		try {
 			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(requetteIni);
@@ -386,16 +387,6 @@ public class AjoutFournisseurController implements Initializable{
 			colonneAdesse.setCellValueFactory(new PropertyValueFactory<>("adresse"));
 			colonneCourriel.setCellValueFactory(new PropertyValueFactory<>("email"));
 			tableViewFournisseur.setItems(fournisseurList);
-/*			
-			for(int i = 0 ; i < tableViewFournisseur.getItems().size() ; i++){
-//	            System.out.println("Fournisseur Raison Sociale " + tableViewFournisseur.getItems().get(i).getRaisonSociale());
-				
-				String p = tableViewFournisseur.getItems().get(i).getRaisonSociale();
-				System.out.println(p);
-	        }
-			*/
-//			CodeBarreImage cig = new CodeBarreImage();
-			
 			
 		} catch (Exception exActualiserDonneesFournisseurTableau) {
 			Logger.getLogger(AjoutFournisseurController.class.getName()).log(Level.SEVERE, null, exActualiserDonneesFournisseurTableau);
@@ -455,80 +446,48 @@ public class AjoutFournisseurController implements Initializable{
 	// BOUTON SUPPRESSION AU NIVEAU DU TABLEAU
 		public void suppressionSurLeTableau() {
 			
-			Fournisseur mat = tableViewFournisseur.getSelectionModel().getSelectedItem();
-			System.out.println(mat.getRaisonSociale());
-			int selectedIndex = tableViewFournisseur.getSelectionModel().getSelectedIndex();
 			Connection connexion = ConnectionDB.maConnection();
 			
+			String Sigl = TextFieldSigle.getText().trim();
+			String Telephon = TextFieldTelephone.getText();
+			String Adess = TextFieldAdresse.getText().trim();
+			String Couriel = TextFieldCourriel.getText();	
+			
+			// RECUPERATTION INDEX SUR LE TABLEAU 
+			
+			// VERIFICTION SI ON ON A SELECTIONNE UNE VALEUR
+			int selectedIndex = tableViewFournisseur.getSelectionModel().getSelectedIndex();
+			
 			if (selectedIndex >= 0) {
-//				tableViewFournisseur.getItems().remove(selectedIndex);
 				
-//			try{
-//					String sql = "DELETE FROM `Fournisseur` WHERE telephone = "+ mat.getTelephone() + "  " ;
+				Fournisseur mat = tableViewFournisseur.getSelectionModel().getSelectedItem();
+				System.out.println(mat.getRaisonSociale());
 				
+					String sql = "UPDATE `Fournisseur` SET `sigle` = '"+Sigl+"', `telephone` = '"+Telephon+"', `adresse` = '"+Adess+"', `email` = '"+Couriel+"', SUpprimer0NonSupprimer1= 0 WHERE `raisonSociale` = '"+ mat.getRaisonSociale()+"'   " ;
 					try {
 						
-						String sql = "DELETE FROM `Fournisseur` WHERE raisonSociale = '"+mat.getRaisonSociale()+"'   " ;
 						PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
 						
 						int rs = pst.executeUpdate();
 						
 						if (rs != 0) {
 							System.out.println("Reussi");
+							tableViewFournisseur.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
+							
+//							new notificationThred().start();
+							
+							pst.close();
+							connexion.close();
 						}
 						
-//						pst.setString(1, mat.getRaisonSociale());
-//						
-//						pst.executeUpdate();
-						connexion.close();
-						
-						System.out.println("Reussi");
-						//--------------------------------------
-						tableViewFournisseur.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
-						// --------------------------------------------------------				
-						new notificationThred().start();
-						//----------------------------
-						System.out.println("Reussi");
 					} catch (SQLException e) {
 						
 						e.printStackTrace();
 						System.out.println("Non Reussi");
 					}
 			}
-					
-					
-					/*  String rsql="DELETE from Fournisseur WHERE raisonSociale=? AND sigle=? AND telephone=? AND adresse=? AND email=?";
-			            PreparedStatement ps = (PreparedStatement) connexion.prepareStatement(rsql);
-			            Fournisseur fcs = new Fournisseur();
-			            
-			            ps.setString(1,fcs.getRaisonSociale());
-			            ps.setString(2,fcs.getSigle());
-			            ps.setString(3,fcs.getTelephone());
-			            ps.setString(4, fcs.getEmail());
-			            ps.setString(5, fcs.getAdresse());
-			            
-			            ps.executeUpdate();*/
-//			            ps.close();
-						
-	/*				// --------------------------------------------------------
-					Confirmation.alerter();
-					// --------------------------------------------------------
-					Alert alert = new Alert(Alert.AlertType.INFORMATION);
-					alert.setHeaderText("Fournisseur a été bien supprimé");
-					alert.showAndWait();*/
-					
-					
-//			}  catch (SQLException ex) {
-//				Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
-//				ex.printStackTrace();
-/*//			}
-			} else {
-				Alert alertt = new Alert(Alert.AlertType.INFORMATION);
-				  alertt.setHeaderText("Veuillez choisir un fournisseur SVP");
-				  alertt.showAndWait();
-			}*/
 			 
-		}
+	}
 // -------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------
 		public void dateDuJourMethode() {
@@ -723,7 +682,6 @@ private boolean validerEmail() {
 //			btValidModif.setVisible(true);
 //			modifier.setVisible(false);
 		
-	
 								// DESACTIVER LE BUTTON	
 //		if(modifier) {
 		this.modifier.disableProperty().bind(BooleanExpression.booleanExpression(this.tableViewFournisseur.getSelectionModel().selectedItemProperty().isNull()));

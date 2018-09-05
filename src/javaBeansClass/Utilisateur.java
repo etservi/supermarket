@@ -36,7 +36,7 @@ public class Utilisateur {
 	}
 //-------------------------------------------------------------
 	public Utilisateur(int id, String nom, String prenom, String adresse, String telephone, String login,
-			String password, String email, byte[] image, Date date, String role) {
+			String password, String email, /*byte[] image,*/ Date date, String role) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -45,7 +45,7 @@ public class Utilisateur {
 		this.login = login;
 		this.password = password;
 		this.email = email;
-		this.image = image;
+//		this.image = image;
 		this.date = date;
 		this.role = role;
 	}

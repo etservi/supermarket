@@ -5,18 +5,12 @@ package directeurGeneral;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,21 +18,30 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.mysql.jdbc.PreparedStatement;
+import org.controlsfx.control.Notifications;
 
+import com.jfoenix.controls.JFXComboBox;
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
+
+import Qr_Code.LireCodeBArre;
 import baseDeDonnées.ConnectionDB;
+import codeBarre.CodeBarreImage;
+import directeurGeneral.AjoutFournisseurController.codeBarreStart;
 import javaBeansClass.Utilisateur;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.SelectionMode;
@@ -48,10 +51,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.util.Duration;
 import javafx.stage.Stage;
 
 public class AjoutUtilisateurController implements Initializable{
@@ -77,8 +82,7 @@ public class AjoutUtilisateurController implements Initializable{
 	@FXML private TableColumn<Utilisateur, String> colonneId;
 	ObservableList<Utilisateur> UtilisateurList = FXCollections.observableArrayList();
 	
-	
-
+	@FXML private JFXComboBox<String> comBoBoxSelectDroit;
 	
 	@FXML Label LabTof;
 	@FXML ImageView imageSet;
@@ -89,18 +93,21 @@ public class AjoutUtilisateurController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+//		ControlChiffPhone(); // CONTROLE DE SAISIT NUMERO TELEPHONE
 		ActualiserDonneesFournisseurTableau();
 		tableViewUtilisateur.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		//---------------------------------------------------------------------------------
-		try {
+		comBoBoxSelectDroit.getItems().addAll("Admin Général", "Admin Stock", "Caissier");  // LISTE DROIT UTILISATEUR
+		//------------------------------------------------------------------
+		try {  
 			genereRandom(); // METHODE RANDON GENERE ID IRTICLE S'IL N'EXISTE PAS DANS LA BASE DE DONNEES
+			codeBarreStart.main(null); // APPELLE METHODE - CREER CODE BARRE ========== VOIR LIGNE 465
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
+		
 		//------------------------------------------------------------------
-		ControlChiffPhone(); // CONTROLE DE SAISIT NUMERO TELEPHONE
-		
-		
+	
 		
 		
 	}
@@ -141,28 +148,16 @@ public class AjoutUtilisateurController implements Initializable{
 	      } else {
 	    	  refeLoginUSer.setText("");
 	      }
-		return pw;
-	      
-	       
-		
+		return pw;		
 }
-	 
 	
 	//-----------------------------------------------------------------------------------
-	public void dateDuJourMethode() throws IOException {
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-		Date today = Calendar.getInstance().getTime();
-		String reportDate = df.format(today);
-//		duJour.setText("Date : "+reportDate);
-		
-}
 	//-----------------------------------------------------------------------------------
 
 	// METHODE VALIDER NOM
-	@SuppressWarnings("unused")
 	private boolean validerNom() {
 
-		Pattern p = Pattern.compile("[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
+		Pattern p = Pattern.compile("[a-zA-Z ]+", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(refNom.getText());
 
 		if (m.find() && m.group().equals(refNom.getText())) {
@@ -170,19 +165,17 @@ public class AjoutUtilisateurController implements Initializable{
 
 		} else {
 			Alert alerte = new Alert(AlertType.WARNING);
-			alerte.setTitle("Attention");
-
-			alerte.setContentText("Entrer un Nom valide SVT!!");
+			alerte.setHeaderText("Entrer un Nom valide !");
 			alerte.showAndWait();
 		}
 		return false;
 	}
 	//----------------------------------------------------------------------------------
 	// ---------------------------------------------------------------------------------
-		@SuppressWarnings("unused")
+
 	private boolean validerPrenom() {
 			
-		Pattern p = Pattern.compile("[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
+		Pattern p = Pattern.compile("[a-zA-Z ]+", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(refPrenom.getText());
 
 		if (m.find() && m.group().equals(refPrenom.getText())) {
@@ -190,33 +183,30 @@ public class AjoutUtilisateurController implements Initializable{
 
 		} else {
 			Alert alerte = new Alert(AlertType.WARNING);
-			alerte.setTitle("Attention");
-			alerte.setContentText("Entrer un Prénom valide SVT!!");
+			alerte.setHeaderText("Entrer un Prénom valide !");
 			alerte.showAndWait();
 		}
 		return false;
-	}
-	//----------------------------------------------------------------------------------
+	}	
+	//---------------------------------------------------------------------------------- 
 	// ---------------------------------------------------------------------------------
-		// ---------------------------------------------------------------------------------
-		@SuppressWarnings("unused")
+
 	private boolean validerAdresse() {
 			
-		Pattern p = Pattern.compile("[a-zA-Z]+", Pattern.CASE_INSENSITIVE);
-		Matcher m = p.matcher(refPrenom.getText());
+		Pattern p = Pattern.compile("[a-zA-Z ]+", Pattern.CASE_INSENSITIVE);
+		Matcher m = p.matcher(refAdress.getText());
 
-		if (m.find() && m.group().equals(refPrenom.getText())) {
+		if (m.find() && m.group().equals(refAdress.getText())) {
 			return true;
 
 		} else {
 			Alert alerte = new Alert(AlertType.WARNING);
-			alerte.setTitle("Attention");
-			alerte.setContentText("Entrer un Prénom valide SVT!!");
+			alerte.setHeaderText("Entrer une Adresse valide !");
 			alerte.showAndWait();
 		}
 		return false;
 	}
-	@SuppressWarnings("unused")
+	
 	private boolean validerTelephone() {
 
 		Pattern p = Pattern.compile("^?[0-9]{2}\\-?[0-9]{3}\\-?[0-9]{2}\\-?[0-9]{2}$", Pattern.CASE_INSENSITIVE);
@@ -227,13 +217,12 @@ public class AjoutUtilisateurController implements Initializable{
 
 		} else {
 			Alert alerte = new Alert(AlertType.WARNING);
-			alerte.setTitle("Attention");
-			alerte.setContentText("Entrer un bon Numero Téléphone SVT!!");
+			alerte.setHeaderText("Entrer un bon Numero Téléphone SVT!!");
 			alerte.showAndWait();
 		}
 		return false;
 	}
-	//----------------------------------------------------------------------------------
+	//---------------------------------------------------------------------------------- 
 	// ---------------------------------------------------------------------------------
 		// ACTUALISER LES DONNEES SUR TABLEAU
 		public void ActualiserDonneesFournisseurTableau() {
@@ -283,25 +272,8 @@ public class AjoutUtilisateurController implements Initializable{
 		}
 		//----------------------------------------------------------------------------------
 		// ---------------------------------------------------------------------------------
-		@SuppressWarnings("unused")  // CONTROLE DE SAISIE NUMERO DE TELEPHONE
-		private boolean validerTelephoneMethode() {
-
-			Pattern p = Pattern.compile("^?[0-9]{2}\\-?[0-9]{3}\\-?[0-9]{2}\\-?[0-9]{2}$", Pattern.CASE_INSENSITIVE);
-			Matcher m = p.matcher(refTelephone.getText());
-
-			if (m.find() && m.group().equals(refTelephone.getText())) {
-				return true;
-
-			} else {
-				Alert alerte = new Alert(AlertType.WARNING);
-				alerte.setTitle("Attention");
-				alerte.setContentText("Entrer un bon Numero Téléphone SVT!!");
-				alerte.showAndWait();
-			}
-			return false;
-		}
 		//----------------------------------------------------------------------------------
-		public void ControlChiffPhone() {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
+		public void ControlChiffPhone(KeyEvent er) {  // CE GENRE DE METHODE ON LES APPELLE DIRECTEMENT DANS LA METHODE QUI RECHARGE LES DONNEES AUTOMATIQUE
 			refTelephone.setOnKeyTyped(e -> {
 				String ch = e.getCharacter();
 				if (!(ch.equals("0") || ch.equals("1") || ch.equals("2") | ch.equals("3") || ch.equals("4")
@@ -314,7 +286,7 @@ public class AjoutUtilisateurController implements Initializable{
 		}
 	//-----------------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------------
-		@SuppressWarnings("unused")
+
 		private boolean validerEmail() { // CONTROLE DE SAISIE ADRESSE EMAIL
 
 			Pattern p = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
@@ -332,99 +304,9 @@ public class AjoutUtilisateurController implements Initializable{
 			}
 			return false;
 		}
-		//----------------------------------------------------------------------------------
-		//--------------------------------------------------------------------------------	
-/*		
-			// APPEERSU D'UNE LIGNE SUR LE TABLEAU UNE FOIS CLIQUER
-			public void AfficheTableViewChampsAjoutUtilsateur(ActionEvent event) {
-				
-				Connection connexion = ConnectionDB.maConnection();
-				String requetteTAb = "SELECT nom, prenom, adresse, telephone, login, password, email, image, role from Utilisateur";
-				
-				try {
-					PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(requetteTAb);
-					ResultSet rs = pst.executeQuery();
-					while (rs.next()) {
-						Utilisateur mat = tableViewUtilisateur.getSelectionModel().getSelectedItem();
-						
-						refNom.setText(rs.getString(1));		
-						refPrenom.setText(rs.getString(2));									
-						refAdress.setText(rs.getString(3));						
-						refTelephone.setText(rs.getString(4));				
-						refEmail.setText(rs.getString(5));				
-						refeLoginUSer.setText(mat.getLogin());		
-						
-						refTelephone.setText(rs.getString(6));				
-//						refEmail.setText(rs.getString(7));				
-//						refeLoginUSer.setText(rs.getString(8));
-//						refeLoginUSer.setText(rs.getString(9));
-						
-					}
-				} catch (Exception e) {
-					
-				}
-				
-				
-			}
-			*/
-//---------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------
-			
-			@FXML private CheckBox CaissierChechbox,AdminChechbox,RespoStokChechbox  ;
-			ObservableList<String> listUserChechbox = FXCollections.observableArrayList();
-			
-			String p ;
-			// CONTROLE CHECKBOX CQISSIER
-						@FXML 
-						public void checkBoxCaissier() {
-							if(CaissierChechbox.isSelected()) {
-								AdminChechbox.setSelected(false);
-								RespoStokChechbox.setSelected(false);
-//								listUserChechbox.add(CaissierChechbox.getText());
-								
-								p = String.valueOf(CaissierChechbox.isSelected());
-								System.out.println(p);
-							}
-						}
-						
-						// CONTROLE CHECKBOX CQISSIER
-						@FXML 
-						public void checkBoxAdmin() {
-							if(AdminChechbox.isSelected()) {
-								CaissierChechbox.setSelected(false);
-								RespoStokChechbox.setSelected(false);
-//								listUserChechbox.add(AdminChechbox.getText());
-								
-								p = String.valueOf(AdminChechbox.isSelected());
-								System.out.println(p);
-							}
-						}
-						
-						// CONTROLE CHECKBOX CQISSIER
-						@FXML 
-						public void checkBoxResponsableStock() {
-							if(RespoStokChechbox.isSelected()) {
-								CaissierChechbox.setSelected(false);
-								AdminChechbox.setSelected(false);
-//								listUserChechbox.add(RespoStokChechbox.getText());
-								
-								p = String.valueOf(RespoStokChechbox.isSelected());
-								
-								System.out.println(p);
-							}
-						}		
-//======================================================================
-			
-			public void checkBoxVerificationSiSectected() {
-				if(! (CaissierChechbox.isSelected() | AdminChechbox.isSelected() | RespoStokChechbox.isSelected()) ) {
-					Alert alert = new Alert(AlertType.WARNING);
-		            alert.setHeaderText("SVP Selectionnez le droit d'utilisateur");
-//		            alert.setContentText("Selectionnez un article dans la tablle SVP.");
-		            
-		            alert.showAndWait();
-				}
-			}
-			
+//--------------------------------------------------------------------- 
+//---------------------------------------------------------------------
+//=====================================================================
 //=====================================================================
 			
 			public void resetTextFieldAndCombox() {
@@ -436,11 +318,6 @@ public class AjoutUtilisateurController implements Initializable{
 				refEmail.setText("");
 				refeLoginUSer.setText("");
 				refpassword.setText("");
-				
-				CaissierChechbox.setSelected(false);
-				RespoStokChechbox.setSelected(false);
-				AdminChechbox.setSelected(false);
-				listUserChechbox.clear();
 			}
 			
 //-----------------------------------------------------------------------------------	
@@ -464,8 +341,8 @@ public class AjoutUtilisateurController implements Initializable{
 				Image imgae = new Image(file.toURI().toString(), 100, 150, true, true);
 				
 			    ImageView imageView = new ImageView(imgae);
-				imageView.setFitWidth(140);
-				imageView.setFitHeight(190);
+				imageView.setFitWidth(170);
+				imageView.setFitHeight(220);
 				imageView.setPreserveRatio(true);
 				borderPanee.setCenter(imageView);
 		
@@ -503,109 +380,143 @@ public class AjoutUtilisateurController implements Initializable{
 // ---------------------------------------------------------------------------------------------------------------------------------------	
 //========================================================================================================================================
 //----------------------------------------------------------------------------------------------------------------------------------------
- /*
-	public void ajouterUtilisateur() throws FileNotFoundException {
-		
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // DATE AUTOMATIQUE - DATE, HEURE
-		Date today = Calendar.getInstance().getTime();
-		String reportDate = df.format(today);
-	//-----------------------------------------------s
-		FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog(primaryStage);
-		fis = new FileInputStream(file);
-		
-		checkBoxVerificationSiSectected(); // METHODE VERIFICATION SI UN DES CHECKBOX EST SELECTIONNE
-	//-----------------------------------------------s
-														// SA RESTE L'INSERTION D'IMAGE
-		Connection connexion = ConnectionDB.maConnection();
-		
-		
-		
-		String requette = " INSERT INTO `Utilisateur`(`id`, `nom`, `prenom`, `adresse`, `telephone`, `login`, `password`, `email`, `image`, `date`, `role`) VALUES ('12', '"+ refNom.getText() +"', '" +refPrenom.getText() +"', "
-				+ "'"+ refAdress.getText() +"', '"+ refTelephone.getText() +"', '"+ refeLoginUSer.getText() +"', '"+ refpassword.getText() +"', '"+ refEmail.getText() +"', '"+imageSet+"',"+ reportDate +", '"+ listUserChechbox.toString() +"'   ) " ;
-		
-		System.out.println(requette);
-		
-		int status;
-		try {
-			status = connexion.createStatement().executeUpdate(requette);
-			
-			if (status != 0) {
-				System.out.println("Reussi");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			
-			System.out.println("Pas Reussi");
-		}	
-
-		// IMAGE USING
-		FileChooser fileChooser = new FileChooser();
-		File file = fileChooser.showOpenDialog(primaryStage);
-		fis = new FileInputStream(file);
-		pst.setBinaryStream(8, (InputStream)fis, (int)file.length());  // PONITER SUR LA CELLULE IMAGE
-
-		
-
-		
-	}*/
-		
+ 
 // ---------------------------------------------------------------------------------------------------------------------------------------	
 //========================================================================================================================================
 //----------------------------------------------------------------------------------------------------------------------------------------
 		
-	public void addUser() throws SQLException, FileNotFoundException {
-	/*	
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy"); // DATE AUTOMATIQUE - DATE, HEURE
-		Date today = Calendar.getInstance().getTime();
-		String reportDate = df.format(today);
-		
-		
-		*/
+	public void addUser() {
 		
 	//// DATE DU JOUR
 		java.util.Date today = new java.util.Date();
 		java.sql.Date dateAutomatique = new java.sql.Date(today.getTime());
 		
+		
+	       String a = refNom.getText();
+	       String b = refPrenom.getText();
+	       String c = refAdress.getText();
+	       String d = refTelephone.getText();
+	       String e = refeLoginUSer.getText();
+	       String f =refpassword.getText();
+	       String g =refEmail.getText();
+	      
+		
 	      Connection con = ConnectionDB.maConnection();
+	      
+	      String sql = "INSERT into Utilisateur (`nom`, `prenom`, `adresse`, `telephone`, `login`, `password`, `email`, `date`, `role`) VALUES ('"+a+"', '"+b+"','"+c+"','"+d+"','"+e+"','"+f+"','"+g+"', '"+dateAutomatique+"', '"+comBoBoxSelectDroit.getValue()+"' )";
 
-	       PreparedStatement pre = (PreparedStatement) con.prepareStatement("insert into Utilisateur values(?,?,?,?,?,?,?,?,?,?)");
-
-	       pre.setInt(1,32);
-	       pre.setString(2,refNom.getText());
-	       pre.setString(3,refPrenom.getText());
-	       pre.setString(4,refAdress.getText());
-	       pre.setString(5, refTelephone.getText());
-	       pre.setString(6,refeLoginUSer.getText());
-	       pre.setString(7,refpassword.getText());
-	       pre.setString(8,refEmail.getText());
-	       //--------------------------------------------
-	       fis = new FileInputStream(file);
-	       pre.setBinaryStream(9, (InputStream) fis,(int) file.length());
-	       //--------------------------------------------
-//	       pre.setDate(10,dateAutomatique);
-	       pre.setString(10,listUserChechbox.toString());
-	       
-	       
-	       
-	       pre.executeUpdate();
-	       System.out.println("Successfully inserted the file into the database!");
-
-	       pre.close();
-	       con.close(); 
+	      if( (validerNom() && validerPrenom() && validerAdresse() && validerTelephone() && validerEmail() ) && ( refeLoginUSer.getText()!= null && refpassword.getText() != null ) && comBoBoxSelectDroit.getValue() != null ) { 
+	      
+	      try {
+			int pst = con.createStatement().executeUpdate(sql);
+			
+			if(pst != 0) {
+				System.out.println("Ressi");
+				Alert alert = new Alert(AlertType.INFORMATION);
+	            alert.setHeaderText( a + " " + b + " a été crée en tant que " + comBoBoxSelectDroit.getValue());
+	            alert.showAndWait();
+	            
+//	            new notificationThred().start(); // NOTIFICATION AJOUT EFFECTUE
+			}
+			
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	
+	      } else if (refeLoginUSer.getText().isEmpty()) {
+	    	  Alert alert = new Alert(AlertType.WARNING);
+	          alert.setHeaderText("Vérifiez votre login");
+	          alert.showAndWait();
+	         
+	    	  
+	      } else if (refpassword.getText().isEmpty()) {
+	    	  Alert alert = new Alert(AlertType.WARNING);
+	          alert.setHeaderText("Vérifiez votre mot de passe");
+	          alert.showAndWait();
+	         
+	    	  
+	      } else if (comBoBoxSelectDroit.getItems().isEmpty()) {
+	    	  Alert alert = new Alert(AlertType.WARNING);
+	          alert.setHeaderText("Vérifiez le type d'utilisateur");
+	          alert.showAndWait();
+	          
+	      }
+	      
+	      
+	      /*
+		       fis = new FileInputStream(file);
+		       pre.setBinaryStream(9, (InputStream) fis,(int) file.length());
+	       */
 
 	    //==============================================================================================  
-	       checkBoxVerificationSiSectected(); // METHODE VERIFICATION SI UN DES CHECKBOX EST SELECTIONNE
-		//-----------------------------------------------s
-															// SA RESTE L'INSERTION D'IMAGE
 			
-			
+
 		
 		
 	}
-		
-		
-		
+	
+//=====================================================================================================
+	
+	//=====================================================================================================
+	//---------------------------------------------- CODE BARRE - Qr_CODE
+	//////////////////////////////////////////////////////////////////
+	// DEMARRER CODE BARRE AUTOMATIQUE - J'AI CREE UNE METHODE MAIN //
+	//////////////////////////////////////////////////////////////////
+	public static class codeBarreStart{
+		public static void main(String[] args) throws SQLException {
+
+			Connection connexion = ConnectionDB.maConnection();
+			String query = "SELECT telephone, email from Utilisateur";
+			Statement stmt = null;
+			stmt = (Statement) connexion.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				CodeBarreImage.createImage(rs.getString(1), rs.getString(2)); // CREE LE CODE IMAGE
+				LireCodeBArre.generete_qr( rs.getString(1), rs.getString(2) ); // CREE LE Qr_Code
+			}
+		}
+	}
+//=======================================================================================================
+	
+//======================================================================================================
+/*	
+	public class notificationThred extends Thread {
+		@Override
+		public void run(){
+			
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException ex) {
+				Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
+				ex.printStackTrace();
+			}
+			
+			Image img = new Image("/images/YES.png");
+			Notifications notificationBuilder = Notifications.create()
+					.title("Action Réussie")
+					.text("Requette bien effectuée")
+					.graphic(new ImageView(img))
+					.hideAfter(Duration.seconds(5))
+					.position(Pos.TOP_RIGHT)
+					.onAction(new EventHandler<ActionEvent>() {
+						
+						@Override
+						public void handle(ActionEvent event) {
+							System.out.println("Notification valide");							
+						}
+					});
+//			notificationBuilder.darkStyle();
+			
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					notificationBuilder.show();
+				}			
+		});
+	  }
+	}
+		*/
 		
 		
 		

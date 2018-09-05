@@ -94,7 +94,6 @@ public class FactureController implements Initializable{
 		try {
 			autoCopleteWords();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

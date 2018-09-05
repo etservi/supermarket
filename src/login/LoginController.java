@@ -54,21 +54,13 @@ public class LoginController implements Initializable{
    Stage StgLogin;
     
 	
-	// LONGUEUR - LARGEUR - DEMARAGE AVEC IMAGE - COMPLEMENT VOIR LIGNE 67 -------------------
-		private static final double height = Screen.getPrimary().getVisualBounds().getHeight();
-		private static final double width = Screen.getPrimary().getVisualBounds().getWidth();
-		private Image app, splash;
+	
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
 		
-		// DEMARAGE AVEC UNE IMAGE---------------- COMPLEMENT VOIR LIGNE 57 ---------------------------------------------
-			app = new Image(getClass().getResource("/images/ajouter.png").toExternalForm());
-			splash = new Image(getClass().getResource("/images/supermarkeT.jpg").toExternalForm());
-			SplashScreen.render(new double[] { LoginController.height, LoginController.width } , app, splash).showAndWait();	
-		
-		//-----------------------------------------------------------------------------------------------------------------	
+			
 	}
 	
 	//=======================================================================
@@ -79,8 +71,8 @@ public class LoginController implements Initializable{
 			
 			// INTERVALLE HEURE DE CONNEXION ---------------------------------
 			var currentTime = LocalTime.now();
-			LocalTime before = LocalTime.parse("00:00");
-	        LocalTime after = LocalTime.parse("07:00");
+			LocalTime before = LocalTime.parse("00:30");
+	        LocalTime after = LocalTime.parse("04:00");
 	        
 //	        java.time.ZonedDateTime before = java.time.ZonedDateTime.parse("07:00");
 //	        java.time.ZonedDateTime after = java.time.ZonedDateTime.parse("07:00");
@@ -117,19 +109,19 @@ public class LoginController implements Initializable{
 					logRole = rs.getString("role");
 					//-------------------------------------
 					
-					if ( logRole.equalsIgnoreCase("Administrateur") ) {
+					if ( logRole.equalsIgnoreCase("Admin Général") ) {
 						
 						Parent fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(fxml);
 						
-					} else if (logRole.equalsIgnoreCase("Responsable de stock")) {
+					} else if (logRole.equalsIgnoreCase("Caissier")) {
 						
 						Parent pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();
 						paneLogin.getChildren().setAll(pane);
 					
-					} else if (logRole.equalsIgnoreCase("Responsable commercial")) {
+					} else if (logRole.equalsIgnoreCase("Admin Stock")) {
 //						
 						Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
 						paneLogin.getChildren().removeAll();

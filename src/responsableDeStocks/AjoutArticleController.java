@@ -8,9 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXTextField;
+import com.mysql.jdbc.Statement;
 
+import Qr_Code.LireCodeBArre;
 import baseDeDonnées.ConnectionDB;
+import codeBarre.CodeBarreImage;
 import javaBeansClass.DomaineCategorie;
 import javaBeansClass.Fournisseur;
 import javaBeansClass.Rayon;
@@ -50,6 +52,14 @@ public class AjoutArticleController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		affichLogin();
+		
+		// APPELLE METHODE - CREER CODE BARRE ========== VOIR LIGNE 245
+		try {
+			codeBarreStart.main(null);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	//--------------------------------------------------------------------------
@@ -147,7 +157,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	
 	public void ouvreRayon() throws IOException {
 			Stage stage = new Stage();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Rayon.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/Rayon.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root,370,500);
 			scene.getStylesheets().add(getClass().getResource("Rayon.css").toExternalForm());
@@ -157,7 +167,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	//-------------------------------------------------------------------------
 	public void ouvreCategirie() throws IOException {
 		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Categorie.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/Categorie.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root,370,500);
 		scene.getStylesheets().add(getClass().getResource("Categorie.css").toExternalForm());
@@ -167,7 +177,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	//-------------------------------------------------------------------------
 	public void ouvreFournisseur() throws IOException {
 		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/AjoutFournisseur.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/AjoutFournisseur.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root,950, 500);
 		scene.getStylesheets().add(getClass().getResource("AjoutFournisseur.css").toExternalForm());
@@ -181,7 +191,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 			// REDIRECTION SUR ACCUEIL - IMAGE
 			@FXML
 			private void retourAuMenu() throws IOException {
-				Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
+				Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
 				rootAjoutArt.getChildren().setAll(pane);
 
 			}
@@ -204,7 +214,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 				}
 				
 
-				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixAvendre,Livrer0nonLivrer1  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', 1)";
+				String sqlAjoutArticle = "INSERT into Article (idRayon, idCategoriee, raisonSociale, id,codeBarre,nomArticleNom, qteStock, prixUnitaire, prixAvendre, Livrer0nonLivrer1  ) VALUES ('" + comboxRayn.getValue() + "','" + comboCatg.getValue() + "','" + comboRaisonSociale.getValue() + "','" + idInsert + "', '" + tdCodeBarre.getText() + "', '"+tfNomArticl.getText() + "', '" + tfQt.getText() + "', '" + tfPrixUnitaire.getText() + "', '" + tfPrixDeVente.getText() + "', 1)";
 				System.out.println(sqlAjoutArticle);
 				int statut;
 				try {
@@ -226,5 +236,27 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 			}
 			
 	//-----------------------------------------------------------------------------------
+//=====================================================================================================
+			//---------------------------------------------- CODE BARRE - Qr_CODE
+			//////////////////////////////////////////////////////////////////
+			// DEMARRER CODE BARRE AUTOMATIQUE - J'AI CREE UNE METHODE MAIN //
+			//////////////////////////////////////////////////////////////////
+			public static class codeBarreStart{
+				public static void main(String[] args) throws SQLException {
+
+					Connection connexion = ConnectionDB.maConnection();
+					String query = "SELECT nomArticleNom, codeBarre from Article";
+					Statement stmt = null;
+					stmt = (Statement) connexion.createStatement();
+					ResultSet rs = stmt.executeQuery(query);
+					
+					while (rs.next()) {
+						CodeBarreImage.createImage(rs.getString(1), rs.getString(2)); // CREE LE CODE IMAGE
+						LireCodeBArre.generete_qr( rs.getString(1), rs.getString(2) ); // CREE LE Qr_Code
+					}
+				}
+			}
+//=======================================================================================================
+			
 			
 }

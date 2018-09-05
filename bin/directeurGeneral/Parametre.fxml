@@ -31,14 +31,14 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="DODGERBLUE" height="46.0" layoutY="21.0" stroke="#9a714c" strokeType="INSIDE" width="902.0" />
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="#d45379" height="46.0" layoutY="21.0" stroke="#f4cf35" strokeType="INSIDE" width="902.0" />
                   <TabPane layoutY="31.0" prefHeight="493.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                       <Tab text="UTILISATEUR">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="496.0" prefWidth="800.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="377.0" layoutX="31.0" layoutY="31.0" opacity="0.79" stroke="#9a714c" strokeType="INSIDE" width="713.0" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f4cf35" height="377.0" layoutX="31.0" layoutY="31.0" opacity="0.79" stroke="#d45379" strokeType="INSIDE" width="713.0" />
                                     <TableView fx:id="tableViewUtilisateur" layoutX="50.0" layoutY="81.0" prefHeight="261.0" prefWidth="678.0">
                                       <columns>
                                         <TableColumn fx:id="colonneNom" prefWidth="107.0" text="NOM" />
@@ -64,7 +64,7 @@
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="288.0" layoutX="126.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" width="518.0" />
+                                    <Rectangle arcHeight="1800.0" arcWidth="5.0" fill="#e6d8d1" height="288.0" layoutX="126.0" layoutY="54.0" stroke="#f4cf35" strokeType="INSIDE" width="518.0" />
                                     <RadioButton layoutX="166.0" layoutY="95.0" mnemonicParsing="false" text="Arreter Enregistrement Article" />
                                     <RadioButton layoutX="166.0" layoutY="157.0" mnemonicParsing="false" text="Limiter Enregistrment Article" />
                                     <TextField layoutX="238.0" layoutY="185.0" prefHeight="25.0" prefWidth="67.0" />
@@ -90,7 +90,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="302.0" layoutX="59.0" layoutY="55.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" width="580.0" />
+                                    <Rectangle arcHeight="1800.0" arcWidth="5.0" fill="#cd9a44" height="302.0" layoutX="59.0" layoutY="55.0" opacity="0.79" stroke="#f4cf35" strokeType="INSIDE" width="580.0" />
                                     <ComboBox fx:id="comboxAdmin" layoutX="295.0" layoutY="183.0" onMouseClicked="#comboBoxAdmin" prefHeight="26.0" prefWidth="207.0" />
                                     <Label layoutX="101.0" layoutY="189.0" text="Admin- Utilisateur Id">
                                        <font>
@@ -110,7 +110,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="340.0" layoutX="33.0" layoutY="53.0" opacity="0.79" stroke="BLACK" strokeType="INSIDE" width="611.0" />
+                                    <Rectangle arcHeight="1800.0" arcWidth="5.0" fill="#f4cf35" height="340.0" layoutX="33.0" layoutY="53.0" opacity="0.79" stroke="#d45379" strokeType="INSIDE" width="611.0" />
                                     <Text fill="#f50606" layoutX="58.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rq : Avant d'ajouter un article, il faut préciser qui a le doit de vendre chez les Caissier" />
                                     <ComboBox fx:id="comboxCaissier" layoutX="260.0" layoutY="177.0" onMouseClicked="#comboBoxCaissier" prefHeight="26.0" prefWidth="200.0" />
                                     <Label layoutX="58.0" layoutY="190.0" text="Caissier - Utilisateur Id">
@@ -133,7 +133,7 @@
                                  <children>
                                     <AnchorPane layoutX="2.0" layoutY="3.0" prefHeight="451.0" prefWidth="794.0">
                                        <children>
-                                          <Rectangle arcHeight="800.0" arcWidth="5.0" fill="DODGERBLUE" height="324.0" layoutX="140.0" layoutY="76.0" stroke="#9a714c" strokeType="INSIDE" width="394.0" />
+                                          <Rectangle arcHeight="800.0" arcWidth="5.0" fill="DODGERBLUE" height="324.0" layoutX="140.0" layoutY="76.0" stroke="#d45379" strokeType="INSIDE" width="394.0" />
                                           <JFXTextField fx:id="refUtilisateur" focusColor="#f50000" layoutX="333.0" layoutY="150.0">
                                              <effect>
                                                 <Reflection />
@@ -170,7 +170,7 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="403.0" layoutX="38.0" layoutY="21.0" opacity="0.76" stroke="BLACK" strokeType="INSIDE" width="839.0" />
+                                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e6dad0" height="403.0" layoutX="38.0" layoutY="21.0" opacity="0.76" stroke="#d45379" strokeType="INSIDE" width="839.0" />
                                     <PieChart fx:id="pieChart" layoutX="62.0" layoutY="49.0" prefHeight="333.0" prefWidth="373.0" title="Articles vendus" />
                                     <Label fx:id="pourcentz" layoutX="48.0" layoutY="396.0" textFill="#f20101">
                                        <font>
@@ -192,10 +192,13 @@
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <TableView layoutX="59.0" layoutY="71.0" prefHeight="336.0" prefWidth="808.0">
+                                    <TableView layoutX="59.0" layoutY="71.0" prefHeight="336.0" prefWidth="808.0" tableMenuButtonVisible="true">
                                       <columns>
-                                        <TableColumn prefWidth="109.0" text="Id Article" />
-                                        <TableColumn prefWidth="124.0" text="Qt. Stock" />
+                                        <TableColumn prefWidth="229.0" text="Nom Article" />
+                                        <TableColumn prefWidth="202.0" text="Code Barre" />
+                                          <TableColumn prefWidth="98.0" text="Rayon" />
+                                          <TableColumn prefWidth="110.0" text="Catégorie" />
+                                          <TableColumn minWidth="0.0" prefWidth="155.0" text="Qt. restante" />
                                       </columns>
                                     </TableView>
                                     <TextField layoutX="696.0" layoutY="32.0" promptText="recherche" />

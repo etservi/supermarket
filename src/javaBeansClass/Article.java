@@ -23,9 +23,11 @@ public class Article {
 	private int Livrer0nonLivrer1;
 	private byte[] facture;
 
-//	public Article(String barrCod, String momArtcle, int qtte, Double prixUnit) {
-//		super();
-//	}
+	public Article(String nomArticleNom, String codeBarre) {
+		super();
+		this.nomArticleNom = nomArticleNom;
+		this.codeBarre = codeBarre;
+	}
 
 	public Article(String nomArticleNom, String codeBarre, int qteStock, double prixUnitaire) {
 

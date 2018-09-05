@@ -13,10 +13,10 @@
    <children>
       <Rectangle arcHeight="1200.0" arcWidth="5.0" fill="LEMONCHIFFON" height="37.0" layoutY="19.0" opacity="0.78" stroke="#99684c" strokeType="INSIDE" width="950.0" />
       <JFXTextField fx:id="tfRechercheCategorie" focusColor="#f20202" layoutX="303.0" layoutY="24.0" promptText=" recherche Catégorie" unFocusColor="#d166ac" />
-      <TableView fx:id="treeviewCategorie" editable="true" layoutX="20.0" layoutY="68.0" opacity="0.92" prefHeight="312.0" prefWidth="452.0" tableMenuButtonVisible="false">
+      <TableView fx:id="treeviewCategorie" editable="true" layoutX="20.0" layoutY="68.0" opacity="0.92" prefHeight="312.0" prefWidth="452.0" tableMenuButtonVisible="true">
         <columns>
             <TableColumn fx:id="clLibelleCategorie" prefWidth="172.0" sortable="false" text="LIBELLE" />
-          <TableColumn efx:id="clRayonCat" prefWidth="265.0" text="ID RAYON" />
+          <TableColumn fx:id="clRayonCat" prefWidth="265.0" text="ID RAYON" />
         </columns>
       </TableView>
       <Text fill="#d166ac" layoutX="20.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Catégorie">

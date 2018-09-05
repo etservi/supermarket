@@ -60,7 +60,7 @@
      
 
                   <JFXTextField fx:id="prixUnitairee" alignment="CENTER_RIGHT" focusColor="#a84040" layoutX="156.0" layoutY="221.0" prefHeight="25.0" prefWidth="194.0" promptText="0.0 F CFA" />
-                  <JFXTextField fx:id="codeBarr" focusColor="#a84040" layoutX="156.0" layoutY="261.0" prefHeight="25.0" prefWidth="194.0" promptText="Code barre" />
+                  <JFXTextField fx:id="codeBarr" focusColor="#a84040" layoutX="156.0" layoutY="261.0" onKeyTyped="#setAerticle" prefHeight="25.0" prefWidth="194.0" promptText="Code barre" />
                   <Button layoutX="69.0" layoutY="320.0" mnemonicParsing="false" onAction="#ajouterArticle" text="Ajouter Article" />
                   <Separator layoutX="36.0" layoutY="362.0" prefWidth="200.0" />
                   <JFXTextField fx:id="montantverser" alignment="CENTER_RIGHT" focusColor="#a84040" layoutX="156.0" layoutY="379.0" prefHeight="25.0" prefWidth="194.0" promptText="Montant Versé" />
@@ -76,7 +76,7 @@
                   </TableView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="36.0" layoutX="381.0" layoutY="452.0" opacity="0.70" stroke="#4895d5" strokeType="INSIDE" width="557.0" />
                   <Button fx:id="btAnnulArticle" layoutX="547.0" layoutY="457.0" mnemonicParsing="false" onAction="#annulerArticle" text="Annuler" />
-                  <Button layoutX="822.0" layoutY="456.0" mnemonicParsing="false" text="Valider Achat" />
+                  <Button layoutX="822.0" layoutY="456.0" mnemonicParsing="false" onAction="#livrerArticle" text="Valider Achat" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LEMONCHIFFON" height="27.0" layoutX="381.0" layoutY="12.0" opacity="0.70" stroke="#4895d5" strokeType="INSIDE" width="557.0" />
                   <Label fx:id="dateduJour" layoutX="394.0" layoutY="18.0" text="DATE : " textFill="#fc0000">
                      <font>

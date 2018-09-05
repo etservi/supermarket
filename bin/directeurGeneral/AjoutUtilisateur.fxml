@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="utilisateurPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.AjoutUtilisateurController">
    <children>
@@ -65,11 +66,11 @@
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <JFXTextField fx:id="refeLoginUSer" layoutX="212.0" layoutY="275.0" prefHeight="25.0" prefWidth="194.0" promptText="Login">
+      <JFXTextField fx:id="refeLoginUSer" blendMode="GREEN" layoutX="212.0" layoutY="275.0" prefHeight="25.0" prefWidth="194.0" promptText="Login">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <JFXPasswordField fx:id="refpassword" layoutX="212.0" layoutY="321.0" prefHeight="25.0" prefWidth="194.0" promptText="Mot de passe">
+      <JFXPasswordField fx:id="refpassword" blendMode="GREEN" layoutX="212.0" layoutY="321.0" prefHeight="25.0" prefWidth="194.0" promptText="Mot de passe" text="0000">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXPasswordField>
@@ -77,18 +78,6 @@
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <CheckBox fx:id="CaissierChechbox" layoutX="472.0" layoutY="145.0" onAction="#checkBoxCaissier" text="Caissier">
-         <font>
-            <Font size="14.0" />
-         </font></CheckBox>
-      <CheckBox fx:id="AdminChechbox" layoutX="472.0" layoutY="175.0" onAction="#checkBoxAdmin" text="Admin général">
-         <font>
-            <Font size="14.0" />
-         </font></CheckBox>
-      <CheckBox fx:id="RespoStokChechbox" layoutX="473.0" layoutY="206.0" onAction="#checkBoxResponsableStock" text="Admin de stocks">
-         <font>
-            <Font size="14.0" />
-         </font></CheckBox>
       <JFXButton layoutX="309.0" layoutY="440.0" mnemonicParsing="false" onAction="#resetTextFieldAndCombox" text="Effacer" />         
 <!--                         editable="false"                      -->
       
@@ -97,11 +86,7 @@
 			<Font name="System Bold" size="14.0" />
 			 </font>
 		  </Label>
-      <Label layoutX="472.0" layoutY="114.0" text="Droit Utilisateur" underline="true">
-         <font>
-            <Font size="18.0" />
-         </font></Label>
-      <ImageView fx:id="imageSet" fitHeight="38.0" fitWidth="53.0" layoutX="431.0" layoutY="291.0" onMouseClicked="#UploadImage" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageSet" fitHeight="38.0" fitWidth="53.0" layoutX="525.0" layoutY="153.0" onMouseClicked="#UploadImage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/new-user.png" />
          </image>
@@ -118,12 +103,14 @@
       <Separator layoutX="92.0" layoutY="72.0" prefWidth="200.0" />
       <Separator layoutX="166.0" layoutY="432.0" prefHeight="3.0" prefWidth="486.0" />
       <Label fx:id="LabTof" layoutX="89.0" layoutY="407.0" prefHeight="16.0" prefWidth="608.0" />
-      <BorderPane fx:id="borderPanee" layoutX="473.0" layoutY="231.0" prefHeight="175.0" prefWidth="166.0" />
+      <BorderPane fx:id="borderPanee" layoutX="431.0" layoutY="199.0" prefHeight="199.0" prefWidth="214.0" />
       <Hyperlink layoutX="58.0" layoutY="453.0" onAction="#retourMnu" text="retour">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Hyperlink>
+      <JFXComboBox fx:id="comBoBoxSelectDroit" blendMode="GREEN" cache="true" focusColor="#f50202" layoutX="450.0" layoutY="98.0" prefHeight="26.0" prefWidth="194.0" promptText="Droit" />
+      <Text layoutX="525.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo" />
 <!--       <JFXButton layoutX="182.0" layoutY="440.0" onAction="" text="TestAffich" /> -->
 <!--       <JFXPasswordField layoutX="354.0" layoutY="402.0" /> -->
 <!--       <JFXTextField layoutX="358.0" layoutY="59.0" /> -->

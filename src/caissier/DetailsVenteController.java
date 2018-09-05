@@ -15,7 +15,6 @@ import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import directeurGeneral.AjoutFournisseurController;
-import directeurGeneral.DetailsArticleParDateController;
 import javaBeansClass.Article;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

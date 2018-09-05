@@ -15,8 +15,11 @@ import javafx.geometry.Rectangle2D;
 
 public class LoginMain extends Application {
 	
-	 
-
+	// LONGUEUR - LARGEUR - DEMARrAGE AVEC IMAGE - COMPLEMENT VOIR LIGNE 33 -------------------
+			private static final double height = Screen.getPrimary().getVisualBounds().getHeight();
+			private static final double width = Screen.getPrimary().getVisualBounds().getWidth();
+			private Image app, splash;
+			
 	@Override
 	public void start(Stage StgLogin) {
 
@@ -26,7 +29,12 @@ public class LoginMain extends Application {
 		VericationConnexionBaseDeDonnees();
 
 		try {
-
+			// DEMARAGE AVEC UNE IMAGE---------------- COMPLEMENT VOIR LIGNE 19 ---------------------------------------------
+			app = new Image(getClass().getResource("/images/ajouter.png").toExternalForm());
+			splash = new Image(getClass().getResource("/images/logo demarrage.jpg").toExternalForm());
+			SplashScreen.render(new double[] { LoginMain.height, LoginMain.width } , app, splash).showAndWait(); // APPELLE METHODE DANS LA CLASSE SplashScreen	
+			
+			try {
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Login.fxml"));
 			Scene scene = new Scene(root, 950, 500);
 			scene.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
@@ -38,18 +46,19 @@ public class LoginMain extends Application {
 			StgLogin.setX( (rd.getWidth() - StgLogin.getWidth()) /2 );
 			StgLogin.setY( (rd.getHeight() - StgLogin.getHeight()) /2 );
 			
-			
-			
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (NullPointerException ex) {
+			System.exit(0);
 		}
 	}
 
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+//==============================================================================================
 	// CONNEXION DANS LA BASE DE DONNEES
 	public void VericationConnexionBaseDeDonnees() {
 
@@ -61,6 +70,5 @@ public class LoginMain extends Application {
 			System.out.println("Connexion de la base de données réussie");
 		}
 	}
-	// ----------
-
+//==============================================================================================
 }
