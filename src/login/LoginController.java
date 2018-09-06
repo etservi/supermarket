@@ -12,6 +12,9 @@ import java.util.Timer;
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
+import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -31,8 +34,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.transform.Scale;
+import javafx.scene.transform.Translate;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 
 public class LoginController implements Initializable{
@@ -45,6 +52,8 @@ public class LoginController implements Initializable{
 	@FXML private Button btValidCon,effacerChp;
 	
     @FXML private Label dateduJour;
+    
+    @FXML private Circle cercle1, cerlce2;
 	
     int compteurAdminStock = 0;
     int compteurCaissier = 0;
@@ -59,11 +68,49 @@ public class LoginController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		valideLogin() ; // LONGUEUR QUE PRENDRE LE LOGIN
+//====================================================================================== TRANSITION ==
+		RotateTransition btnRotate = new RotateTransition(Duration.seconds(2), btValidCon);
+		btnRotate.setByAngle(360);
+		btnRotate.setDelay(Duration.seconds(1));
+		btnRotate.setRate(5);
+		btnRotate.setCycleCount(5);
+		btnRotate.play();
+		// COMMENCER A PARTIR DE -70
+		btValidCon.setLayoutX(-70); 
+		btValidCon.setLayoutY(275);
+		// QUITTER DE GAUCHE A DROITE - JUSKA SUR L'ABCISSE 440
+		TranslateTransition btnTranslate = new TranslateTransition(Duration.seconds(2), btValidCon);
+		btnTranslate.setDelay(Duration.seconds(1));
+		btnTranslate.setToX(440);
+		btnTranslate.setCycleCount(1);
+		btnTranslate.play();
+//====================================================================================================
+		RotateTransition btnAnnulerRotate = new RotateTransition(Duration.seconds(2), effacerChp);
+		btnAnnulerRotate.setByAngle(360);
+		btnAnnulerRotate.setDelay(Duration.seconds(1));
+		btnAnnulerRotate.setRate(5);
+		btnAnnulerRotate.setCycleCount(5);
+		btnAnnulerRotate.play();
+//====================================================================================================		
+		setRotae(cercle1, true, 360, 10);
+		setRotae(cerlce2, true, 180, 18);
+}
+//====================================================================================================
+	
+	int rotate = 0;
+	 // TRANSITION ------------------------------------------ TRANSITION //
+	public void setRotae(Circle c, boolean reverse, int angle, int duration) {
+		RotateTransition rotateTransition = new RotateTransition(Duration.seconds(duration), c);
+		rotateTransition.setAutoReverse(reverse);
+		rotateTransition.setByAngle(angle);
+		rotateTransition.setDelay(Duration.seconds(0));
+		rotateTransition.setRate(3);
+		rotateTransition.setCycleCount(18);
+		rotateTransition.play();
 		
-			
 	}
 	
-	//=======================================================================
+//====================================================================================================
 	
 		// REDIRECTION SUR ACCUEIL ! CAISSIER / DIRECTEUR / RESPONSABLE DE STOCKS
 		@FXML
@@ -71,7 +118,7 @@ public class LoginController implements Initializable{
 			
 			// INTERVALLE HEURE DE CONNEXION ---------------------------------
 			var currentTime = LocalTime.now();
-			LocalTime before = LocalTime.parse("00:30");
+			LocalTime before = LocalTime.parse("00:00");
 	        LocalTime after = LocalTime.parse("04:00");
 	        
 //	        java.time.ZonedDateTime before = java.time.ZonedDateTime.parse("07:00");

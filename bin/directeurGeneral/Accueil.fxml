@@ -8,6 +8,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -68,13 +69,16 @@
          <center>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
-                  <Rectangle arcHeight="900.0" arcWidth="50.0" fill="LEMONCHIFFON" height="336.0" layoutX="49.0" layoutY="99.0" opacity="0.78" stroke="#a47753" strokeType="INSIDE" width="855.0" />
+                  <Rectangle arcHeight="900.0" arcWidth="50.0" fill="LEMONCHIFFON" height="336.0" layoutX="49.0" layoutY="99.0" opacity="0.78" stroke="#a47753" strokeType="INSIDE" strokeWidth="5.0" width="855.0">
+                     <effect>
+                        <Glow />
+                     </effect></Rectangle>
 
-                  <Circle fill="#a9afad" layoutX="127.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
-                  <Circle fill="#a9afad" layoutX="490.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
-                  <Circle fill="#a9afad" layoutX="604.0" layoutY="378.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
-                  <Circle fill="#a9afad" layoutX="247.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
-                  <Circle fill="#a9afad" layoutX="366.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" />
+                  <Circle fx:id="cercle1" fill="#a9afad" layoutX="127.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
+                  <Circle fx:id="cercle2" fill="#a9afad" layoutX="490.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
+                  <Circle fx:id="cercle3" fill="#a9afad" layoutX="604.0" layoutY="378.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
+                  <Circle fx:id="cercle4" fill="#a9afad" layoutX="247.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
+                  <Circle fx:id="cercle5" fill="#a9afad" layoutX="366.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
                   <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="217.0" layoutY="344.0" onMouseClicked="#ajouterFournisseur" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Fournisseur.png" />

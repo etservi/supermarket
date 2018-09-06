@@ -516,20 +516,21 @@ public class FactureController implements Initializable{
 			
 			Connection con = ConnectionDB.maConnection();
 			
-			String sql = " SELECT * FROM Article";
+			String sql = " SELECT * FROM Article    " ;  //  codeBarre LIKE '%_' 
+			System.out.println(sql);
 			String codeBarrView = null;
 			try {
 				PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
 				ResultSet rs = pst.executeQuery();
 				
-				if(rs.next()) {
+				while(rs.next()) {
 					codeBarrView = rs.getString("codeBarre");
 					System.out.println(codeBarrView);
-				}
+				}	 
 				
 				if( codeBarrView.equalsIgnoreCase(codeBarr.getText() ) ) {
 					System.out.println("Existe");
-				} 
+				}
 				
 			} catch (SQLException e) {
 

@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
+import javafx.animation.RotateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,7 +19,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import login.StaticInfo;
 
 
@@ -28,11 +31,18 @@ public class AccueilController implements Initializable {
 	 Stage stage = null;
 	@FXML TextField tfFirstName, tfLastName, tfEmail;
 	@FXML Label affichUser;
+	
+	@FXML Circle cercle1, cercle2, cercle3, cercle4, cercle5;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
-			affichLogin(); // AFFICHE UTILISATEUR		
+		affichLogin(); // AFFICHE UTILISATEUR		
+			//====================================================================================================		
+		setRotae(cercle1, true, 360, 10);
+		setRotae(cercle2, true, 180, 18);
+		setRotae(cercle3, true, 360, 10);
+		setRotae(cercle4, true, 180, 18);
+		setRotae(cercle5, true, 360, 10);
 		
 	}
 	
@@ -230,6 +240,21 @@ public class AccueilController implements Initializable {
 	}
 		
 // ---------------------------------------------------
+	//====================================================================================================
+	
+		int rotate = 0;
+		 // TRANSITION ------------------------------------------ TRANSITION //
+		public void setRotae(Circle c, boolean reverse, int angle, int duration) {
+			RotateTransition rotateTransition = new RotateTransition(Duration.seconds(duration), c);
+			rotateTransition.setAutoReverse(reverse);
+			rotateTransition.setByAngle(angle);
+			rotateTransition.setDelay(Duration.seconds(0));
+			rotateTransition.setRate(3);
+			rotateTransition.setCycleCount(18);
+			rotateTransition.play();
+			
+		}
 		
+	//====================================================================================================
 
 }

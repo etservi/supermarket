@@ -46,7 +46,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="336.0" layoutX="49.0" layoutY="99.0" opacity="0.74" stroke="#8d583c" strokeType="INSIDE" width="855.0" />
-                  <Circle fill="#a9afad" layoutX="264.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
+                  <Circle fx:id="cercle1" fill="#a9afad" layoutX="264.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
                   <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="233.0" layoutY="337.0" onMouseClicked="#statistique" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Statistique.png" />
@@ -55,7 +55,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Circle fill="#a9afad" layoutX="135.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
+                  <Circle fx:id="cercle2" fill="#a9afad" layoutX="135.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
                   <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="104.0" layoutY="336.0" onMouseClicked="#listeArticle" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/storage.png" />
@@ -64,9 +64,9 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Circle fill="#a9afad" layoutX="405.0" layoutY="369.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
-                  <Circle fill="#a9afad" layoutX="657.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
-                  <Circle fill="#a9afad" layoutX="539.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" />
+                  <Circle fx:id="cercle3" fill="#a9afad" layoutX="405.0" layoutY="369.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
+                  <Circle fx:id="cercle4" fill="#a9afad" layoutX="657.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
+                  <Circle fx:id="cercle5" fill="#a9afad" layoutX="539.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
                   
                   <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="629.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
                      <image>

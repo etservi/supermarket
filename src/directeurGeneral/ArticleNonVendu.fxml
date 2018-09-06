@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -25,19 +26,20 @@
             <TableColumn fx:id="colonnePrixVendu" prefWidth="124.0" text="Prix à Vdre" />
         </columns>
       </TableView>
-      <JFXDatePicker fx:id="dateA" defaultColor="#895b39" layoutX="413.0" layoutY="28.0" prefHeight="31.0" prefWidth="151.0" />
-      <JFXDatePicker fx:id="dateB" defaultColor="#895b39" layoutX="647.0" layoutY="30.0" prefHeight="29.0" prefWidth="151.0" />
-      <Text layoutX="594.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="à">
+      <JFXDatePicker fx:id="dateA" defaultColor="#895b39" layoutX="283.0" layoutY="28.0" prefHeight="31.0" prefWidth="151.0" />
+      <JFXDatePicker fx:id="dateB" defaultColor="#895b39" layoutX="481.0" layoutY="30.0" prefHeight="29.0" prefWidth="151.0" />
+      <Text layoutX="445.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="à">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
-      <JFXButton layoutX="807.0" layoutY="31.0" onAction="#listerParDate" text="rechercher" />
+      <JFXButton layoutX="646.0" layoutY="31.0" onAction="#listerParDate" text="ok" />
       <Text fill="#895b39" layoutX="14.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des Articles non vendu">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Text>
       <Button layoutX="906.0" layoutY="32.0" mnemonicParsing="false" onAction="#selectionMutiple" text="o" />
+      <JFXTextField fx:id="recherch" layoutX="754.0" layoutY="32.0" onKeyTyped="#rechercheFiltrs" prefWidth="105.0" promptText="search" />
    </children>
 </AnchorPane>

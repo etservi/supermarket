@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorePane" prefHeight="482.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="950.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo%20demarrage.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="648.0" layoutY="369.0" text="Loading 100%" textFill="#f5f0f0">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="912.0" layoutY="14.0"  text="." textFill="#385097">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Hyperlink>
+      <Separator layoutX="86.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="477.0" prefWidth="7.0" />
+      <Separator layoutX="-2.0" layoutY="422.0" prefHeight="18.0" prefWidth="950.0" />
+      <Label layoutX="149.0" layoutY="280.0" text="Version 1.0" textFill="#f5f0f0">
+         <font>
+            <Font name="System Italic" size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

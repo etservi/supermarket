@@ -1,9 +1,10 @@
+/Facture/
 /Qr_Code/
 /baseDeDonnées/
 /boiteAlert/
-/caissier/
 /codeBarre/
 /directeurGeneral/
+/images/
 /javaBeansClass/
 /login/
 /pdfFacture/
@@ -11,8 +12,4 @@
 /serverMailSendMesaz/
 /serveurMultiThread/
 /statistique/
-/images/
-/notification.class
-/notification$notificationThred$1.class
-/notification$notificationThred$2.class
-/notification$notificationThred.class
+/caissier/

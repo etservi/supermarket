@@ -5,17 +5,22 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.concurrent.SynchronousQueue;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
+import javaBeansClass.Fournisseur;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
@@ -23,6 +28,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 public class ArticleNonVenduController implements Initializable{
@@ -43,6 +49,8 @@ public class ArticleNonVenduController implements Initializable{
     @FXML private JFXDatePicker dateA;
 
     @FXML private JFXDatePicker dateB;
+    @FXML private JFXTextField recherch;
+
 
 
 	@Override
@@ -51,6 +59,8 @@ public class ArticleNonVenduController implements Initializable{
 //		selectionMutiple();
 		tableViewDetails.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		tableViewDetails.getSelectionModel().setCellSelectionEnabled(false);
+		
+
 	}
 	
 	// ACTUALISER LES DONNEES SUR TABLEAU
@@ -140,8 +150,40 @@ public class ArticleNonVenduController implements Initializable{
 				System.out.println(value);
 			}
 		}
-		
-		
+//==================================================================================================================		
+		//----------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------
+				
+			final ObservableList<Article> data = FXCollections.observableArrayList();
+			
+			public void rechercheFiltrs(KeyEvent ke) {
+				// RECHERCHE - RECHERCHE - RECHERCHE - RECHERCHE - RECHERCHE - RECHERCHE
+				
+					FilteredList<Article> filtrFournisseur = new FilteredList<>(data, e -> true);
+					
+					recherch.setOnKeyReleased(e -> {
+						recherch.textProperty().addListener((observableValue, oldValue, newValue) ->{
+							filtrFournisseur.setPredicate((Predicate<? super Article>) qrticleReserch->{
+								if(newValue == null || newValue.isEmpty()) {
+								return true;
+								}
+								String lowerCaseFiltrer = newValue.toLowerCase();
+//								if(fourniseurReserch.getID().contains(newValue)){
+//								} else
+								if (qrticleReserch.getNomArticleNom().toLowerCase().contains(lowerCaseFiltrer)) {
+									return true;
+								} else if( qrticleReserch.getCodeBarre().toLowerCase().contains(lowerCaseFiltrer) ) {
+									return true;
+								}
+								return false;
+							});
+						});
+						SortedList<Article>  sortData = new SortedList<>(filtrFournisseur);
+						sortData.comparatorProperty().bind(tableViewDetails.comparatorProperty());
+						tableViewDetails.setItems(sortData);
+					});		
+			}
+				
 		
 		
 }

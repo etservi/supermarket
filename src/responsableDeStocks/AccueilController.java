@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import login.StaticInfo;
 
 public class AccueilController implements Initializable{
@@ -28,9 +31,18 @@ public class AccueilController implements Initializable{
 	
 	@FXML private Label afficheLogin;
 	
+	@FXML Circle cercle1, cercle2, cercle3, cercle4, cercle5;
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		affichLogin(); // RECUPERER UTILISATEUR CONNECTER
+		//====================================================================================================		
+				setRotae(cercle1, true, 360, 10);
+				setRotae(cercle2, true, 180, 18);
+				setRotae(cercle3, true, 360, 10);
+				setRotae(cercle4, true, 180, 18);
+				setRotae(cercle5, true, 360, 10);
+//				setRotae(cercle5, true, 145, 24);
 		
 	}
 	
@@ -178,4 +190,20 @@ public class AccueilController implements Initializable{
 				}		
 // ----------------------------------------------------------------------------------	
 //-----------------------------------------------------------------------------------
+					//====================================================================================================
+					// TRANSITON ROTATION -  ROTATION - TRANSITON ROTATION -  ROTATION -TRANSITON ROTATION -  ROTATION -
+					int rotate = 0;
+					 // TRANSITION ------------------------------------------ TRANSITION //
+					public void setRotae(Circle c, boolean reverse, int angle, int duration) {
+						RotateTransition rotateTransition = new RotateTransition(Duration.seconds(duration), c);
+						rotateTransition.setAutoReverse(reverse);
+						rotateTransition.setByAngle(angle);
+						rotateTransition.setDelay(Duration.seconds(0));
+						rotateTransition.setRate(3);
+						rotateTransition.setCycleCount(18);
+						rotateTransition.play();
+						
+					}
+					
+				//====================================================================================================
 }
