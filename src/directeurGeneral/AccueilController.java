@@ -166,9 +166,13 @@ public class AccueilController implements Initializable {
 	//-----------------------------------------------------------------------------------
 		@FXML
 		public void statistique() throws IOException {  
-			AnchorPane fxml = FXMLLoader.load(getClass().getResource("/directeurGeneral/Statistique.fxml"));
-			rootPane.getChildren().removeAll();
-			rootPane.getChildren().setAll(fxml);
+			Stage stage = new Stage();
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/Statistique.fxml"));
+			Parent root = loader.load();
+			Scene scene = new Scene(root,950,500);
+			scene.getStylesheets().add(getClass().getResource("Statistique.css").toExternalForm());
+			stage.setScene(scene);
+			stage.showAndWait();
 	}
 		// ----------------------------------------------------------------------------------	
 		//-----------------------------------------------------------------------------------

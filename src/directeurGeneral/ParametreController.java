@@ -14,7 +14,6 @@ import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Admin;
 import javaBeansClass.Article;
 import javaBeansClass.Caissier;
-import javaBeansClass.Rayon;
 import javaBeansClass.Utilisateur;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -59,6 +58,9 @@ public class ParametreController implements Initializable{
 	@FXML private PieChart pieChart;
 	@FXML Label pourcentz;
 	
+	@FXML private TableView<Admin> tdAdmin;
+    @FXML private TableView<Caissier> tdCaissier;
+	
 	
 //    @FXML private JFXComboBox<?> comboxCaissier;
 	
@@ -84,7 +86,8 @@ public class ParametreController implements Initializable{
 		}
 		//---------------------------------------
 		ActualiserDonneesUtilisateurTableau();
-		
+		//------------------------------------------------------------------------------
+//		
 	}
 	
 // -------------------------------------------------------------------
@@ -93,8 +96,7 @@ public class ParametreController implements Initializable{
 		Connection connexion = ConnectionDB.maConnection();
 	
 			try {
-				String requetteChange = "SELECT * FROM Utilisateur WHERE login = '" + refUtilisateur.getText( ) + "' || telephone  = '" + refUtilisateur.getText() + "' AND password= '" + refOldPssd.getText() + "' ";
-				System.out.println(requetteChange);
+				String requetteChange = "SELECT * FROM Utilisateur WHERE (login = '" + refUtilisateur.getText( ) + "' || telephone  = '" + refUtilisateur.getText() + "') AND password= '" + refOldPssd.getText() + "' ";
 				
 				PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(requetteChange);
 				ResultSet rs = pst.executeQuery();
@@ -104,39 +106,40 @@ public class ParametreController implements Initializable{
 				String motDePass = null;
 
 				if (rs.next()) {
-					logDataBase = rs.getString("login");
-					numPhone = rs.getString("telephone");
-					motDePass = rs.getString("password");
+					logDataBase = rs.getString("login");	
+					numPhone = rs.getString("telephone");	
+					motDePass = rs.getString("password");	
 				}
 
-				String logTextField = refUtilisateur.getText();
-				String ancienMotDePasseTextFld = refOldPssd.getText();
-
-				if (logTextField.equals(logDataBase) && ancienMotDePasseTextFld.equals(motDePass)) {
-					if (refNewPssd.getText().equals(refConfPssd.getText())) {
-
-						String sqlChange = "UPDATE Utilisateur SET password = '" + refNewPssd.getText() + "' WHERE id ='" + refUtilisateur.getText() + "' ";
-						PreparedStatement psttt = (PreparedStatement) connexion.prepareStatement(sqlChange);
-						psttt.execute();
+				if ( (refUtilisateur.getText().equals(numPhone) && refOldPssd.getText().equals(motDePass) ) && refNewPssd.getText().equals(refConfPssd.getText())) {
+					try {
+						String sqlChange = "UPDATE Utilisateur SET password = '" + refNewPssd.getText() + "' WHERE (telephone)  ='" + refUtilisateur.getText() + "'  ";
+						System.err.println(sqlChange);
+						
+						PreparedStatement pst2 = (PreparedStatement) connexion.prepareStatement(sqlChange);
+						int rs2 = pst2.executeUpdate();
+						
+						if (rs2 != 0) {
+							Alert alerte = new Alert(AlertType.INFORMATION);
+							alerte.setContentText("Votre mot de passe a bien été changé, \n merci de vous reconnecter !");
+							alerte.showAndWait();	
+						}
+						} catch(Exception e) {
+							e.printStackTrace();
+						
+						}
 						//-------------------------
-						Alert alerte = new Alert(AlertType.INFORMATION);
-						alerte.setTitle("Confirmation");
-						alerte.setContentText("Votre mot de passe a bien été changé, \n merci de vous reconnecter !");
-						alerte.showAndWait();
-					} else if (refNewPssd.getText() != refConfPssd.getText()){
-						Alert alerte = new Alert(AlertType.WARNING);
-						alerte.setTitle("Evertissement");
-						alerte.setContentText("Vos mot de passe sont different, \n merci de réessayer !");
-						alerte.showAndWait();
-					}
-				} else if (logTextField != logDataBase && ancienMotDePasseTextFld != motDePass){
+				} else if (refUtilisateur.getText() != logDataBase && refOldPssd.getText() != motDePass){
 					Alert alerte = new Alert(AlertType.WARNING);
 					alerte.setTitle("Evertissement");
-					alerte.setContentText("Vos informations n'existent pas dans la base !");
+					alerte.setContentText("Veuillez utiliser votre numéro de téléphone comme login.");
 					alerte.showAndWait();
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				Alert alerte = new Alert(AlertType.WARNING);
+				alerte.setTitle("Evertissement");
+				alerte.setContentText("Veuillez Entrer vos informations.");
+				alerte.showAndWait();
 				
 			}
 } 
@@ -249,9 +252,9 @@ public class ParametreController implements Initializable{
 		}
 
 	//=============================================================
-		@FXML ComboBox<Admin> comboxAdmin;
-		final ObservableList<Admin> optionsComboboxcomboxAdmin = FXCollections.observableArrayList();
-
+		@FXML ComboBox<Integer> comboxAdmin;
+		final ObservableList<Integer> optionsComboboxcomboxAdmin = FXCollections.observableArrayList();
+		
 		public void comboBoxAdmin() {   // NOM DE LA METHODE
 			
 			try {
@@ -262,9 +265,10 @@ public class ParametreController implements Initializable{
 				ResultSet rs = pst.executeQuery();
 
 				while (rs.next()) {
-					optionsComboboxcomboxAdmin.add(new Admin ( rs.getInt(1)  ));
+					optionsComboboxcomboxAdmin.add(new Admin ( rs.getInt(1)).getIdAdmin());
 				}
 				comboxAdmin.getItems().addAll(optionsComboboxcomboxAdmin);
+				
 				rs.close();
 				connexion.close();
 			} catch (SQLException er_rs) {
@@ -287,9 +291,10 @@ public class ParametreController implements Initializable{
 						ResultSet rs = pst.executeQuery();
 
 						while (rs.next()) {
-							optionsComboboxcomboxCaissier.add(new Caissier  (   rs.getInt(1)).getIdCaissier()  );
+							optionsComboboxcomboxCaissier.add(new Caissier ( rs.getInt(1)).getIdCaissier()  );
 						}
 						comboxCaissier.getItems().addAll(optionsComboboxcomboxCaissier);
+
 						rs.close();
 						connexion.close();
 					} catch (SQLException er_rs) {
@@ -298,10 +303,55 @@ public class ParametreController implements Initializable{
 				}
 				//================================================================
 		
+	public void validerAdminId() {
+		Connection con = ConnectionDB.maConnection();
 		
+		String sql = "INSERT into Admin WHERE idAdmin = '" + comboxAdmin.getValue() + "' ";
 		
+		PreparedStatement pst;
+		try {
+			pst = con.prepareStatement(sql);
+			int rs = pst.executeUpdate();
+
+			if (rs != 0) {
+				Alert alertt = new Alert(Alert.AlertType.CONFIRMATION);
+				alertt.setHeaderText("Utilisateur Valider");
+				alertt.show();
+			}
+			
+		} catch (SQLException e) {
+//			e.printStackTrace();
+			Alert alertt = new Alert(Alert.AlertType.WARNING);
+			alertt.setHeaderText(" Validation echec ou \\n Utilisateur deja valider");
+			alertt.show();
+		}	
+	}	
 		
+	public void validerCaissierId() {
+		Connection con = ConnectionDB.maConnection();
 		
+		String sql = "INSERT into Caissier WHERE idCaissier = '" + comboxCaissier.getValue() + "' ";
+		
+		PreparedStatement pst;
+		try {
+			pst = con.prepareStatement(sql);
+			int rs = pst.executeUpdate();
+
+			if (rs != 0) {
+				Alert alertt = new Alert(Alert.AlertType.CONFIRMATION);
+				alertt.setHeaderText("Utilisateur Valider");
+				alertt.show();
+			}
+			
+		} catch (SQLException e) {
+//			e.printStackTrace();
+			Alert alertt = new Alert(Alert.AlertType.WARNING);
+			alertt.setHeaderText(" Validation echec ou \n Utilisateur deja valider");
+			alertt.show();
+		}	
+	}	
+//=================================================================================================
+//=================================================================================================
 		
 		
 }

@@ -139,6 +139,7 @@ public class AjoutFournisseurController implements Initializable{
 		}
 		
 		//========================
+		rechercheFournisseur(null);
 		
 }
 //---------------------------------------------------------------------------------	
@@ -163,123 +164,20 @@ public class AjoutFournisseurController implements Initializable{
 		} else if( validerTelephone() && validerEmail() && textFieldRaisonSociale.getText()!= null && TextFieldAdresse.getText() != null ) {
 
 		try {
-			String requetteInsertion = "INSERT INTO `Fournisseur`(`raisonSociale`, `sigle`, `telephone`, `adresse`, `email`, SUpprimer0NonSupprimer1=1) VALUES ('"+RaisonSocial+"','"+Sigl+"','"+Telephon+"','"+Adess+"','"+Couriel+ "', 1)";
+			String requetteInsertion = "INSERT INTO `Fournisseur`(`raisonSociale`, `sigle`, `telephone`, `adresse`, `email`, `SUpprimer0NonSupprimer1`) VALUES ('"+RaisonSocial+"','"+Sigl+"','"+Telephon+"','"+Adess+"','"+Couriel+ "', 1)";
 			
 			int statut = connexion.createStatement().executeUpdate(requetteInsertion);
 			if (statut != 0) {
 				
-				Alert alert = new Alert(Alert.AlertType.INFORMATION);
-				alert.setTitle("Fournisseur ajouté");
-				alert.setHeaderText("Fournisseur a été bien ajouté");
-				alert.showAndWait();
+				ActualiserDonneesFournisseurTableau();	
 				
-
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+				alert.setHeaderText("Fournisseur a été bien ajouté");
+				alert.show();
 				
 				new notificationThred().start();
-				ActualiserDonneesFournisseurTableau();	
+				
 				EffacerLesChamps();
-				
-				// ------------------------------------------------------
-		
-				
-/////////////////////////////////PDF TEST ///////////// PDF TEST /////////
-/////////////////////////////////PDF TEST ////////////// PDF TEST /////////
-				String chemin="BonsEntrant/pdfTest.pdf";				
-				Document document = new Document();
-			        
-				try {
-
-		            PdfWriter.getInstance(document, new FileOutputStream(new File(chemin)));
-		            document.open();
-
-		            Paragraph p = new Paragraph();
-		            p.add("GESTION COMMERCIALE SUPERMARCHÉ \n");
-		            p.add("----------------- \n");
-		            p.add("DAKAR - 772774465 / 773667724");
-		            p.add("\n ******************************************************* \n");
-		            
-		           
-		            bottom_bar_dt = new ImageView( new Image( new File("../resources/icons/bottom_bar_dt.png").toURI().toString(), true));
-//		            p.add(bottom_bar_dt);
-//		            -------------------------------
-		            for (int i = 0; i < 5; i++) {
-		            	p.add("\n");
-					}
-		            p.setAlignment(Element.ALIGN_CENTER);
-		            document.add(p);
-		            // ------------------------------------ENTETE TABLEAU
-		            
-		            //-----------------------------------------
-		            PdfPTable table = new PdfPTable(5);
-		            table.setWidthPercentage(100);
-		         //   table.getDefaultCell().setBorder(Rectangle.NO_BORDER); // ELIMIME LE BORDER
-		            table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-		            table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-		            table.getDefaultCell().setFixedHeight(30);
-		            
-		            PdfPCell enteteTatb = new PdfPCell(new Paragraph("header with colspan 3"));
-		            enteteTatb.setColspan(5);
-		            
-//		            enteteTatb.setBorderColor(new Color(0xC0, 0xC0, 0xC0, 0xC0));
-		            enteteTatb.setHorizontalAlignment(Element.ALIGN_CENTER);
-		            table.addCell(enteteTatb);
-		            //--------------------------------------- 
-		            
-		            table.addCell(new Phrase(new Chunk("RAISON SOCIALE", FontFactory.getFont(FontFactory.HELVETICA, 10, Font.BOLD))));
-				    table.addCell(new Phrase(new Chunk("SIGLE", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD))));
-				    table.addCell(new Phrase(new Chunk("ADRESSE", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD))));
-				    table.addCell(new Phrase(new Chunk("TÉLEPHONE", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD))));
-				    table.addCell(new Phrase(new Chunk("E-mail", FontFactory.getFont(FontFactory.HELVETICA, 12, Font.BOLD))));
-			
-				    //	    
-				    
-		            table.addCell(new Phrase(new Chunk(RaisonSocial)));
-				    table.addCell(new Phrase(new Chunk(Sigl)));
-				    table.addCell(new Phrase(new Chunk(Telephon)));
-				    table.addCell(new Phrase(new Chunk(Adess)));
-				    table.addCell(new Phrase(new Chunk(Couriel)));
-				    document.add(table);
-		            
-		            //-------------------------------------------------------
-		            Paragraph paragraphList = new Paragraph("A to E:");
-		            List list = new List(false, 10);
-		            list.add("A");
-		            list.add("B");
-		            list.add("C");
-		            list.add("D");
-		            list.add("E");
-		            paragraphList.add(list);
-		            document.add(paragraphList);
-		            
-		            //--------------------------------------------------------
-		            Paragraph espaceVide = new Paragraph(" \n");
-		            for (int i = 0; i < 7; i++) {
-		            	p.add(espaceVide);
-					}
-		           //------------------------------------------------------
-		            String tabulation = null;
-		            for (int i = 0; i < 20; i++) {
-						 tabulation ="\t";
-					}
-		            Paragraph piedDePageGauche = new Paragraph("Directeur " + tabulation + " Client");
-		            piedDePageGauche.setAlignment(Element.ALIGN_LEFT);
-		            document.add(piedDePageGauche);
-		            //-------------------------------------------------------
-		            //-------------------------------------------------------
-		            
-		            Font f = new Font();
-		            f.setStyle(Font.BOLD);
-		            f.setSize(8);
-
-//		            document.add(new Paragraph("Fournisseur Ajouter ", f));
-		            document.close();
-		         
-		        } catch (DocumentException | IOException e) {
-		            e.printStackTrace();
-		        
-		        }
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
 				
 			} else { 
 				Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -476,6 +374,10 @@ public class AjoutFournisseurController implements Initializable{
 							
 //							new notificationThred().start();
 							
+							Alert alertt = new Alert(Alert.AlertType.CONFIRMATION);
+							alertt.setHeaderText("Suppression réussie");
+							alertt.showAndWait();
+							
 							pst.close();
 							connexion.close();
 						}
@@ -616,7 +518,7 @@ private boolean validerEmail() {
 		}
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
-		
+/*		
 	final ObservableList<Fournisseur> data = FXCollections.observableArrayList();
 	
 	public void rechercheFiltrs(KeyEvent ke) {
@@ -646,7 +548,7 @@ private boolean validerEmail() {
 				tableViewFournisseur.setItems(sortData);
 //			});		
 	}
-	
+	*/
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
 
@@ -868,7 +770,7 @@ private boolean validerEmail() {
 	@FXML
     private void rechercheFournisseur(KeyEvent ke) {
         
-        FilteredList<Fournisseur> filterData = new FilteredList<>(masterData,p->true);
+        FilteredList<Fournisseur> filterData = new FilteredList<>(masterData, p -> true);
         recherch.textProperty().addListener((obsevable, oldvalue, newvalue) -> {
             filterData.setPredicate(e -> {
 

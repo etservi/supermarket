@@ -21,12 +21,10 @@ import com.mysql.jdbc.PreparedStatement;
 
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
-import javaBeansClass.Fournisseur;
 import javafx.beans.binding.BooleanExpression;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -43,7 +41,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import login.StaticInfo;
 
 public class FactureController implements Initializable{
@@ -146,7 +143,7 @@ public class FactureController implements Initializable{
 	// -------------------------------------------- VIDER LES CHAMPS AVANT D'AJOUT ARTICLE
 	public void viderLesCambre(){
 		
-		idArticl.setText("");
+//		idArticl.setText("");
 		nomArticle.setText("");
 		prixUnitairee.setText("");
 		codeBarr.setText("");
@@ -247,7 +244,7 @@ public class FactureController implements Initializable{
 	   
 	   public void moneyRendu() {
 	        	Double  p = ( Double.parseDouble( montantverser.getText() ) ) - total ;
-	        	    montantReduu.setText( String.valueOf(p) +" F CFA");
+	        	    montantReduu.setText( String.valueOf(p));
 	        	    	
 	   }
 	   
@@ -262,10 +259,10 @@ public class FactureController implements Initializable{
 	//-----------------------------------------------
 	
 	public void dateDuJourMethode() {
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
-		dateduJour.setText("Date : " + reportDate);
+		dateduJour.setText(reportDate);  // AFFICHER LADATE DU JOUR
  }		
 	
 	
@@ -448,28 +445,41 @@ public class FactureController implements Initializable{
 //==============================================================================
 		
 		@SuppressWarnings("unchecked")
-		public void livrerArticle() {
+		public void livrerArticle() throws SQLException {
+			Connection con  = ConnectionDB.maConnection(); 
 			
+			int idRecup = 0;
+			String sql1 ="SELECT id FROM Utilisateur WHERE telephone= '"+StaticInfo.USERNAME+"' OR login='"+StaticInfo.USERNAME+"' ";
+
+				PreparedStatement pst1 = (PreparedStatement) con.prepareStatement(sql1);
+				ResultSet rs1 = pst1.executeQuery();
+				
+				if(rs1.next()) {
+					idRecup = rs1.getInt("id");
+					System.out.println("RECUP id Reussi "+idRecup);
+				}
+				
+			//--------------------------------------------------------------------------------------------------------------------
+			//====================================================================================================================
 		//// DATE ET TEMPS DU JOUR
 			java.util.Date today = new java.util.Date();
 			Timestamp dateTimeAutomatique = new java.sql.Timestamp(today.getTime());
-			
-			for(TablePosition<Article, ?> pos : tbViewFacture.getSelectionModel().getSelectedCells()) {
+			//------------------------------------------------------------------------------------------
+			for(TablePosition<Article, ?> pos : tbViewFacture.getSelectionModel().getSelectedCells() ) {
 				TableColumn<Article, ?> colum = pos.getTableColumn();
 				ObservableValue<?> obs = colum.getCellObservableValue(pos.getRow());
 				Object value = obs.getValue();
-				
 				System.out.println(value);
 				
-				int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
+			//------------------------------------------------------------------------------------------	
 				
-				Connection con  = ConnectionDB.maConnection();
+				int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
 				
 				if (selectedIndex >= 0) {
 					
 					Article mat = tbViewFacture.getSelectionModel().getSelectedItem();
-				
-				String sql = "UPDATE `Article` SET `id` = '"+StaticInfo.USERNAME+"', `montantVerse` = '"+montantverser.getText()+"', `montantRendu` = '"+montantReduu.getText()+"', `dateVendu` = '"+dateTimeAutomatique+"', `Livrer0nonLivrer1` = '0' WHERE nomArticleNom= '"+mat.getNomArticleNom()+"', OR codeBarre='"+mat.getCodeBarre()+"', OR qteStock='"+mat.getQteStock()+"', '"+mat.getPrixAvendre()+"'   ";                                    
+				    
+				String sql = "UPDATE `Article` SET `id` = '" + idRecup+"', qteStock='"+comboBoxQuatite.getValue()+"',`montantVerse` = '"+montantverser.getText()+"', `montantRendu` = '"+montantReduu.getText()+"', `dateVendu` = '"+dateTimeAutomatique+"', `Livrer0nonLivrer1` = '0' WHERE nomArticleNom= '"+mat.getNomArticleNom()+"'   ";
 				System.out.println(sql);
 				
 				try {
@@ -481,22 +491,30 @@ public class FactureController implements Initializable{
 						System.out.println("Reussi");
 						tbViewFacture.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
 						
+						Alert alertt = new Alert(Alert.AlertType.INFORMATION);
+						alertt.setHeaderText(" Livraison réussie ");
+						alertt.show();
+						
 						pst.close();
 						con.close();
 					}
 					
 				} catch (SQLException e) {
-					e.printStackTrace();
+//					e.printStackTrace();
 					System.out.println("Non Reussi");
+					
+					Alert alertt = new Alert(Alert.AlertType.WARNING);
+					alertt.setHeaderText("Livraision incorrect - Veuillez mettre \n les meme informations existant dans la base de donnees");
+					alertt.showAndWait();
 				}
 				} else {
-					System.out.println("Veuillez ajouter et selectionner des  articles");
+					System.out.println("Veuillez ajouter et selectionner des  articles"); 
 				}
 			}
 		}	
 //===============================================================================
 //===============================================================================
-		/*
+		
 		@SuppressWarnings("unchecked")
 		public void annulerLivraisonArticle() {
 			
@@ -508,10 +526,10 @@ public class FactureController implements Initializable{
 				System.out.println(value);
 			}
 		}
-		*/
+		
 //================================================================================
 //================================================================================
-		public void setAerticle() {
+	/*	public void setAerticle() {
 			
 			
 			Connection con = ConnectionDB.maConnection();
@@ -537,7 +555,7 @@ public class FactureController implements Initializable{
 				e.printStackTrace();
 			}
 		}
-		
+		*/
 		
 //		nomArticle.setText("");
 //		prixUnitairee.setText("");

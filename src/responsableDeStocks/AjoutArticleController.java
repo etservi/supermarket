@@ -157,7 +157,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	
 	public void ouvreRayon() throws IOException {
 			Stage stage = new Stage();
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/Rayon.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Rayon.fxml"));
 			Parent root = loader.load();
 			Scene scene = new Scene(root,370,500);
 			scene.getStylesheets().add(getClass().getResource("Rayon.css").toExternalForm());
@@ -167,7 +167,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	//-------------------------------------------------------------------------
 	public void ouvreCategirie() throws IOException {
 		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/Categorie.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/Categorie.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root,370,500);
 		scene.getStylesheets().add(getClass().getResource("Categorie.css").toExternalForm());
@@ -177,7 +177,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 	//-------------------------------------------------------------------------
 	public void ouvreFournisseur() throws IOException {
 		Stage stage = new Stage();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/directeurGeneral/AjoutFournisseur.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/AjoutFournisseur.fxml"));
 		Parent root = loader.load();
 		Scene scene = new Scene(root,950, 500);
 		scene.getStylesheets().add(getClass().getResource("AjoutFournisseur.css").toExternalForm());
@@ -191,7 +191,7 @@ public void comboBoxRaisonSociale() {   // NOM DE LA METHODE
 			// REDIRECTION SUR ACCUEIL - IMAGE
 			@FXML
 			private void retourAuMenu() throws IOException {
-				Parent pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
+				Parent pane = FXMLLoader.load(getClass().getResource("/responsableDeStocks/Accueil.fxml"));
 				rootAjoutArt.getChildren().setAll(pane);
 
 			}

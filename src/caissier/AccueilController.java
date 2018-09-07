@@ -130,5 +130,20 @@ public class AccueilController implements Initializable{
 					stage.showAndWait();
 
 				}
-//==================================================
+
+//=========================================================================================
+				//-------------------------------------------------------------------------
+				// REDIRECTION SUR ACCUEIL - IMAGE
+				@FXML
+				private void chnagerMotDePasse() throws IOException {
+					Stage stage = new Stage();
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("/caissier/ChangerMotDePasse.fxml"));
+					Parent root = loader.load();
+					Scene scene = new Scene(root,377,330);
+					scene.getStylesheets().add(getClass().getResource("ChangerMotDePasse.css").toExternalForm());
+					stage.setScene(scene);
+					stage.showAndWait();
+
+				}
+///==========================================================================================
 }

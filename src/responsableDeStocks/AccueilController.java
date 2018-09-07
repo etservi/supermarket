@@ -182,6 +182,20 @@ public class AccueilController implements Initializable{
 				}		
 // ----------------------------------------------------------------------------------	
 //-----------------------------------------------------------------------------------
+					
+					@FXML
+					public void changerMotDePasse() throws IOException {  
+											
+						Stage stage = new Stage();
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/responsableDeStocks/ChangerMotDePasse.fxml"));
+						Parent root = loader.load();
+						Scene scene = new Scene(root,377,330);
+						scene.getStylesheets().add(getClass().getResource("ChangerMotDePasse.css").toExternalForm());
+						stage.setScene(scene);
+						stage.showAndWait();
+									}		
+					// ----------------------------------------------------------------------------------	
+					//-----------------------------------------------------------------------------------
 					@FXML
 					public void ajouterArticle() throws IOException {  
 						AnchorPane fxml = FXMLLoader.load(getClass().getResource("/responsableDeStocks/AjoutArticle.fxml"));

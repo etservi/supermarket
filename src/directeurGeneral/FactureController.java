@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,6 +22,7 @@ import com.mysql.jdbc.PreparedStatement;
 import baseDeDonnées.ConnectionDB;
 import javaBeansClass.Article;
 import javafx.beans.binding.BooleanExpression;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +31,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -37,7 +41,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import login.StaticInfo;
 
 public class FactureController implements Initializable{
@@ -94,13 +97,16 @@ public class FactureController implements Initializable{
 		try {
 			autoCopleteWords();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		//--------------------------
 		refPrixTotal.setStyle("-fx-text-inner-color: red;");
 		montantReduu.setStyle("-fx-text-inner-color: red;");
-		
+		//--------------------------------------------------
+		tbViewFacture.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		tbViewFacture.getSelectionModel().setCellSelectionEnabled(false);
 	}
 // ---------------------------------------------------
 //----------------------------------------------------
@@ -127,7 +133,7 @@ public class FactureController implements Initializable{
 		
 	
 	public void retourMenu() throws IOException {
-		AnchorPane pane = FXMLLoader.load(getClass().getResource("/directeurGeneral/Accueil.fxml"));
+		AnchorPane pane = FXMLLoader.load(getClass().getResource("/caissier/Accueil.fxml"));
 		rootPane.getChildren().removeAll();
 		rootPane.getChildren().setAll(pane);
 
@@ -137,7 +143,7 @@ public class FactureController implements Initializable{
 	// -------------------------------------------- VIDER LES CHAMPS AVANT D'AJOUT ARTICLE
 	public void viderLesCambre(){
 		
-		idArticl.setText("");
+//		idArticl.setText("");
 		nomArticle.setText("");
 		prixUnitairee.setText("");
 		codeBarr.setText("");
@@ -159,6 +165,7 @@ public class FactureController implements Initializable{
 	static Double total = 0.0;
 	
 	public void ajouterArticle() {
+				
 		   String articleName;
 		   Double price, amount;
 		   		@SuppressWarnings("unused")
@@ -173,7 +180,7 @@ public class FactureController implements Initializable{
 		   amount = price * Integer.parseInt(quantite);  // CALCUL MONTANT TOTAL
 		   
 		   listPurchase.add(articleName); listOfPrice.add(amount); 
-
+		 
 		   //------------------------------------------------------------------------------------------------------------------------
 		   // LES ARGUMENT DE CES 4 PREMIERS LIGNES AU DESSOUS ET LES ATTRIBUTS DANS LA CLAASSE BEANS DOIVENT CORRESPONDRE 
 			tcNom.setCellValueFactory( new PropertyValueFactory<>("nomArticleNom") );
@@ -237,7 +244,7 @@ public class FactureController implements Initializable{
 	   
 	   public void moneyRendu() {
 	        	Double  p = ( Double.parseDouble( montantverser.getText() ) ) - total ;
-	        	    montantReduu.setText( String.valueOf(p) +" F CFA");
+	        	    montantReduu.setText( String.valueOf(p));
 	        	    	
 	   }
 	   
@@ -252,11 +259,11 @@ public class FactureController implements Initializable{
 	//-----------------------------------------------
 	
 	public void dateDuJourMethode() {
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 		Date today = Calendar.getInstance().getTime();
 		String reportDate = df.format(today);
-		dateduJour.setText("Date : " + reportDate);
-}		
+		dateduJour.setText(reportDate);  // AFFICHER LADATE DU JOUR
+ }		
 	
 	
 	
@@ -435,6 +442,128 @@ public class FactureController implements Initializable{
 			
 		}
 //==============================================================================
+//==============================================================================
+		
+		@SuppressWarnings("unchecked")
+		public void livrerArticle() throws SQLException {
+			Connection con  = ConnectionDB.maConnection(); 
+			
+			int idRecup = 0;
+			String sql1 ="SELECT id FROM Utilisateur WHERE telephone= '"+StaticInfo.USERNAME+"' OR login='"+StaticInfo.USERNAME+"' ";
+
+				PreparedStatement pst1 = (PreparedStatement) con.prepareStatement(sql1);
+				ResultSet rs1 = pst1.executeQuery();
+				
+				if(rs1.next()) {
+					idRecup = rs1.getInt("id");
+					System.out.println("RECUP id Reussi "+idRecup);
+				}
+				
+			//--------------------------------------------------------------------------------------------------------------------
+			//====================================================================================================================
+		//// DATE ET TEMPS DU JOUR
+			java.util.Date today = new java.util.Date();
+			Timestamp dateTimeAutomatique = new java.sql.Timestamp(today.getTime());
+			//------------------------------------------------------------------------------------------
+			for(TablePosition<Article, ?> pos : tbViewFacture.getSelectionModel().getSelectedCells() ) {
+				TableColumn<Article, ?> colum = pos.getTableColumn();
+				ObservableValue<?> obs = colum.getCellObservableValue(pos.getRow());
+				Object value = obs.getValue();
+				System.out.println(value);
+				
+			//------------------------------------------------------------------------------------------	
+				
+				int selectedIndex = tbViewFacture.getSelectionModel().getSelectedIndex();
+				
+				if (selectedIndex >= 0) {
+					
+					Article mat = tbViewFacture.getSelectionModel().getSelectedItem();
+				    
+				String sql = "UPDATE `Article` SET `id` = '" + idRecup+"', qteStock='"+comboBoxQuatite.getValue()+"',`montantVerse` = '"+montantverser.getText()+"', `montantRendu` = '"+montantReduu.getText()+"', `dateVendu` = '"+dateTimeAutomatique+"', `Livrer0nonLivrer1` = '0' WHERE nomArticleNom= '"+mat.getNomArticleNom()+"'   ";
+				System.out.println(sql);
+				
+				try {
+					PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+					
+					int rs = pst.executeUpdate();
+					
+					if (rs != 0) {
+						System.out.println("Reussi");
+						tbViewFacture.getItems().remove(selectedIndex); // ENLEVE L'ARTICLE SELECTIONNER DANS LE TABLEAU
+						
+						Alert alertt = new Alert(Alert.AlertType.INFORMATION);
+						alertt.setHeaderText(" Livraison réussie ");
+						alertt.show();
+						
+						pst.close();
+						con.close();
+					}
+					
+				} catch (SQLException e) {
+//					e.printStackTrace();
+					System.out.println("Non Reussi");
+					
+					Alert alertt = new Alert(Alert.AlertType.WARNING);
+					alertt.setHeaderText("Livraision incorrect - Veuillez mettre \n les meme informations existant dans la base de donnees");
+					alertt.showAndWait();
+				}
+				} else {
+					System.out.println("Veuillez ajouter et selectionner des  articles"); 
+				}
+			}
+		}	
+//===============================================================================
+//===============================================================================
+		
+		@SuppressWarnings("unchecked")
+		public void annulerLivraisonArticle() {
+			
+			for(TablePosition<Article, ?> pos : tbViewFacture.getSelectionModel().getSelectedCells()) {
+				TableColumn<Article, ?> colum = pos.getTableColumn();
+				ObservableValue<?> obs = colum.getCellObservableValue(pos.getRow());
+				Object value = obs.getValue();
+				
+				System.out.println(value);
+			}
+		}
+		
+//================================================================================
+//================================================================================
+	/*	public void setAerticle() {
+			
+			
+			Connection con = ConnectionDB.maConnection();
+			
+			String sql = " SELECT * FROM Article    " ;  //  codeBarre LIKE '%_' 
+			System.out.println(sql);
+			String codeBarrView = null;
+			try {
+				PreparedStatement pst = (PreparedStatement) con.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();
+				
+				while(rs.next()) {
+					codeBarrView = rs.getString("codeBarre");
+					System.out.println(codeBarrView);
+				}	 
+				
+				if( codeBarrView.equalsIgnoreCase(codeBarr.getText() ) ) {
+					System.out.println("Existe");
+				}
+				
+			} catch (SQLException e) {
+
+				e.printStackTrace();
+			}
+		}
+		*/
+		
+//		nomArticle.setText("");
+//		prixUnitairee.setText("");
+//		codeBarr.setText("");
+//		montantverser.setText("");
+//		montantReduu.setText("");
+//		codeBarr.getText();
+		
 		
 		
 		

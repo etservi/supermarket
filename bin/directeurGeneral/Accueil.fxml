@@ -74,11 +74,11 @@
                         <Glow />
                      </effect></Rectangle>
 
-                  <Circle fx:id="cercle1" fill="#a9afad" layoutX="127.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
-                  <Circle fx:id="cercle2" fill="#a9afad" layoutX="490.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
-                  <Circle fx:id="cercle3" fill="#a9afad" layoutX="604.0" layoutY="378.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
-                  <Circle fx:id="cercle4" fill="#a9afad" layoutX="247.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
-                  <Circle fx:id="cercle5" fill="#a9afad" layoutX="366.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
+                  <Circle fx:id="cercle1" fill="#a9afad" layoutX="127.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
+                  <Circle fx:id="cercle2" fill="#a9afad" layoutX="490.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
+                  <Circle fx:id="cercle3" fill="#a9afad" layoutX="604.0" layoutY="378.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
+                  <Circle fx:id="cercle4" fill="#a9afad" layoutX="247.0" layoutY="376.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
+                  <Circle fx:id="cercle5" fill="#a9afad" layoutX="366.0" layoutY="377.0" radius="45.0" stroke="#a47753" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
                   <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="217.0" layoutY="344.0" onMouseClicked="#ajouterFournisseur" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Fournisseur.png" />
@@ -87,7 +87,7 @@
                         <Cursor fx:constant="CROSSHAIR" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="460.0" layoutY="345.0" onMouseClicked="#ajouterArticle" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="460.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/storage.png" />
                      </image>

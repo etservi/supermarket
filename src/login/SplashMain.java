@@ -1,4 +1,4 @@
-/*package login;
+package login;
 	
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -11,13 +11,12 @@ public class SplashMain extends Application {
 	@Override
 	public void start(Stage StgAccueil) {
 		
-		StgAccueil.setTitle("ADMINISTRATEUR");
 		StgAccueil.setResizable(false);
 		
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Login.fxml"));
+			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("Splash.fxml"));
 			Scene scene = new Scene(root,950,500);
-//			scene.getStylesheets().add(getClass().getResource("Accueil.css").toExternalForm());
+//			scene.getStylesheets().add(getClass().getResource("Splash.css").toExternalForm());
 			StgAccueil.setScene(scene);
 			StgAccueil.show();
 			
@@ -31,4 +30,4 @@ public class SplashMain extends Application {
 	}
 }
 
-//add comment*/
+//add comment

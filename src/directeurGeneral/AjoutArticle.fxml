@@ -12,20 +12,16 @@
 
 <AnchorPane fx:id="rootAjoutArt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.AjoutArticleController">
    <children>
-      <Rectangle arcHeight="1200.0" arcWidth="5.0" fill="LEMONCHIFFON" height="453.0" layoutX="49.0" layoutY="19.0" opacity="0.81" stroke="#946a45" strokeType="INSIDE" width="853.0" />
-      <Label layoutX="106.0" layoutY="191.0" text="Id Catégorie">
+      <Rectangle arcHeight="1200.0" arcWidth="5.0" fill="LEMONCHIFFON" height="453.0" layoutX="49.0" layoutY="19.0" opacity="0.81" stroke="#946a45" strokeType="INSIDE" strokeWidth="10.0" width="853.0" />
+      <Label layoutX="106.0" layoutY="157.0" text="Id Catégorie">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="108.0" layoutY="153.0" text="Id Rayon">
+      <Label layoutX="108.0" layoutY="119.0" text="Id Rayon">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="107.0" layoutY="229.0" text="Fournisseur">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font></Label>
-      <Label layoutX="108.0" layoutY="114.0" text="Id Article">
+      <Label layoutX="107.0" layoutY="195.0" text="Fournisseur">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
@@ -45,7 +41,7 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <Label layoutX="106.0" layoutY="274.0" text="Code barre">
+      <Label layoutX="106.0" layoutY="240.0" text="Code barre">
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
@@ -53,11 +49,10 @@
          <font>
             <Font name="System Bold" size="13.0" />
          </font></Label>
-      <JFXTextField disable="true" focusColor="#f80505" layoutX="210.0" layoutY="109.0" prefHeight="26.0" prefWidth="194.0" />
-      <JFXComboBox fx:id="comboxRayn" focusColor="#a84040" layoutX="210.0" layoutY="148.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="Id Rayon" />
-      <JFXComboBox fx:id="comboCatg" focusColor="#a84040" layoutX="210.0" layoutY="186.0" onMouseClicked="#comboBoxCategorie" prefHeight="26.0" prefWidth="194.0" promptText="Id Catégorie" />
-      <JFXComboBox fx:id="comboRaisonSociale" focusColor="#a84040" layoutX="210.0" layoutY="225.0" onMouseClicked="#comboBoxRaisonSociale" prefHeight="26.0" prefWidth="194.0" promptText="Raison sociale" />
-      <JFXTextField fx:id="tdCodeBarre" editable="true" focusColor="#f80505" layoutX="210.0" layoutY="269.0" prefHeight="26.0" prefWidth="194.0" promptText="code barre" />
+      <JFXComboBox fx:id="comboxRayn" blendMode="GREEN" focusColor="#a84040" layoutX="210.0" layoutY="114.0" onMouseClicked="#comboBoxrayon" prefHeight="26.0" prefWidth="194.0" promptText="Id Rayon" />
+      <JFXComboBox fx:id="comboCatg" blendMode="GREEN" focusColor="#a84040" layoutX="210.0" layoutY="152.0" onMouseClicked="#comboBoxCategorie" prefHeight="26.0" prefWidth="194.0" promptText="Id Catégorie" />
+      <JFXComboBox fx:id="comboRaisonSociale" blendMode="GREEN" focusColor="#a84040" layoutX="210.0" layoutY="191.0" onMouseClicked="#comboBoxRaisonSociale" prefHeight="26.0" prefWidth="194.0" promptText="Raison sociale" />
+      <JFXTextField fx:id="tdCodeBarre" editable="true" focusColor="#f80505" layoutX="210.0" layoutY="235.0" prefHeight="26.0" prefWidth="194.0" promptText="code barre" />
       <JFXTextField fx:id="tfNomArticl" focusColor="#f80505" layoutX="634.0" layoutY="112.0" prefHeight="26.0" prefWidth="194.0" promptText="Nom Article" />
       <JFXTextField fx:id="tfQt" focusColor="#f80505" layoutX="634.0" layoutY="151.0" prefHeight="26.0" prefWidth="194.0" promptText="Quantité de stocks" />
       <JFXTextField fx:id="tfPrixUnitaire" focusColor="#f80505" layoutX="634.0" layoutY="190.0" prefHeight="26.0" prefWidth="194.0" promptText="Prix Unitaire" />
@@ -68,20 +63,25 @@
       <Button layoutX="394.0" layoutY="358.0" mnemonicParsing="false" onAction="#ajouterArticle" text="Enregistrer" />
       <Button layoutX="510.0" layoutY="358.0" mnemonicParsing="false" text="Modifier" />
       <Button layoutX="610.0" layoutY="358.0" mnemonicParsing="false" text="Imprimer" />
-      <Button fx:id="ajoutRy" layoutX="410.0" layoutY="149.0" mnemonicParsing="false" onAction="#ouvreRayon" opacity="0.57" prefHeight="9.0" prefWidth="10.0" style="-fx-background-radius: 10;" text="+" />
+      <Button fx:id="ajoutRy" layoutX="410.0" layoutY="115.0" mnemonicParsing="false" onAction="#ouvreRayon" opacity="0.57" prefHeight="9.0" prefWidth="10.0" style="-fx-background-radius: 10;" text="+" />
       <Separator layoutX="276.0" layoutY="93.0" prefHeight="3.0" prefWidth="488.0" />
       <Label fx:id="nomUser" layoutX="78.0" layoutY="49.0" textFill="#946a45">
          <font>
             <Font name="System Italic" size="18.0" />
          </font></Label>
       <Separator layoutX="274.0" layoutY="312.0" prefHeight="3.0" prefWidth="488.0" />
-      <Button fx:id="AjtCAt" layoutX="409.0" layoutY="186.0" mnemonicParsing="false" onAction="#ouvreCategirie" opacity="0.57" prefHeight="9.0" prefWidth="10.0" style="-fx-background-radius: 10;" text="+" />
-      <Button fx:id="AjtFrnsseur" layoutX="409.0" layoutY="225.0" mnemonicParsing="false" onAction="#ouvreFournisseur" opacity="0.57" prefHeight="9.0" prefWidth="10.0" style="-fx-background-radius: 10;" text="+" />
+      <Button fx:id="AjtCAt" layoutX="409.0" layoutY="152.0" mnemonicParsing="false" onAction="#ouvreCategirie" opacity="0.57" prefHeight="9.0" prefWidth="10.0" style="-fx-background-radius: 10;" text="+" />
+      <Button fx:id="AjtFrnsseur" layoutX="409.0" layoutY="191.0" mnemonicParsing="false" onAction="#ouvreFournisseur" opacity="0.57" prefHeight="9.0" prefWidth="10.0" style="-fx-background-radius: 10;" text="+" />
       <Hyperlink layoutX="84.0" layoutY="371.0" onAction="#retourAuMenu" text="retour">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Hyperlink>
+<!--       <Label blendMode="GREEN" layoutX="88.0" layoutY="52.0" text="Ajout Article"> -->
+<!--          <font> -->
+<!--             <Font name="System Bold Italic" size="24.0" /> -->
+<!--          </font> -->
+<!--       </Label> -->
 <!--       <JFXComboBox layoutX="210.0" layoutY="315.0" /> -->
 <!--       <JFXTextField layoutX="97.0" layoutY="332.0" /> -->
 

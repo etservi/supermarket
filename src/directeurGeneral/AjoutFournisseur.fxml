@@ -14,32 +14,32 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.AjoutFournisseurController">
    <children>
-      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="500.0" prefWidth="950.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
-            <AnchorPane fx:id="paneFournisseur">
+            <AnchorPane fx:id="paneFournisseur" prefHeight="541.0" prefWidth="950.0">
                <children>
 <!-- ##################################################################### -->
 
-                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="31.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="950.0" />
-                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="412.0" layoutX="12.0" layoutY="66.0" stroke="BLACK" strokeType="INSIDE" width="338.0" />
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" blendMode="GREEN" fill="LEMONCHIFFON" height="31.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" width="950.0" />
+                  <Rectangle arcHeight="800.0" arcWidth="5.0" fill="LEMONCHIFFON" height="412.0" layoutX="12.0" layoutY="66.0" stroke="#a95db6" strokeType="INSIDE" strokeWidth="5.0" width="338.0" />
              
-				  <Label layoutX="16.0" layoutY="130.0" text="Raison sociale">
+				  <Label layoutX="28.0" layoutY="132.0" text="Raison sociale">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="15.0" layoutY="167.0" text="Sigle">
+                  <Label layoutX="27.0" layoutY="169.0" text="Sigle">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="15.0" layoutY="204.0" text="Téléphone">
+                  <Label layoutX="27.0" layoutY="206.0" text="Téléphone">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="14.0" layoutY="283.0" text="E-mail">
+                  <Label layoutX="26.0" layoutY="285.0" text="E-mail">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
-                  <Label layoutX="14.0" layoutY="243.0" text="Adresse">
+                  <Label layoutX="26.0" layoutY="245.0" text="Adresse">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font></Label>
@@ -59,11 +59,10 @@
                   <JFXTextField fx:id="TextFieldAdresse" focusColor="#a84040" layoutX="141.0" layoutY="238.0" prefHeight="25.0" prefWidth="194.0" promptText="Adresse" />
                   <JFXTextField fx:id="TextFieldCourriel" focusColor="#a84040" layoutX="141.0" layoutY="278.0" prefHeight="25.0" prefWidth="194.0" promptText="E-mail" />
                   <JFXTextField fx:id="recherch" focusColor="#a84040" layoutX="781.0" layoutY="13.0" onKeyTyped="#rechercheFournisseur" promptText="recherche" />
-                  <JFXButton layoutX="99.0" layoutY="352.0" mnemonicParsing="false" onAction="#ajouterFournsseur" text="AJOUTER" textFill="#9c6647" />
-                  <JFXButton fx:id="modifier" layoutX="179.0" layoutY="352.0" mnemonicParsing="false" onAction="#AfficheTableViewChampsFournisseur" text="MODIFIER" textFill="#9c6647" />
+                  <JFXButton layoutX="127.0" layoutY="352.0" mnemonicParsing="false" onAction="#ajouterFournsseur" text="AJOUTER" textFill="#9c6647" />
                   <JFXButton layoutX="21.0" layoutY="352.0" mnemonicParsing="false" onAction="#EffacerLesChamps" text="EFFACER" textFill="#9c6647" />
                   <JFXButton fx:id="btValidModif" layoutX="141.0" layoutY="402.0" mnemonicParsing="false" onAction="#ModifierFournisseur" text="VALIDER MODIFICATION" textFill="#9c6647" />
-                  <JFXButton layoutX="264.0" layoutY="352.0" mnemonicParsing="false" onAction="#selctionAuto" text="IMPRIMER" textFill="#9c6647" />          
+                  <JFXButton layoutX="221.0" layoutY="352.0" mnemonicParsing="false" onAction="#selctionAuto" text="IMPRIMER" textFill="#9c6647" />          
                   <JFXButton layoutX="46.0" layoutY="403.0" mnemonicParsing="false" onAction="#suppressionSurLeTableau" text="SUPPRIMER" textFill="#9c6647" />
                   <Separator layoutX="28.0" layoutY="392.0" prefHeight="0.0" prefWidth="292.0" />
                   <Separator layoutX="28.0" layoutY="340.0" prefHeight="0.0" prefWidth="292.0" />

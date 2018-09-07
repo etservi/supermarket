@@ -46,7 +46,7 @@
             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="336.0" layoutX="49.0" layoutY="99.0" opacity="0.74" stroke="#8d583c" strokeType="INSIDE" width="855.0" />
-                  <Circle fx:id="cercle1" fill="#a9afad" layoutX="264.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0" />
+                  <Circle fx:id="cercle1" fill="#a9afad" layoutX="264.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
                   <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="233.0" layoutY="337.0" onMouseClicked="#statistique" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/Statistique.png" />
@@ -55,7 +55,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Circle fx:id="cercle2" fill="#a9afad" layoutX="135.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
+                  <Circle fx:id="cercle2" fill="#a9afad" layoutX="135.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
                   <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="104.0" layoutY="336.0" onMouseClicked="#listeArticle" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/storage.png" />
@@ -64,9 +64,9 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <Circle fx:id="cercle3" fill="#a9afad" layoutX="405.0" layoutY="369.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
-                  <Circle fx:id="cercle4" fill="#a9afad" layoutX="657.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
-                  <Circle fx:id="cercle5" fill="#a9afad" layoutX="539.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" style="-fx-stroke-dash-array: 30;" strokeWidth="10.0"/>
+                  <Circle fx:id="cercle3" fill="#a9afad" layoutX="405.0" layoutY="369.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
+                  <Circle fx:id="cercle4" fill="#a9afad" layoutX="657.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
+                  <Circle fx:id="cercle5" fill="#a9afad" layoutX="539.0" layoutY="367.0" radius="46.0" stroke="#8d583c" strokeType="INSIDE" strokeWidth="10.0" style="-fx-stroke-dash-array: 30;" />
                   
                   <ImageView fitHeight="55.0" fitWidth="57.0" layoutX="629.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,7 +76,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </ImageView>
-                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="508.0" layoutY="336.0" onMouseClicked="#notification" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="63.0" fitWidth="61.0" layoutX="508.0" layoutY="336.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/alert.png" />
                      </image>
@@ -124,12 +124,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Separator layoutX="97.0" layoutY="146.0" prefWidth="700.0" />
+                  <Separator layoutX="95.0" layoutY="146.0" prefHeight="0.0" prefWidth="725.0" />
                   <Label fx:id="afficheLogin" layoutX="97.0" layoutY="201.0" textFill="#8d583c">
                      <font>
                         <Font name="System Italic" size="24.0" />
                      </font>
                   </Label>
+                  <Hyperlink layoutX="639.0" layoutY="119.0" onAction="#changerMotDePasse" text="Changer Mot de Passe" textFill="#f80303">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Hyperlink>
                </children>
              </AnchorPane>
          </center>  

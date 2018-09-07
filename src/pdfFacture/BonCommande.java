@@ -18,7 +18,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import javaBeansClass.Article;
 import javafx.scene.image.Image;
 
-public class BonArticleDG {
+public class BonCommande {
 	
 	public static void main(String[] args) throws FileNotFoundException, DocumentException {
 		retour(null);

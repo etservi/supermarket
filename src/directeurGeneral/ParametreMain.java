@@ -11,7 +11,7 @@ public class ParametreMain extends Application {
 	@Override
 	public void start(Stage StgParametre) {
 		
-		StgParametre.setTitle("ADMINISTRATEUR");
+//		StgParametre.setTitle("ADMINISTRATEUR");
 		StgParametre.setResizable(false);
 		
 		try {

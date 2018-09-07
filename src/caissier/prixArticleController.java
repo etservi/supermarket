@@ -75,21 +75,23 @@ public class prixArticleController implements Initializable{
 			PreparedStatement pst = (PreparedStatement) connexion.prepareStatement(sql);
 			ResultSet rs = pst.executeQuery();
 			
-			String idRyn = null;
+			int idRyn = 0;
 			String nomProd = null;
-			String qtReste = null;
-			String prxUt = null;
+			int qtReste = 0;
+			double prxUt = 0.0;
 			String verifieCodeBarre = null;
 			
+//			String tab[] = null;
 			
 			if(rs.next()) {
+				
 				System.out.println("existe");
 				
-				nomProd = rs.getString("nomArticleNom");
-				idRyn = rs.getString("idRayon");
-				qtReste = rs.getString("qteStock");
-				prxUt = rs.getString("prixUnitaire");
-				verifieCodeBarre = rs.getString("codeBarre");  // NOM ARTICLE OU L'ON FAIT LE TEST
+				nomProd = rs.getString("nomArticleNom");  System.out.println(nomProd);
+				idRyn = rs.getInt("idRayon");			  System.out.println(idRyn);
+				qtReste = rs.getInt("qteStock");		  System.out.println(qtReste);
+				prxUt = rs.getDouble("prixAvendre");	  System.out.println(prxUt);
+				verifieCodeBarre = rs.getString("codeBarre"); System.out.println(verifieCodeBarre); // NOM ARTICLE OU L'ON FAIT LE TEST 
 				
 				if(nomProd.equalsIgnoreCase(tfReserch.getText())) {
 			
@@ -106,10 +108,10 @@ public class prixArticleController implements Initializable{
 		        	labQtRestante.setText("");
 		        	labPrxUnitaire.setText("");
 				}
-				
-			} else {
-				System.out.println("CONNEXION BASE DE DONNEE NON REUSSI");
 			}
+//			 else {
+//				System.out.println("CONNEXION BASE DE DONNEE NON REUSSI");
+//			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

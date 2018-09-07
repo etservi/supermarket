@@ -12,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="directeurGeneral.CategorieController">
    <children>
-      <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="436.0" layoutX="2.0" layoutY="18.0" opacity="0.75" stroke="#9a714c" strokeType="INSIDE" width="363.0" />
+      <Rectangle arcHeight="800.0" arcWidth="50.0" fill="LEMONCHIFFON" height="436.0" layoutX="2.0" layoutY="18.0" opacity="0.75" stroke="#9a714c" strokeType="INSIDE" strokeWidth="10.0" width="363.0" />
       <Label layoutX="32.0" layoutY="206.0" prefHeight="18.0" prefWidth="94.0" text="Id Rayon">
          <font>
             <Font name="System Bold" size="14.0" />
